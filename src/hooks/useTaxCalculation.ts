@@ -1,247 +1,134 @@
+// =============================
+// ファイル: src/hooks/useTaxCalculation.ts
+// 役割  : 税金計算の統括
+// - 所得税: `taxCalculations.ts` を使用
+// - 各種控除: `deductions.ts` を使用
+// - 計算結果を組み立て、最終的な収入を算出
+// =============================
+
+import { calculateIncomeTax } from './taxCalculations';
+import { calculateDeductions } from './deductions';
+
+// =============================
+// 入力データの型定義
+// =============================
 interface TaxCalculationInput {
-  baseSalary: number;
-  bonus: number;
-  hasPension: boolean;
-  hasCareInsurance: boolean;
-  hasChildCare: boolean;
+  baseSalary: number;   // 月額基本給（万円単位）
+  bonus: number;        // ボーナス（万円単位）
+  hasPension: boolean;  // 厚生年金加入有無
+  hasCareInsurance: boolean; // 介護保険加入有無
+  hasChildCare: boolean; // 企業の子育て支援負担有無
 }
 
+// =============================
+// 月額・年間データの型定義
+// =============================
+interface MonthlyAnnual {
+  annual: number;  // 年間の金額
+  monthly: number; // 月間の金額
+}
+
+// =============================
+// 計算結果の型定義
+// =============================
 interface TaxCalculationResult {
   employee: {
-    grossIncome: {
-      annual: number;
-      monthly: number;
-    };
-    incomeTax: {
-      annual: number;
-      monthly: number;
-    };
-    residentTax: {
-      annual: number;
-      monthly: number;
-    };
-    healthInsurance: {
-      annual: number;
-      monthly: number;
-    };
-    pensionInsurance?: {
-      annual: number;
-      monthly: number;
-    };
-    careInsurance?: {
-      annual: number;
-      monthly: number;
-    };
-    employmentInsurance: {
-      annual: number;
-      monthly: number;
-    };
-    takeHome: {
-      annual: number;
-      monthly: number;
-    };
+    grossIncome: MonthlyAnnual;        // 総支給額（額面）
+    incomeTax: MonthlyAnnual;          // 所得税
+    residentTax: MonthlyAnnual;        // 住民税
+    healthInsurance: MonthlyAnnual;    // 健康保険
+    pensionInsurance?: MonthlyAnnual;  // 厚生年金（任意）
+    careInsurance?: MonthlyAnnual;     // 介護保険（任意）
+    employmentInsurance: MonthlyAnnual;// 雇用保険
+    totalTax: MonthlyAnnual;           // 税金合計
+    takeHome: MonthlyAnnual;           // 手取り額
   };
   employer: {
-    residentTax: {
-      annual: number;
-      monthly: number;
-    };
-    healthInsurance: {
-      annual: number;
-      monthly: number;
-    };
-    pensionInsurance?: {
-      annual: number;
-      monthly: number;
-    };
-    careInsurance?: {
-      annual: number;
-      monthly: number;
-    };
-    employmentInsurance: {
-      annual: number;
-      monthly: number;
-    };
-    laborInsurance: {
-      annual: number;
-      monthly: number;
-    };
-    childCare?: {
-      annual: number;
-      monthly: number;
-    };
+    residentTax: MonthlyAnnual;        // 会社負担分の住民税
+    healthInsurance: MonthlyAnnual;    // 会社負担分の健康保険
+    pensionInsurance?: MonthlyAnnual;  // 会社負担分の厚生年金
+    careInsurance?: MonthlyAnnual;     // 会社負担分の介護保険
+    employmentInsurance: MonthlyAnnual;// 会社負担分の雇用保険
+    laborInsurance: MonthlyAnnual;     // 労災保険
+    childCare?: MonthlyAnnual;         // 会社負担の子育て支援
+    totalEmployerTax: MonthlyAnnual;   // 会社負担の税金合計
   };
 }
 
+// =============================
+// 税金計算の統括関数
+// - 各種計算処理を統合し、結果を返す
+// =============================
 export const useTaxCalculation = () => {
-  const calculateIncomeTax = (monthlySalary: number) => {
-    const annualSalary = monthlySalary * 12;
-    let incomeDeduction;
-
-    if (annualSalary <= 1800000) {
-      incomeDeduction = Math.max(annualSalary * 0.4, 550000);
-    } else if (annualSalary <= 3600000) {
-      incomeDeduction = annualSalary * 0.3 + 180000;
-    } else if (annualSalary <= 6600000) {
-      incomeDeduction = annualSalary * 0.2 + 540000;
-    } else if (annualSalary <= 8500000) {
-      incomeDeduction = annualSalary * 0.1 + 1200000;
-    } else {
-      incomeDeduction = 1950000;
-    }
-
-    const basicDeduction = 480000;
-    const taxableIncome = annualSalary - incomeDeduction - basicDeduction;
-
-    let incomeTax = 0;
-    if (taxableIncome <= 1950000) {
-      incomeTax = taxableIncome * 0.05;
-    } else if (taxableIncome <= 3300000) {
-      incomeTax = 1950000 * 0.05 + (taxableIncome - 1950000) * 0.1;
-    } else if (taxableIncome <= 6950000) {
-      incomeTax = 1950000 * 0.05 + (3300000 - 1950000) * 0.1 + (taxableIncome - 3300000) * 0.2;
-    } else if (taxableIncome <= 9000000) {
-      incomeTax = 1950000 * 0.05 + (3300000 - 1950000) * 0.1 + (6950000 - 3300000) * 0.2 + (taxableIncome - 6950000) * 0.23;
-    } else if (taxableIncome <= 18000000) {
-      incomeTax = 1950000 * 0.05 + (3300000 - 1950000) * 0.1 + (6950000 - 3300000) * 0.2 + (9000000 - 6950000) * 0.23 + (taxableIncome - 9000000) * 0.33;
-    } else if (taxableIncome <= 40000000) {
-      incomeTax = 1950000 * 0.05 + (3300000 - 1950000) * 0.1 + (6950000 - 3300000) * 0.2 + (9000000 - 6950000) * 0.23 + (18000000 - 9000000) * 0.33 + (taxableIncome - 18000000) * 0.4;
-    } else {
-      incomeTax = 1950000 * 0.05 + (3300000 - 1950000) * 0.1 + (6950000 - 3300000) * 0.2 + (9000000 - 6950000) * 0.23 + (18000000 - 9000000) * 0.33 + (40000000 - 18000000) * 0.4 + (taxableIncome - 40000000) * 0.45;
-    }
-
-    return Math.floor(incomeTax / 12);
-  };
-
   const calculate = (input: TaxCalculationInput): TaxCalculationResult => {
     const { baseSalary, bonus, hasPension, hasCareInsurance, hasChildCare } = input;
-    const monthlySalary = baseSalary * 10000;
-    const annualSalary = monthlySalary * 12 + bonus * 10000;
 
-    const monthlyIncomeTax = calculateIncomeTax(monthlySalary);
-    const residentTaxEmployee = Math.floor(annualSalary * 0.1 / 12 / 2);
-    const healthInsuranceEmployee = Math.floor(monthlySalary * 0.0987 / 2);
-    const employmentInsuranceEmployee = Math.floor(monthlySalary * 0.003 / 2);
-    
-    let careInsuranceEmployee = 0;
-    let pensionInsuranceEmployee = 0;
+    // 基本収入の計算
+    const monthlySalary = baseSalary * 10000;  // 月額給与（円）
+    const annualSalary = monthlySalary * 12 + bonus * 10000;  // 年収（円）
 
-    if (hasCareInsurance) {
-      careInsuranceEmployee = Math.floor(monthlySalary * 0.0173 / 2);
-    }
-    if (hasPension) {
-      pensionInsuranceEmployee = Math.floor(monthlySalary * 0.183 / 2);
-    }
+    // 所得税の計算（年間 & 月間）
+    const annualIncomeTax = calculateIncomeTax(annualSalary);
+    const monthlyIncomeTax = Math.floor(annualIncomeTax / 12);
 
-    const totalEmployeeDeductions = 
-      monthlyIncomeTax + 
-      residentTaxEmployee + 
-      healthInsuranceEmployee + 
-      pensionInsuranceEmployee + 
-      employmentInsuranceEmployee + 
-      careInsuranceEmployee;
+    // 社員負担の控除計算
+    const employeeDeductions = calculateDeductions(monthlySalary, hasPension, hasCareInsurance);
 
-    const takeHomePay = monthlySalary - totalEmployeeDeductions;
+    // 社員負担の税金合計
+    const totalEmployeeTax =
+      monthlyIncomeTax +
+      employeeDeductions.residentTax +
+      employeeDeductions.healthInsurance +
+      employeeDeductions.employmentInsurance +
+      (employeeDeductions.careInsurance ?? 0) +
+      (employeeDeductions.pensionInsurance ?? 0);
 
-    // 会社負担分の計算
-    const residentTaxEmployer = Math.floor(annualSalary * 0.1 / 12 / 2);
-    const healthInsuranceEmployer = Math.floor(monthlySalary * 0.0987 / 2);
-    const employmentInsuranceEmployer = Math.floor(monthlySalary * 0.003 * 2 / 3);
-    const laborInsuranceEmployer = Math.floor(monthlySalary * 0.0025);
-    
-    let childCareEmployer = 0;
-    let careInsuranceEmployer = 0;
-    let pensionInsuranceEmployer = 0;
+    // 手取り収入の計算
+    const takeHomePay = monthlySalary - totalEmployeeTax;
 
-    if (hasChildCare) {
-      childCareEmployer = Math.floor(monthlySalary * 0.0036);
-    }
-    if (hasCareInsurance) {
-      careInsuranceEmployer = Math.floor(monthlySalary * 0.0173 / 2);
-    }
-    if (hasPension) {
-      pensionInsuranceEmployer = Math.floor(monthlySalary * 0.183 / 2);
-    }
+    // 会社負担の計算
+    const employerDeductions = {
+      ...calculateDeductions(monthlySalary, hasPension, hasCareInsurance),
+      childCare: hasChildCare ? Math.floor(monthlySalary * 0.0036) : 0,
+    };
 
+    // 会社負担税金合計
+    const totalEmployerTax =
+      employerDeductions.residentTax +
+      employerDeductions.healthInsurance +
+      employerDeductions.employmentInsurance +
+      employerDeductions.laborInsurance +
+      (employerDeductions.careInsurance ?? 0) +
+      (employerDeductions.pensionInsurance ?? 0) +
+      (hasChildCare ? employerDeductions.childCare : 0);
+
+    // 計算結果の組み立て
     return {
       employee: {
-        grossIncome: {
-          annual: annualSalary,
-          monthly: monthlySalary
-        },
-        incomeTax: {
-          annual: monthlyIncomeTax * 12,
-          monthly: monthlyIncomeTax
-        },
-        residentTax: {
-          annual: residentTaxEmployee * 12,
-          monthly: residentTaxEmployee
-        },
-        healthInsurance: {
-          annual: healthInsuranceEmployee * 12,
-          monthly: healthInsuranceEmployee
-        },
-        ...(hasPension && {
-          pensionInsurance: {
-            annual: pensionInsuranceEmployee * 12,
-            monthly: pensionInsuranceEmployee
-          }
-        }),
-        ...(hasCareInsurance && {
-          careInsurance: {
-            annual: careInsuranceEmployee * 12,
-            monthly: careInsuranceEmployee
-          }
-        }),
-        employmentInsurance: {
-          annual: employmentInsuranceEmployee * 12,
-          monthly: employmentInsuranceEmployee
-        },
-        takeHome: {
-          annual: takeHomePay * 12,
-          monthly: takeHomePay
-        }
+        grossIncome: { annual: annualSalary, monthly: monthlySalary },
+        incomeTax: { annual: annualIncomeTax, monthly: monthlyIncomeTax },
+        residentTax: { annual: employeeDeductions.residentTax * 12, monthly: employeeDeductions.residentTax },
+        healthInsurance: { annual: employeeDeductions.healthInsurance * 12, monthly: employeeDeductions.healthInsurance },
+        employmentInsurance: { annual: employeeDeductions.employmentInsurance * 12, monthly: employeeDeductions.employmentInsurance },
+        pensionInsurance: hasPension ? { annual: employeeDeductions.pensionInsurance! * 12, monthly: employeeDeductions.pensionInsurance! } : undefined,
+        careInsurance: hasCareInsurance ? { annual: employeeDeductions.careInsurance! * 12, monthly: employeeDeductions.careInsurance! } : undefined,
+        totalTax: { annual: totalEmployeeTax * 12, monthly: totalEmployeeTax },
+        takeHome: { annual: takeHomePay * 12, monthly: takeHomePay },
       },
       employer: {
-        residentTax: {
-          annual: residentTaxEmployer * 12,
-          monthly: residentTaxEmployer
-        },
-        healthInsurance: {
-          annual: healthInsuranceEmployer * 12,
-          monthly: healthInsuranceEmployer
-        },
-        ...(hasPension && {
-          pensionInsurance: {
-            annual: pensionInsuranceEmployer * 12,
-            monthly: pensionInsuranceEmployer
-          }
-        }),
-        ...(hasCareInsurance && {
-          careInsurance: {
-            annual: careInsuranceEmployer * 12,
-            monthly: careInsuranceEmployer
-          }
-        }),
-        employmentInsurance: {
-          annual: employmentInsuranceEmployer * 12,
-          monthly: employmentInsuranceEmployer
-        },
-        laborInsurance: {
-          annual: laborInsuranceEmployer * 12,
-          monthly: laborInsuranceEmployer
-        },
-        ...(hasChildCare && {
-          childCare: {
-            annual: childCareEmployer * 12,
-            monthly: childCareEmployer
-          }
-        })
-      }
+        residentTax: { annual: employerDeductions.residentTax * 12, monthly: employerDeductions.residentTax },
+        healthInsurance: { annual: employerDeductions.healthInsurance * 12, monthly: employerDeductions.healthInsurance },
+        employmentInsurance: { annual: employerDeductions.employmentInsurance * 12, monthly: employerDeductions.employmentInsurance },
+        pensionInsurance: hasPension ? { annual: employerDeductions.pensionInsurance! * 12, monthly: employerDeductions.pensionInsurance! } : undefined,
+        careInsurance: hasCareInsurance ? { annual: employerDeductions.careInsurance! * 12, monthly: employerDeductions.careInsurance! } : undefined,
+        laborInsurance: { annual: employerDeductions.laborInsurance * 12, monthly: employerDeductions.laborInsurance },
+        childCare: hasChildCare ? { annual: employerDeductions.childCare * 12, monthly: employerDeductions.childCare } : undefined,
+        totalEmployerTax: { annual: totalEmployerTax * 12, monthly: totalEmployerTax },
+      },
     };
   };
 
   return { calculate };
 };
 
-export type { TaxCalculationInput, TaxCalculationResult };
+export type { TaxCalculationResult };
