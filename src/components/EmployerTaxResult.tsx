@@ -6,90 +6,90 @@
 // - 厚生年金 (`pensionInsurance`) などのオプション項目は条件付き表示
 // =============================
 
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Paper } from '@mui/material';
+import { Box, Typography, Divider } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import type { TaxCalculationResult } from '../hooks/useTaxCalculation';
-import { formatCurrency } from './utils'; // 通貨フォーマット関数を共通化
 
 interface EmployerTaxResultProps {
   employer: TaxCalculationResult['employer'];
 }
 
+const ResultSection = styled(Box)(({ theme }) => ({
+  marginBottom: theme.spacing(3),
+  '&:last-child': {
+    marginBottom: 0,
+  }
+}));
+
+const ResultItem = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  padding: theme.spacing(1.5, 0),
+  '& .label': {
+    fontSize: '1.1rem',
+    color: theme.palette.text.primary,
+    fontWeight: 500,
+  },
+  '& .value': {
+    fontSize: '1.2rem',
+    color: '#2B4C8C',
+    fontWeight: 600,
+  },
+  '& .total-label': {
+    fontSize: '1.3rem',
+    color: theme.palette.text.primary,
+    fontWeight: 700,
+  },
+  '& .total-value': {
+    fontSize: '1.5rem',
+    color: '#1E88E5',
+    fontWeight: 800,
+  }
+}));
+
 export const EmployerTaxResult = ({ employer }: EmployerTaxResultProps) => {
   return (
-    <TableContainer component={Paper} sx={{ mt: 4, p: 2 }}>
-      {/* 会社負担のセクション見出し */}
-      <Typography variant="h5" gutterBottom>
-        会社負担 (Company's Share)
-      </Typography>
+    <Box>
+      <ResultSection>
+        <Typography variant="h6" gutterBottom sx={{ color: '#2B4C8C', mb: 2 }}>
+          社会保険料（事業主負担）
+        </Typography>
+        <ResultItem>
+          <span className="label">住民税</span>
+          <span className="value">{employer.residentTax.monthly.toLocaleString()}円</span>
+        </ResultItem>
+        <ResultItem>
+          <span className="label">健康保険</span>
+          <span className="value">{employer.healthInsurance.monthly.toLocaleString()}円</span>
+        </ResultItem>
+        {employer.pensionInsurance && (
+          <ResultItem>
+            <span className="label">厚生年金</span>
+            <span className="value">{employer.pensionInsurance.monthly.toLocaleString()}円</span>
+          </ResultItem>
+        )}
+        <ResultItem>
+          <span className="label">雇用保険</span>
+          <span className="value">{employer.employmentInsurance.monthly.toLocaleString()}円</span>
+        </ResultItem>
+        <ResultItem>
+          <span className="label">労災保険</span>
+          <span className="value">{employer.laborInsurance.monthly.toLocaleString()}円</span>
+        </ResultItem>
+      </ResultSection>
 
-      <Table>
-        {/* ============================= */}
-        {/* 🏢 テーブルヘッダー */}
-        {/* ============================= */}
-        <TableHead>
-          <TableRow>
-            <TableCell>項目 (Item)</TableCell>
-            <TableCell align="right">年額 (Annual)</TableCell>
-            <TableCell align="right">月額 (Monthly)</TableCell>
-          </TableRow>
-        </TableHead>
+      <Divider sx={{ my: 3, borderColor: 'rgba(43, 76, 140, 0.1)' }} />
 
-        {/* ============================= */}
-        {/* 💰 会社負担の税金リスト */}
-        {/* ============================= */}
-        <TableBody>
-          <TableRow>
-            <TableCell>住民税 (Inhabitant Tax)</TableCell>
-            <TableCell align="right">{formatCurrency(employer.residentTax.annual)}</TableCell>
-            <TableCell align="right">{formatCurrency(employer.residentTax.monthly)}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>健康保険 (Health Insurance)</TableCell>
-            <TableCell align="right">{formatCurrency(employer.healthInsurance.annual)}</TableCell>
-            <TableCell align="right">{formatCurrency(employer.healthInsurance.monthly)}</TableCell>
-          </TableRow>
-          {/* 厚生年金（加入時のみ表示） */}
-          {employer.pensionInsurance && (
-            <TableRow>
-              <TableCell>厚生年金 (Employees' Pension)</TableCell>
-              <TableCell align="right">{formatCurrency(employer.pensionInsurance.annual)}</TableCell>
-              <TableCell align="right">{formatCurrency(employer.pensionInsurance.monthly)}</TableCell>
-            </TableRow>
-          )}
-          {/* 介護保険（加入時のみ表示） */}
-          {employer.careInsurance && (
-            <TableRow>
-              <TableCell>介護保険 (Care Insurance)</TableCell>
-              <TableCell align="right">{formatCurrency(employer.careInsurance.annual)}</TableCell>
-              <TableCell align="right">{formatCurrency(employer.careInsurance.monthly)}</TableCell>
-            </TableRow>
-          )}
-          <TableRow>
-            <TableCell>雇用保険 (Unemployment Insurance)</TableCell>
-            <TableCell align="right">{formatCurrency(employer.employmentInsurance.annual)}</TableCell>
-            <TableCell align="right">{formatCurrency(employer.employmentInsurance.monthly)}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>労災保険 (Workers' Accident Compensation Insurance)</TableCell>
-            <TableCell align="right">{formatCurrency(employer.laborInsurance.annual)}</TableCell>
-            <TableCell align="right">{formatCurrency(employer.laborInsurance.monthly)}</TableCell>
-          </TableRow>
-          {/* 子育て拠出（適用時のみ表示） */}
-          {employer.childCare && (
-            <TableRow>
-              <TableCell>子育て拠出 (Child Care Contribution)</TableCell>
-              <TableCell align="right">{formatCurrency(employer.childCare.annual)}</TableCell>
-              <TableCell align="right">{formatCurrency(employer.childCare.monthly)}</TableCell>
-            </TableRow>
-          )}
-          {/* 会社負担合計（強調表示） */}
-          <TableRow>
-            <TableCell><strong>会社負担税金合計 (Total Company-Paid Taxes)</strong></TableCell>
-            <TableCell align="right"><strong>{formatCurrency(employer.totalEmployerTax.annual)}</strong></TableCell>
-            <TableCell align="right"><strong>{formatCurrency(employer.totalEmployerTax.monthly)}</strong></TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
+      <ResultItem sx={{ 
+        bgcolor: 'rgba(30, 136, 229, 0.05)', 
+        p: 2, 
+        borderRadius: 2,
+        mt: 3
+      }}>
+        <span className="total-label">会社負担税金合計</span>
+        <span className="total-value">{employer.totalEmployerTax.monthly.toLocaleString()}円</span>
+      </ResultItem>
+    </Box>
   );
 };

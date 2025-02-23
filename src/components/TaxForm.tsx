@@ -6,111 +6,180 @@
 // - `onSubmit` で計算を実行
 // =============================
 
-import { TextField, Grid, Checkbox, FormControlLabel, Button } from '@mui/material';
+import { 
+  TextField, 
+  Grid, 
+  FormControlLabel, 
+  Button, 
+  Box,
+  Typography,
+  Paper,
+  InputAdornment,
+  styled,
+  Switch
+} from '@mui/material';
+import { Calculate as CalculateIcon } from '@mui/icons-material';
 
-interface TaxFormProps {
-  inputs: {
-    baseSalary: number;     // ユーザーが入力する月給（万円単位）
-    bonus: number;          // ユーザーが入力する賞与（万円単位）
-    hasPension: boolean;    // 厚生年金加入の有無（チェックボックス）
-    hasCareInsurance: boolean;  // 介護保険加入の有無（チェックボックス）
-    hasChildCare: boolean;  // 子育て拠出金負担の有無（チェックボックス）
-  };
-  onChange: (key: string, value: string | boolean | number) => void; // `number` 型を追加
-  onSubmit: () => void;  // 送信ボタンが押された際に計算を実行する関数
+// スタイル付きのSwitch
+const CustomSwitch = styled(Switch)(({ theme }) => ({
+  '& .MuiSwitch-switchBase.Mui-checked': {
+    color: theme.palette.primary.main,
+    '&:hover': {
+      backgroundColor: `${theme.palette.primary.main}1a`,
+    },
+  },
+  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+    backgroundColor: theme.palette.primary.main,
+  },
+}));
+
+// スタイル付きのTextField
+const StyledTextField = styled(TextField)(() => ({
+  '& .MuiOutlinedInput-root': {
+    transition: 'transform 0.2s',
+    '&:hover': {
+      transform: 'translateY(-2px)',
+    },
+    '&.Mui-focused': {
+      transform: 'translateY(-2px)',
+    },
+  },
+}));
+
+// スタイル付きのButton
+const CalculateButton = styled(Button)(({ theme }) => ({
+  padding: theme.spacing(1.5),
+  fontSize: '1.1rem',
+  fontWeight: 600,
+  background: 'linear-gradient(135deg, #2B4C8C 0%, #1E88E5 100%)',
+  '&:hover': {
+    background: 'linear-gradient(135deg, #1E88E5 0%, #2B4C8C 100%)',
+    transform: 'translateY(-2px)',
+    boxShadow: '0 8px 16px rgba(43, 76, 140, 0.2)',
+  },
+  '&:active': {
+    transform: 'translateY(0)',
+  },
+  transition: 'all 0.3s ease',
+}));
+
+interface TaxFormInputs {
+  baseSalary: string;
+  bonus: string;
+  hasPension: boolean;
+  hasCareInsurance: boolean;
+  hasChildCare: boolean;
 }
 
-// `TaxForm` コンポーネント
+interface TaxFormProps {
+  inputs: TaxFormInputs;
+  onChange: (key: string, value: string | boolean | number) => void;
+  onSubmit: () => void;
+}
+
 export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
   return (
-    <Grid container spacing={2}>
-      {/*=============================*/}
-      {/* 月給（基本給）入力欄 */}
-      {/*=============================*/}
-      <Grid item xs={12} sm={6}>
-        <TextField
-          fullWidth
-          label="月給(万円)"
-          type="number"
-          value={inputs.baseSalary}
-          onChange={(e) => onChange('baseSalary', Number(e.target.value) || 0)} // NaN対策
-          required
-          variant="outlined"
-        />
-      </Grid>
-
-      {/*=============================*/}
-      {/* 賞与（ボーナス）入力欄 */}
-      {/*=============================*/}
-      <Grid item xs={12} sm={6}>
-        <TextField
-          fullWidth
-          label="賞与(万円)"
-          type="number"
-          value={inputs.bonus}
-          onChange={(e) => onChange('bonus', Number(e.target.value) || 0)} // NaN対策
-          variant="outlined"
-        />
-      </Grid>
-
-      {/*=============================*/}
-      {/* 厚生年金チェックボックス */}
-      {/*=============================*/}
-      <Grid item xs={12} sm={4}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={inputs.hasPension}
-              onChange={(e) => onChange('hasPension', e.target.checked)}
-            />
-          }
-          label="厚生年金"
-        />
-      </Grid>
-
-      {/*=============================*/}
-      {/* 介護保険チェックボックス */}
-      {/*=============================*/}
-      <Grid item xs={12} sm={4}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={inputs.hasCareInsurance}
-              onChange={(e) => onChange('hasCareInsurance', e.target.checked)}
-            />
-          }
-          label="介護保険料"
-        />
-      </Grid>
-
-      {/*=============================*/}
-      {/* 子育て拠出金チェックボックス */}
-      {/*=============================*/}
-      <Grid item xs={12} sm={4}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={inputs.hasChildCare}
-              onChange={(e) => onChange('hasChildCare', e.target.checked)}
-            />
-          }
-          label="子育て拠出"
-        />
-      </Grid>
-
-      {/*=============================*/}
-      {/* 計算実行ボタン */}
-      {/*=============================*/}
+    <Grid container spacing={3}>
+      {/* 給与情報セクション */}
       <Grid item xs={12}>
-        <Button
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold', color: 'primary.main' }}>
+            💰 給与情報
+          </Typography>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+              <StyledTextField
+                fullWidth
+                label="月給"
+                type="number"
+                value={inputs.baseSalary}
+                onChange={(e) => onChange('baseSalary', e.target.value)}
+                required
+                variant="outlined"
+                InputProps={{
+                  endAdornment: <InputAdornment position="end">万円</InputAdornment>,
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <StyledTextField
+                fullWidth
+                label="賞与"
+                type="number"
+                value={inputs.bonus}
+                onChange={(e) => onChange('bonus', e.target.value)}
+                variant="outlined"
+                InputProps={{
+                  endAdornment: <InputAdornment position="end">万円</InputAdornment>,
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Box>
+      </Grid>
+
+      {/* 保険・控除セクション */}
+      <Grid item xs={12}>
+        <Paper 
+          elevation={0} 
+          sx={{ 
+            p: 3, 
+            mb: 4, 
+            bgcolor: 'grey.50',
+            borderRadius: 2
+          }}
+        >
+          <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold', color: 'primary.main' }}>
+            🏥 保険・控除
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={
+                  <CustomSwitch
+                    checked={inputs.hasPension}
+                    onChange={(e) => onChange('hasPension', e.target.checked)}
+                  />
+                }
+                label="厚生年金"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={
+                  <CustomSwitch
+                    checked={inputs.hasCareInsurance}
+                    onChange={(e) => onChange('hasCareInsurance', e.target.checked)}
+                  />
+                }
+                label="介護保険料"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={
+                  <CustomSwitch
+                    checked={inputs.hasChildCare}
+                    onChange={(e) => onChange('hasChildCare', e.target.checked)}
+                  />
+                }
+                label="子育て拠出金"
+              />
+            </Grid>
+          </Grid>
+        </Paper>
+      </Grid>
+
+      {/* 計算ボタン */}
+      <Grid item xs={12}>
+        <CalculateButton
           variant="contained"
-          color="primary"
           fullWidth
           onClick={onSubmit}
-          size="large"
+          startIcon={<CalculateIcon />}
         >
-          計算
-        </Button>
+          計算する
+        </CalculateButton>
       </Grid>
     </Grid>
   );
