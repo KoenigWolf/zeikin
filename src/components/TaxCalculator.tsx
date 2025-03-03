@@ -29,7 +29,7 @@ import {
 } from '../styles/shared.styles';
 
 // コンポーネント固有のスタイルのインポート
-import { HeaderTypography, FormTitle, ResultTitle } from '../styles/components/Typography.styles';
+import { HeaderTypography, ResultTitle } from '../styles/components/Typography.styles';
 import { StyledCard, StyledCardContent } from '../styles/components/Card.styles';
 
 export const TaxCalculator = () => {
