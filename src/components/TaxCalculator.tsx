@@ -85,7 +85,7 @@ export const TaxCalculator = () => {
       <GradientBox>
         <StyledContainer>
           <HeaderTypography variant={isMobile ? "h6" : "h5"} component="h1">
-            給与計算シミュレーター
+            ZEIKIN
           </HeaderTypography>
         </StyledContainer>
       </GradientBox>
