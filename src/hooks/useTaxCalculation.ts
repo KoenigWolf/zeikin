@@ -1,9 +1,9 @@
 // =============================
 // ファイル: src/hooks/useTaxCalculation.ts
 // 役割  : 税金計算の統括
-// - 所得税: taxCalculations.ts を使用
-// - 各種控除: deductions.ts を使用
-// - 計算結果を組み立て、最終的な収入を算出
+// 所得税: taxCalculations.ts を使用
+// 各種控除: deductions.ts を使用
+// 計算結果を組み立て、最終的な収入を算出
 // =============================
 
 import { calculateIncomeTax } from '@hooks/taxCalculations';
@@ -57,7 +57,7 @@ interface TaxCalculationResult {
 
 // =============================
 // 税金計算の統括関数
-// - 各種計算処理を統合し、結果を返す
+// 各種計算処理を統合し、結果を返す
 // =============================
 export const useTaxCalculation = () => {
   const calculate = (input: TaxCalculationInput): TaxCalculationResult => {

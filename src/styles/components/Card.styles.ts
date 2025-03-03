@@ -4,9 +4,9 @@ import { colors } from '../theme/colors';
 
 // =============================
 // カスタムカード: StyledCard
-// - 角丸デザイン & 背景のブラーエフェクト
-// - ホバー時に浮き上がるアニメーション
-// - 可読性と拡張性を向上
+// 角丸デザイン & 背景のブラーエフェクト
+// ホバー時に浮き上がるアニメーション
+// 可読性と拡張性を向上
 // =============================
 
 export const StyledCard = styled(Card)(({ theme }) => {
@@ -16,15 +16,14 @@ export const StyledCard = styled(Card)(({ theme }) => {
     border: `1px solid ${colors.border.medium}`,
     background: colors.background.card,
     backdropFilter: 'blur(10px)',
-    transition: 'all 0.3s ease',
+    transition: 'box-shadow 0.2s ease',
     overflow: 'visible',
     width: '100%',
   };
 
   // ホバー時のスタイル
   const hoverStyles = {
-    transform: 'translateY(-4px)',
-    boxShadow: `0 12px 24px ${colors.shadow.medium}`,
+    boxShadow: `0 8px 16px ${colors.shadow.medium}`,
     border: `1px solid ${colors.border.hover}`,
   };
 
@@ -36,9 +35,9 @@ export const StyledCard = styled(Card)(({ theme }) => {
 
 // =============================
 // カスタムカードコンテンツ: StyledCardContent
-// - 余白調整 (レスポンシブ対応)
-// - フレックスボックスで縦レイアウト対応
-// - 可読性と拡張性を向上
+// 余白調整 (レスポンシブ対応)
+// フレックスボックスで縦レイアウト対応
+// 可読性と拡張性を向上
 // =============================
 
 export const StyledCardContent = styled(CardContent)(({ theme }) => {

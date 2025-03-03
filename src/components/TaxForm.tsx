@@ -136,11 +136,10 @@ export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
             backdropFilter: 'blur(10px)',
             borderRadius: 2,
             border: '1px solid rgba(43, 76, 140, 0.08)',
-            transition: 'all 0.3s ease',
+            transition: 'background 0.2s ease, box-shadow 0.2s ease',
             '&:hover': {
               bgcolor: 'rgba(255, 255, 255, 0.95)',
-              transform: 'translateY(-2px)',
-              boxShadow: '0 6px 12px rgba(43, 76, 140, 0.08)',
+              boxShadow: '0 4px 8px rgba(43, 76, 140, 0.08)',
             },
           }}
         >

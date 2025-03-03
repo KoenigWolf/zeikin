@@ -4,9 +4,9 @@ import { colors } from './theme/colors';
 
 // =============================
 // ルートレイアウトコンテナ: RootBox
-// - アプリ全体の背景設定
-// - `position: fixed` を適用し、ビューポート全体を覆う
-// - 縦スクロールを可能にする
+// アプリ全体の背景設定
+// `position: fixed` を適用し、ビューポート全体を覆う
+// 縦スクロールを可能にする
 // =============================
 
 export const RootBox = styled(Box)(() => ({
@@ -23,9 +23,9 @@ export const RootBox = styled(Box)(() => ({
 
 // =============================
 // グラデーション背景コンテナ: GradientBox
-// - グラデーションを適用し、装飾効果を強化
-// - ラディアルグラデーションのオーバーレイを追加
-// - シャドウを適用し、立体感を演出
+// グラデーションを適用し、装飾効果を強化
+// ラディアルグラデーションのオーバーレイを追加
+// シャドウを適用し、立体感を演出
 // =============================
 
 export const GradientBox = styled(Box)(({ theme }) => ({
@@ -53,8 +53,8 @@ export const GradientBox = styled(Box)(({ theme }) => ({
 
 // =============================
 // レスポンシブコンテナ: StyledContainer
-// - `maxWidth` をブレークポイントごとに調整
-// - 自動中央配置 & レスポンシブパディング適用
+// `maxWidth` をブレークポイントごとに調整
+// 自動中央配置 & レスポンシブパディング適用
 // =============================
 
 export const StyledContainer = styled(Container)(({ theme }) => ({
@@ -76,7 +76,7 @@ export const StyledContainer = styled(Container)(({ theme }) => ({
 
 // =============================
 // メインコンテンツ用コンテナ: ContentContainer
-// - `StyledContainer` を継承し、上下パディングを追加
+// `StyledContainer` を継承し、上下パディングを追加
 // =============================
 
 export const ContentContainer = styled(StyledContainer)(({ theme }) => ({
@@ -91,8 +91,8 @@ export const ContentContainer = styled(StyledContainer)(({ theme }) => ({
 
 // =============================
 // フレックスボックスコンテナ: ContentBox
-// - `column` レイアウトをデフォルトに設定
-// - 要素間の `gap` をブレークポイントごとに調整
+// `column` レイアウトをデフォルトに設定
+// 要素間の `gap` をブレークポイントごとに調整
 // =============================
 
 export const ContentBox = styled(Box)(({ theme }) => ({
@@ -107,9 +107,9 @@ export const ContentBox = styled(Box)(({ theme }) => ({
 
 // =============================
 // グリッドコンテナ: ResultGrid
-// - デフォルトは 1 列
-// - `md` 以上で 2 列のグリッドに変更
-// - `gap` のレスポンシブ設定
+// デフォルトは 1 列
+// `md` 以上で 2 列のグリッドに変更
+// `gap` のレスポンシブ設定
 // =============================
 
 export const ResultGrid = styled(Box)(({ theme }) => ({
@@ -119,7 +119,7 @@ export const ResultGrid = styled(Box)(({ theme }) => ({
   width: '100%',
 
   [theme.breakpoints.up('md')]: {
-    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', // `md` 以上で 2 列
+    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', // md 以上で 2 列
     gap: theme.spacing(4),
   },
 }));

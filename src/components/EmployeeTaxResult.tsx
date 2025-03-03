@@ -1,9 +1,9 @@
 // =============================
-// 📂 ファイル: src/components/EmployeeTaxResult.tsx
-// 💰 社員負担の税金一覧を表示
-// - `useTaxCalculation.ts` の計算結果を受け取る
-// - 社員の各種税金をテーブルで表示
-// - 厚生年金 (`pensionInsurance`) や 介護保険 (`careInsurance`) などのオプション項目は条件付き表示
+// ファイル: src/components/EmployeeTaxResult.tsx
+// 社員負担の税金一覧を表示
+// `useTaxCalculation.ts` の計算結果を受け取る
+// 社員の各種税金をテーブルで表示
+// 厚生年金 pensionInsurance や 介護保険 careInsurance などのオプション項目は条件付き表示
 // =============================
 
 import { Box, Typography } from '@mui/material';
@@ -22,11 +22,10 @@ const ResultSection = styled(Box)(({ theme }) => ({
   backdropFilter: 'blur(10px)',
   borderRadius: theme.shape.borderRadius * 2,
   border: `1px solid ${colors.border.light}`,
-  transition: 'all 0.3s ease',
+  transition: 'background 0.2s ease, box-shadow 0.2s ease',
   '&:hover': {
     background: 'rgba(255, 255, 255, 0.95)',
-    transform: 'translateY(-2px)',
-    boxShadow: `0 6px 12px ${colors.shadow.light}`
+    boxShadow: `0 4px 8px ${colors.shadow.light}`
   },
   '&:last-child': {
     marginBottom: 0,

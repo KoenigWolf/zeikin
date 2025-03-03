@@ -3,9 +3,9 @@ import { TaxCalculator } from '@components/TaxCalculator';
 
 // =============================
 // テーマ設定: theme
-// - アプリ全体のデフォルトテーマを設定
-// - `palette.mode: 'light'` を指定し、ライトモードを適用
-// - 将来的にカスタムテーマを追加しやすい構造に
+// アプリ全体のデフォルトテーマを設定
+// `palette.mode: 'light'` を指定し、ライトモードを適用
+// 将来的にカスタムテーマを追加しやすい構造に
 // =============================
 
 const theme = createTheme({
@@ -16,9 +16,9 @@ const theme = createTheme({
 
 // =============================
 // アプリケーションのメインコンポーネント: App
-// - `ThemeProvider` で MUI のテーマを適用
-// - `CssBaseline` でリセットスタイルを適用
-// - `Container` 内に `TaxCalculator` を配置
+// `ThemeProvider` で MUI のテーマを適用
+// `CssBaseline` でリセットスタイルを適用
+// `Container` 内に `TaxCalculator` を配置
 // =============================
 
 function App() {

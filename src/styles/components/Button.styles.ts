@@ -4,9 +4,9 @@ import { colors } from '../theme/colors';
 
 // =============================
 // カスタムボタン: GradientButton
-// - グラデーション背景
-// - ホバー・アクティブ時のエフェクト付き
-// - 可読性と拡張性を考慮してリファクタリング
+// グラデーション背景
+// ホバー・アクティブ時のエフェクト付き
+// 可読性と拡張性を考慮してリファクタリング
 // =============================
 
 export const GradientButton = styled(Button)(({ theme }) => {
@@ -17,19 +17,18 @@ export const GradientButton = styled(Button)(({ theme }) => {
     fontWeight: 600,
     borderRadius: theme.shape.borderRadius * 1.5,
     background: colors.primary.gradient,
-    transition: 'all 0.3s ease',
+    transition: 'box-shadow 0.2s ease',
   };
 
   // ホバー時のスタイル
   const hoverStyles = {
     background: colors.primary.hover,
-    transform: 'translateY(-2px)',
-    boxShadow: `0 6px 12px ${colors.shadow.hover}`,
+    boxShadow: `0 4px 8px ${colors.shadow.hover}`,
   };
 
   // クリック時のスタイル
   const activeStyles = {
-    transform: 'translateY(0)',
+    boxShadow: 'none',
   };
 
   return {
