@@ -2,56 +2,79 @@
 <html lang="ja">
 
 <head>
-  <!-- =============================
-         メタデータ (SEO & レスポンシブ対応)
-         - UTF-8 文字エンコーディングを指定
-         - ビューポート設定 (モバイル対応)
-         ============================= -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+       <!-- =============================
+       メタデータ (SEO & レスポンシブ対応)
+       ============================= -->
+       <meta charset="UTF-8" />
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- =============================
-         ページのタイトル & 説明
-         - SEO や SNS シェア時に使用
-         ============================= -->
-  <title>税金計算アプリ</title>
-  <meta name="description" content="税金計算を簡単に行える便利なアプリ" />
+       <!-- =============================
+       SEO最適化 (タイトル & メタ情報)
+       ============================= -->
+       <title>税金計算アプリ - 住民税・所得税・社会保険料を簡単にシミュレーション</title>
+       <meta name="description" content="【無料】簡単に住民税・所得税・社会保険料をシミュレーション。年収や扶養状況を入力するだけで手取り額を自動計算！税金の仕組みを理解して賢く節税しよう。" />
+       <meta name="keywords" content="税金計算, 住民税, 所得税, 社会保険料, 給与計算, 手取り, 節税, シミュレーション" />
+       <meta name="robots" content="index, follow" />
 
-  <!-- =============================
-         Favicon 設定
-         - サイトアイコンを指定 (ファイルが存在する場合)
-         ============================= -->
-  <link rel="icon" href="/favicon.ico" />
+       <!-- =============================
+       Canonical URL (重複URL回避)
+       ============================= -->
+       <link rel="canonical" href="https://yourdomain.com/" />
 
-  <!-- =============================
-         Open Graph (OGP) メタタグ
-         - SNS でのシェア時のプレビュー表示を設定
-         ============================= -->
-  <meta property="og:title" content="税金計算アプリ" />
-  <meta property="og:description" content="税金計算を簡単に行える便利なアプリ" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://yourdomain.com" />
-  <meta property="og:image" content="https://yourdomain.com/og-image.png" />
+       <!-- =============================
+       Favicon 設定
+       ============================= -->
+       <link rel="icon" href="/favicon.ico" />
+       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-  <!-- =============================
-         Apple Touch アイコン
-         - iOS デバイス用のホーム画面アイコン
-         ============================= -->
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+       <!-- =============================
+       OGP (SNS共有時の表示)
+       ============================= -->
+       <meta property="og:title" content="税金計算アプリ - 住民税・所得税・社会保険料を簡単にシミュレーション" />
+       <meta property="og:description" content="年収や扶養状況を入力するだけで、住民税・所得税・社会保険料・手取り額を自動計算。簡単に税額をシミュレーション！" />
+       <meta property="og:type" content="website" />
+       <meta property="og:url" content="https://yourdomain.com/" />
+       <meta property="og:image" content="https://yourdomain.com/og-image.png" />
+       <meta property="og:site_name" content="税金計算アプリ" />
+
+       <!-- =============================
+       Twitter カード (SNS用)
+       ============================= -->
+       <meta name="twitter:card" content="summary_large_image" />
+       <meta name="twitter:title" content="税金計算アプリ - 住民税・所得税・社会保険料を簡単にシミュレーション" />
+       <meta name="twitter:description" content="【無料】簡単に住民税・所得税・社会保険料をシミュレーション。年収や扶養状況を入力するだけで手取り額を自動計算！" />
+       <meta name="twitter:image" content="https://yourdomain.com/og-image.png" />
+
+       <!-- =============================
+       構造化データ (Google検索向け)
+       ============================= -->
+       <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "税金計算アプリ",
+    "description": "年収や扶養状況を入力するだけで、住民税・所得税・社会保険料・手取り額を自動計算。簡単に税額をシミュレーション！",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "JPY"
+    }
+  }
+  </script>
 </head>
 
 <body>
-  <!-- =============================
-         React アプリケーションのマウントポイント
-         - React のルート要素として使用
-         ============================= -->
-  <div id="root"></div>
+       <!-- =============================
+       React アプリケーションのマウントポイント
+       ============================= -->
+       <div id="root"></div>
 
-  <!-- =============================
-         JavaScript のエントリーポイント
-         - `type="module"` により ESModules を使用
-         ============================= -->
-  <script type="module" src="/src/main.tsx"></script>
+       <!-- =============================
+       JavaScript のエントリーポイント
+       ============================= -->
+       <script type="module" src="/src/main.tsx"></script>
 </body>
 
 </html>
