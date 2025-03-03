@@ -1,10 +1,10 @@
 // =============================
-// 📂 ファイル: src/components/TaxForm.tsx
-// 📝 役割: ユーザーの税金計算入力フォーム
-// - ユーザーが月給、賞与、控除オプションを入力
-// - `onChange` を通じて親コンポーネントに変更を通知
-// - `onSubmit` で計算を実行
-// - 可読性・拡張性を向上
+// ファイル: src/components/TaxForm.tsx
+// 役割: ユーザーの税金計算入力フォーム
+// ユーザーが月給、控除オプションを入力
+// `onChange` を通じて親コンポーネントに変更を通知
+// `onSubmit` で計算を実行
+// 可読性・拡張性を向上
 // =============================
 
 import { 
@@ -21,7 +21,7 @@ import { GradientButton } from '../styles/components/Button.styles';
 
 // =============================
 // 型定義: TaxFormInputs
-// - 入力フィールドの状態を管理
+// 入力フィールドの状態を管理
 // =============================
 interface TaxFormInputs {
   baseSalary: string;
@@ -33,9 +33,9 @@ interface TaxFormInputs {
 
 // =============================
 // 型定義: TaxFormProps
-// - `inputs`: 入力状態
-// - `onChange`: 入力変更時のハンドラ
-// - `onSubmit`: 計算実行時のハンドラ
+// `inputs`: 入力状態
+// `onChange`: 入力変更時のハンドラ
+// `onSubmit`: 計算実行時のハンドラ
 // =============================
 interface TaxFormProps {
   inputs: TaxFormInputs;
@@ -44,8 +44,8 @@ interface TaxFormProps {
 }
 
 // =============================
-// 🎨 タイトルコンポーネント
-// - セクションごとの見出しを統一化
+// タイトルコンポーネント
+// セクションごとの見出しを統一化
 // =============================
 const SectionTitle = ({ icon, title }: { icon: string; title: string }) => (
   <Typography
@@ -68,8 +68,8 @@ const SectionTitle = ({ icon, title }: { icon: string; title: string }) => (
 );
 
 // =============================
-// 🎛️ スイッチコンポーネント
-// - 厚生年金、介護保険、子育て拠出金のチェックを統一
+// スイッチコンポーネント
+// 厚生年金、介護保険、子育て拠出金のチェックを統一
 // =============================
 const SwitchControl = ({
   label,
@@ -94,18 +94,18 @@ const SwitchControl = ({
 
 // =============================
 // メインコンポーネント: TaxForm
-// - ユーザー入力フォーム
-// - `onChange` で入力内容を親に伝える
-// - `onSubmit` で計算を実行
+// ユーザー入力フォーム
+// `onChange` で入力内容を親に伝える
+// `onSubmit` で計算を実行
 // =============================
 
 export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
   return (
     <Grid container spacing={3}>
-      {/* 📌 給与情報セクション */}
+      {/* 給与情報セクション */}
       <Grid item xs={12}>
         <Box sx={{ mb: 3 }}>
-          <SectionTitle icon="💰" title="給与情報" />
+          <SectionTitle icon="💰" title="月額給与" />
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <StyledTextField
@@ -121,24 +121,11 @@ export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
                 }}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <StyledTextField
-                fullWidth
-                label="賞与"
-                type="number"
-                value={inputs.bonus}
-                onChange={(e) => onChange('bonus', e.target.value)}
-                variant="outlined"
-                InputProps={{
-                  endAdornment: <InputAdornment position="end">万円</InputAdornment>,
-                }}
-              />
-            </Grid>
           </Grid>
         </Box>
       </Grid>
 
-      {/* 📌 保険・控除セクション */}
+      {/* 保険・控除セクション */}
       <Grid item xs={12}>
         <Paper
           elevation={0}
@@ -184,7 +171,7 @@ export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
         </Paper>
       </Grid>
 
-      {/* 📌 計算ボタン */}
+      {/* 計算ボタン */}
       <Grid item xs={12}>
         <GradientButton
           fullWidth
