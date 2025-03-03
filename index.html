@@ -1,13 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>税金計算アプリ</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <!-- =============================
+         メタデータ (SEO & レスポンシブ対応)
+         - UTF-8 文字エンコーディングを指定
+         - ビューポート設定 (モバイル対応)
+         ============================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- =============================
+         ページのタイトル & 説明
+         - SEO や SNS シェア時に使用
+         ============================= -->
+  <title>税金計算アプリ</title>
+  <meta name="description" content="税金計算を簡単に行える便利なアプリ" />
+
+  <!-- =============================
+         Favicon 設定
+         - サイトアイコンを指定 (ファイルが存在する場合)
+         ============================= -->
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- =============================
+         Open Graph (OGP) メタタグ
+         - SNS でのシェア時のプレビュー表示を設定
+         ============================= -->
+  <meta property="og:title" content="税金計算アプリ" />
+  <meta property="og:description" content="税金計算を簡単に行える便利なアプリ" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourdomain.com" />
+  <meta property="og:image" content="https://yourdomain.com/og-image.png" />
+
+  <!-- =============================
+         Apple Touch アイコン
+         - iOS デバイス用のホーム画面アイコン
+         ============================= -->
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+</head>
+
+<body>
+  <!-- =============================
+         React アプリケーションのマウントポイント
+         - React のルート要素として使用
+         ============================= -->
+  <div id="root"></div>
+
+  <!-- =============================
+         JavaScript のエントリーポイント
+         - `type="module"` により ESModules を使用
+         ============================= -->
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

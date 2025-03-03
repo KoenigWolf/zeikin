@@ -6,9 +6,10 @@
 // - 厚生年金 (`pensionInsurance`) や 介護保険 (`careInsurance`) などのオプション項目は条件付き表示
 // =============================
 
-import { Box, Typography, Divider } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import type { TaxCalculationResult } from '../hooks/useTaxCalculation';
+import { colors } from '../styles/theme/colors';
 
 interface EmployeeTaxResultProps {
   employee: TaxCalculationResult['employee'];
@@ -16,6 +17,17 @@ interface EmployeeTaxResultProps {
 
 const ResultSection = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(3),
+  padding: theme.spacing(2.5),
+  background: colors.background.overlay,
+  backdropFilter: 'blur(10px)',
+  borderRadius: theme.shape.borderRadius * 2,
+  border: `1px solid ${colors.border.light}`,
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    background: 'rgba(255, 255, 255, 0.95)',
+    transform: 'translateY(-2px)',
+    boxShadow: `0 6px 12px ${colors.shadow.light}`
+  },
   '&:last-child': {
     marginBottom: 0,
   }
@@ -26,24 +38,27 @@ const ResultItem = styled(Box)(({ theme }) => ({
   justifyContent: 'space-between',
   alignItems: 'center',
   padding: theme.spacing(1.5, 0),
+  '&:not(:last-child)': {
+    borderBottom: `1px solid ${colors.border.light}`
+  },
   '& .label': {
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     color: theme.palette.text.primary,
     fontWeight: 500,
   },
   '& .value': {
-    fontSize: '1.2rem',
-    color: '#2B4C8C',
+    fontSize: '1.1rem',
+    color: colors.text.primary,
     fontWeight: 600,
   },
   '& .total-label': {
-    fontSize: '1.3rem',
+    fontSize: '1.2rem',
     color: theme.palette.text.primary,
     fontWeight: 700,
   },
   '& .total-value': {
-    fontSize: '1.5rem',
-    color: '#1E88E5',
+    fontSize: '1.4rem',
+    color: colors.text.secondary,
     fontWeight: 800,
   }
 }));
@@ -53,7 +68,22 @@ export const EmployeeTaxResult = ({ employee }: EmployeeTaxResultProps) => {
     <Box>
       {/* 収入セクション */}
       <ResultSection>
-        <Typography variant="h6" gutterBottom sx={{ color: '#2B4C8C', mb: 2 }}>
+        <Typography 
+          variant="h6" 
+          sx={{ 
+            color: colors.text.primary, 
+            mb: 2,
+            fontSize: '1.1rem',
+            fontWeight: 600,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1,
+            '&::before': {
+              content: '"💴"',
+              fontSize: '1.2rem'
+            }
+          }}
+        >
           収入
         </Typography>
         <ResultItem>
@@ -62,11 +92,24 @@ export const EmployeeTaxResult = ({ employee }: EmployeeTaxResultProps) => {
         </ResultItem>
       </ResultSection>
 
-      <Divider sx={{ my: 3, borderColor: 'rgba(43, 76, 140, 0.1)' }} />
-
       {/* 税金セクション */}
       <ResultSection>
-        <Typography variant="h6" gutterBottom sx={{ color: '#2B4C8C', mb: 2 }}>
+        <Typography 
+          variant="h6" 
+          sx={{ 
+            color: colors.text.primary, 
+            mb: 2,
+            fontSize: '1.1rem',
+            fontWeight: 600,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1,
+            '&::before': {
+              content: '"🏛️"',
+              fontSize: '1.2rem'
+            }
+          }}
+        >
           所得税・住民税
         </Typography>
         <ResultItem>
@@ -79,11 +122,24 @@ export const EmployeeTaxResult = ({ employee }: EmployeeTaxResultProps) => {
         </ResultItem>
       </ResultSection>
 
-      <Divider sx={{ my: 3, borderColor: 'rgba(43, 76, 140, 0.1)' }} />
-
       {/* 社会保険料セクション */}
       <ResultSection>
-        <Typography variant="h6" gutterBottom sx={{ color: '#2B4C8C', mb: 2 }}>
+        <Typography 
+          variant="h6" 
+          sx={{ 
+            color: colors.text.primary, 
+            mb: 2,
+            fontSize: '1.1rem',
+            fontWeight: 600,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1,
+            '&::before': {
+              content: '"🏥"',
+              fontSize: '1.2rem'
+            }
+          }}
+        >
           社会保険料
         </Typography>
         <ResultItem>
@@ -102,23 +158,19 @@ export const EmployeeTaxResult = ({ employee }: EmployeeTaxResultProps) => {
         </ResultItem>
       </ResultSection>
 
-      <Divider sx={{ my: 3, borderColor: 'rgba(43, 76, 140, 0.1)' }} />
-
       {/* 合計セクション */}
-      <ResultSection>
-        <ResultItem sx={{ 
-          bgcolor: 'rgba(30, 136, 229, 0.05)', 
-          p: 2, 
-          borderRadius: 2,
-        }}>
+      <ResultSection sx={{ 
+        background: 'linear-gradient(135deg, rgba(43, 76, 140, 0.04) 0%, rgba(30, 136, 229, 0.04) 100%)'
+      }}>
+        <ResultItem sx={{ border: 'none' }}>
           <span className="total-label">税金合計</span>
           <span className="total-value">{employee.totalTax.monthly.toLocaleString()}円</span>
         </ResultItem>
         <ResultItem sx={{ 
-          bgcolor: 'rgba(76, 175, 80, 0.05)', 
-          p: 2, 
-          borderRadius: 2,
-          mt: 2
+          mt: 1.5,
+          pt: 2,
+          borderTop: `1px solid ${colors.border.medium}`,
+          borderBottom: 'none'
         }}>
           <span className="total-label">手取り額</span>
           <span className="total-value" style={{ color: '#4CAF50' }}>

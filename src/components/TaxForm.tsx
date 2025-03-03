@@ -1,68 +1,28 @@
 // =============================
-// ファイル: src/components/TaxForm.tsx
-// 役割  : ユーザーの税金計算入力フォーム
+// 📂 ファイル: src/components/TaxForm.tsx
+// 📝 役割: ユーザーの税金計算入力フォーム
 // - ユーザーが月給、賞与、控除オプションを入力
 // - `onChange` を通じて親コンポーネントに変更を通知
 // - `onSubmit` で計算を実行
+// - 可読性・拡張性を向上
 // =============================
 
 import { 
-  TextField, 
   Grid, 
   FormControlLabel, 
-  Button, 
   Box,
   Typography,
   Paper,
   InputAdornment,
-  styled,
-  Switch
 } from '@mui/material';
 import { Calculate as CalculateIcon } from '@mui/icons-material';
+import { StyledTextField, CustomSwitch } from '../styles/components/Form.styles';
+import { GradientButton } from '../styles/components/Button.styles';
 
-// スタイル付きのSwitch
-const CustomSwitch = styled(Switch)(({ theme }) => ({
-  '& .MuiSwitch-switchBase.Mui-checked': {
-    color: theme.palette.primary.main,
-    '&:hover': {
-      backgroundColor: `${theme.palette.primary.main}1a`,
-    },
-  },
-  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-    backgroundColor: theme.palette.primary.main,
-  },
-}));
-
-// スタイル付きのTextField
-const StyledTextField = styled(TextField)(() => ({
-  '& .MuiOutlinedInput-root': {
-    transition: 'transform 0.2s',
-    '&:hover': {
-      transform: 'translateY(-2px)',
-    },
-    '&.Mui-focused': {
-      transform: 'translateY(-2px)',
-    },
-  },
-}));
-
-// スタイル付きのButton
-const CalculateButton = styled(Button)(({ theme }) => ({
-  padding: theme.spacing(1.5),
-  fontSize: '1.1rem',
-  fontWeight: 600,
-  background: 'linear-gradient(135deg, #2B4C8C 0%, #1E88E5 100%)',
-  '&:hover': {
-    background: 'linear-gradient(135deg, #1E88E5 0%, #2B4C8C 100%)',
-    transform: 'translateY(-2px)',
-    boxShadow: '0 8px 16px rgba(43, 76, 140, 0.2)',
-  },
-  '&:active': {
-    transform: 'translateY(0)',
-  },
-  transition: 'all 0.3s ease',
-}));
-
+// =============================
+// 型定義: TaxFormInputs
+// - 入力フィールドの状態を管理
+// =============================
 interface TaxFormInputs {
   baseSalary: string;
   bonus: string;
@@ -71,22 +31,82 @@ interface TaxFormInputs {
   hasChildCare: boolean;
 }
 
+// =============================
+// 型定義: TaxFormProps
+// - `inputs`: 入力状態
+// - `onChange`: 入力変更時のハンドラ
+// - `onSubmit`: 計算実行時のハンドラ
+// =============================
 interface TaxFormProps {
   inputs: TaxFormInputs;
-  onChange: (key: string, value: string | boolean | number) => void;
+  onChange: (key: keyof TaxFormInputs, value: string | boolean) => void;
   onSubmit: () => void;
 }
+
+// =============================
+// 🎨 タイトルコンポーネント
+// - セクションごとの見出しを統一化
+// =============================
+const SectionTitle = ({ icon, title }: { icon: string; title: string }) => (
+  <Typography
+    variant="h6"
+    sx={{
+      mb: 2.5,
+      fontWeight: 600,
+      color: 'primary.main',
+      display: 'flex',
+      alignItems: 'center',
+      gap: 1,
+      '&::before': {
+        content: `"${icon}"`,
+        fontSize: '1.2rem',
+      },
+    }}
+  >
+    {title}
+  </Typography>
+);
+
+// =============================
+// 🎛️ スイッチコンポーネント
+// - 厚生年金、介護保険、子育て拠出金のチェックを統一
+// =============================
+const SwitchControl = ({
+  label,
+  checked,
+  onChange,
+}: {
+  label: string;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+}) => (
+  <FormControlLabel
+    control={<CustomSwitch checked={checked} onChange={(e) => onChange(e.target.checked)} />}
+    label={label}
+    sx={{
+      '& .MuiFormControlLabel-label': {
+        fontSize: '1rem',
+        color: 'text.primary',
+      },
+    }}
+  />
+);
+
+// =============================
+// メインコンポーネント: TaxForm
+// - ユーザー入力フォーム
+// - `onChange` で入力内容を親に伝える
+// - `onSubmit` で計算を実行
+// =============================
 
 export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
   return (
     <Grid container spacing={3}>
-      {/* 給与情報セクション */}
+      {/* 📌 給与情報セクション */}
       <Grid item xs={12}>
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold', color: 'primary.main' }}>
-            💰 給与情報
-          </Typography>
-          <Grid container spacing={3}>
+        <Box sx={{ mb: 3 }}>
+          <SectionTitle icon="💰" title="給与情報" />
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <StyledTextField
                 fullWidth
@@ -118,68 +138,62 @@ export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
         </Box>
       </Grid>
 
-      {/* 保険・控除セクション */}
+      {/* 📌 保険・控除セクション */}
       <Grid item xs={12}>
-        <Paper 
-          elevation={0} 
-          sx={{ 
-            p: 3, 
-            mb: 4, 
-            bgcolor: 'grey.50',
-            borderRadius: 2
+        <Paper
+          elevation={0}
+          sx={{
+            p: 3,
+            mb: 3,
+            bgcolor: 'rgba(255, 255, 255, 0.8)',
+            backdropFilter: 'blur(10px)',
+            borderRadius: 2,
+            border: '1px solid rgba(43, 76, 140, 0.08)',
+            transition: 'all 0.3s ease',
+            '&:hover': {
+              bgcolor: 'rgba(255, 255, 255, 0.95)',
+              transform: 'translateY(-2px)',
+              boxShadow: '0 6px 12px rgba(43, 76, 140, 0.08)',
+            },
           }}
         >
-          <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold', color: 'primary.main' }}>
-            🏥 保険・控除
-          </Typography>
+          <SectionTitle icon="🏥" title="保険・控除" />
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <CustomSwitch
-                    checked={inputs.hasPension}
-                    onChange={(e) => onChange('hasPension', e.target.checked)}
-                  />
-                }
+              <SwitchControl
                 label="厚生年金"
+                checked={inputs.hasPension}
+                onChange={(checked) => onChange('hasPension', checked)}
               />
             </Grid>
             <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <CustomSwitch
-                    checked={inputs.hasCareInsurance}
-                    onChange={(e) => onChange('hasCareInsurance', e.target.checked)}
-                  />
-                }
+              <SwitchControl
                 label="介護保険料"
+                checked={inputs.hasCareInsurance}
+                onChange={(checked) => onChange('hasCareInsurance', checked)}
               />
             </Grid>
             <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <CustomSwitch
-                    checked={inputs.hasChildCare}
-                    onChange={(e) => onChange('hasChildCare', e.target.checked)}
-                  />
-                }
+              <SwitchControl
                 label="子育て拠出金"
+                checked={inputs.hasChildCare}
+                onChange={(checked) => onChange('hasChildCare', checked)}
               />
             </Grid>
           </Grid>
         </Paper>
       </Grid>
 
-      {/* 計算ボタン */}
+      {/* 📌 計算ボタン */}
       <Grid item xs={12}>
-        <CalculateButton
-          variant="contained"
+        <GradientButton
           fullWidth
+          variant="contained"
           onClick={onSubmit}
           startIcon={<CalculateIcon />}
         >
           計算する
-        </CalculateButton>
+        </GradientButton>
       </Grid>
     </Grid>
   );

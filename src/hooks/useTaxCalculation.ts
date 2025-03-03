@@ -1,13 +1,13 @@
 // =============================
 // ファイル: src/hooks/useTaxCalculation.ts
 // 役割  : 税金計算の統括
-// - 所得税: `taxCalculations.ts` を使用
-// - 各種控除: `deductions.ts` を使用
+// - 所得税: taxCalculations.ts を使用
+// - 各種控除: deductions.ts を使用
 // - 計算結果を組み立て、最終的な収入を算出
 // =============================
 
-import { calculateIncomeTax } from './taxCalculations';
-import { calculateDeductions } from './deductions';
+import { calculateIncomeTax } from '@hooks/taxCalculations';
+import { calculateDeductions } from '@hooks/deductions';
 
 // =============================
 // 入力データの型定義
@@ -110,8 +110,12 @@ export const useTaxCalculation = () => {
         residentTax: { annual: employeeDeductions.residentTax * 12, monthly: employeeDeductions.residentTax },
         healthInsurance: { annual: employeeDeductions.healthInsurance * 12, monthly: employeeDeductions.healthInsurance },
         employmentInsurance: { annual: employeeDeductions.employmentInsurance * 12, monthly: employeeDeductions.employmentInsurance },
-        pensionInsurance: hasPension ? { annual: employeeDeductions.pensionInsurance! * 12, monthly: employeeDeductions.pensionInsurance! } : undefined,
-        careInsurance: hasCareInsurance ? { annual: employeeDeductions.careInsurance! * 12, monthly: employeeDeductions.careInsurance! } : undefined,
+        pensionInsurance: hasPension && employeeDeductions.pensionInsurance ? 
+          { annual: employeeDeductions.pensionInsurance * 12, monthly: employeeDeductions.pensionInsurance } : 
+          undefined,
+        careInsurance: hasCareInsurance && employeeDeductions.careInsurance ? 
+          { annual: employeeDeductions.careInsurance * 12, monthly: employeeDeductions.careInsurance } : 
+          undefined,
         totalTax: { annual: totalEmployeeTax * 12, monthly: totalEmployeeTax },
         takeHome: { annual: takeHomePay * 12, monthly: takeHomePay },
       },
@@ -119,8 +123,12 @@ export const useTaxCalculation = () => {
         residentTax: { annual: employerDeductions.residentTax * 12, monthly: employerDeductions.residentTax },
         healthInsurance: { annual: employerDeductions.healthInsurance * 12, monthly: employerDeductions.healthInsurance },
         employmentInsurance: { annual: employerDeductions.employmentInsurance * 12, monthly: employerDeductions.employmentInsurance },
-        pensionInsurance: hasPension ? { annual: employerDeductions.pensionInsurance! * 12, monthly: employerDeductions.pensionInsurance! } : undefined,
-        careInsurance: hasCareInsurance ? { annual: employerDeductions.careInsurance! * 12, monthly: employerDeductions.careInsurance! } : undefined,
+        pensionInsurance: hasPension && employerDeductions.pensionInsurance ? 
+          { annual: employerDeductions.pensionInsurance * 12, monthly: employerDeductions.pensionInsurance } : 
+          undefined,
+        careInsurance: hasCareInsurance && employerDeductions.careInsurance ? 
+          { annual: employerDeductions.careInsurance * 12, monthly: employerDeductions.careInsurance } : 
+          undefined,
         laborInsurance: { annual: employerDeductions.laborInsurance * 12, monthly: employerDeductions.laborInsurance },
         childCare: hasChildCare ? { annual: employerDeductions.childCare * 12, monthly: employerDeductions.childCare } : undefined,
         totalEmployerTax: { annual: totalEmployerTax * 12, monthly: totalEmployerTax },
