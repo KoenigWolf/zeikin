@@ -9,10 +9,10 @@ TypeScript と React を用いて、堅牢で保守性の高いコードベー�
 
 ### 技術スタック
 
-**TypeScript**: 静的型付けによる型安全性の確保
-**React**: 効率的な UI レンダリングと状態管理
-**Material-UI**: モダンで一貫性のあるデザインシステム
-**Vite**: 高速な開発環境とビルドツール
+**TypeScript**：静的型付けによる型安全性の確保
+**React**：効率的な UI レンダリングと状態管理
+**Material-UI**：モダンで一貫性のあるデザインシステム
+**Vite**：高速な開発環境とビルドツール
 
 ### アーキテクチャ設計
 
@@ -67,14 +67,13 @@ npm install
 # 開発サーバーの起動
 
 npm run dev
-\`\`\`
 
 ### スクリプト
 
-\`npm run dev\`: 開発サーバーの起動
-\`npm run build\`: プロダクションビルド
-\`npm run lint\`: コード品質チェック
-\`npm run preview\`: ビルド結果のプレビュー
+npm run dev：開発サーバーの起動
+npm run build：プロダクションビルド
+npm run lint：コード品質チェック
+npm run preview：ビルド結果のプレビュー
 
 ## 🔒 セキュリティ対策
 
