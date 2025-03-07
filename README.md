@@ -6,22 +6,26 @@
 
 ### 目的
 
-給与所得者が自分の税金と手取り額を簡単に計算できるようにする
-企業側の負担額も同時に確認できるようにする
-税金計算の透明性を高め、ユーザーの理解を助ける
+給与所得者が自分の税金と手取り額を簡単に計算できるようにする。企業側の負担額も同時に確認できるようにする。税金計算の透明性を高め、ユーザーの理解を助ける。
 
 ### 主要機能
 
 **給与・ボーナスの税金計算**：月額給与とボーナスから年間の税金を計算
+
 **各種社会保険の計算**：健康保険、厚生年金、雇用保険、介護保険などの計算
+
 **従業員・企業双方の負担額表示**：従業員の手取り額と企業の負担額を同時に表示
+
 **オプション設定**：厚生年金、介護保険、子育て支援などの有無を設定可能
 
 ### 想定ユーザー
 
 給与所得者（会社員、パートタイマーなど）
+
 フリーランサー（自身の税金負担を理解したい方）
+
 企業の人事・経理担当者（従業員コストを把握したい方）
+
 就職・転職活動中の方（手取り額のシミュレーションをしたい方）
 
 ### 使用方法
@@ -46,7 +50,9 @@
 **クリーンアーキテクチャ**
 
 責務の明確な分離（UI、ビジネスロジック、型定義）
+
 疎結合なモジュール構成
+
 テスト容易性を考慮した設計
 
 **ディレクトリ構造**
@@ -67,18 +73,25 @@ src/
 **型安全性**
 
 厳密な型チェック
+
 インターフェースによる契約プログラミング
+
 非 null アサーション演算子の排除
 
 **保守性**
 
 一貫したコーディング規約
+
 詳細なコメント
+
 モジュール化された構造
 
 **パフォーマンス**
+
 メモ化による不要な再計算の防止
+
 効率的なレンダリング
+
 バンドルサイズの最適化
 
 ## 💻 開発環境のセットアップ
@@ -149,13 +162,12 @@ npm run preview
 3. **コメント**
 
    複雑なロジックには日本語でコメントを記述
-   JSDoc 形式のコメントを使用
    セクション区切りには `// ===` スタイルのコメントを使用
 
 4. **型定義**
-   明示的な型定義を使用
-   `any` 型の使用を避ける
-   インターフェースを積極的に活用
+   明示的な型定義を使用。
+   `any` 型の使用を避ける。
+   インターフェースを積極的に活用。
 
 ### Linter
 
@@ -182,14 +194,14 @@ npm run lint
 
 1. **所得税計算**
 
-   - [国税庁 所得税の税率](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2260.htm) citeturn0search0
-   - [国税庁 給与所得控除](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm) citeturn0search1
+   - [国税庁 所得税の税率](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2260.htm)
+   - [国税庁 給与所得控除](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm)
 
 2. **社会保険料計算**
 
-   - [日本年金機構 厚生年金保険料額表](https://www.nenkin.go.jp/service/kounen/hokenryo/ryogaku/ryogakuhyo/index.html) citeturn0search2
-   - [全国健康保険協会 令和7年度保険料率のお知らせ](https://www.kyoukaikenpo.or.jp/LP/2025hokenryou/) citeturn0search3
-   - [厚生労働省 雇用保険料率について](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000108634.html) citeturn0search4
+   - [日本年金機構 厚生年金保険料額表](https://www.nenkin.go.jp/service/kounen/hokenryo/ryogaku/ryogakuhyo/index.html) 
+   - [全国健康保険協会 令和7年度保険料率のお知らせ](https://www.kyoukaikenpo.or.jp/LP/2025hokenryou/)
+   - [厚生労働省 雇用保険料率について](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000108634.html)
 
 3. **住民税計算**
 
@@ -210,18 +222,18 @@ npm run lint
 ### **クリーンアーキテクチャ & コード設計**
 
 **手を動かして理解するクリーンアーキテクチャ**
-   [クリーンアーキテクチャの基本概念と実装方法を具体的なコード例とともに解説しています](https://zenn.dev/sui_water/articles/88af41dc6d64bc)
+   (https://zenn.dev/sui_water/articles/88af41dc6d64bc)
 
 **Clean Architecture on Frontend （翻訳） #React**
-   [フロントエンドにおけるクリーンアーキテクチャの適用方法を詳細に説明しています](https://qiita.com/70ki8suda/items/7b720217c9b1b4855e99)
+   (https://qiita.com/70ki8suda/items/7b720217c9b1b4855e99)
 
 ### **パフォーマンス最適化**
 
 **驚愕の改善率！たった3ステップのReactパフォーマンスチューニング**
-   [Reactアプリケーションのパフォーマンスを向上させるための具体的な手法を3つのステップで紹介しています](https://zenn.dev/nap_engineer/articles/9e26019a661e50)
+   (https://zenn.dev/nap_engineer/articles/9e26019a661e50)
 
 **Reactでデザインシステムをコード分割してパフォーマンスを向上**
-   [Reactアプリケーションにおけるコード分割の手法と、その効果について解説しています](https://ittrip.xyz/react/react-design-system-optimization)
+   (https://ittrip.xyz/react/react-design-system-optimization)
 
 ---
 
