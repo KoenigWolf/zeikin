@@ -195,12 +195,15 @@ npm run lint
 **所得税計算**
 
 [国税庁 所得税の税率](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2260.htm)
+
 [国税庁 給与所得控除](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm)
 
 **社会保険料計算**
 
 [日本年金機構 厚生年金保険料額表](https://www.nenkin.go.jp/service/kounen/hokenryo/ryogaku/ryogakuhyo/index.html) 
+
 [全国健康保険協会 令和7年度保険料率のお知らせ](https://www.kyoukaikenpo.or.jp/LP/2025hokenryou/)
+
 [厚生労働省 雇用保険料率について](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000108634.html)
 
 **住民税計算**
@@ -212,12 +215,17 @@ npm run lint
 ### **技術的な実装の参考**
 
 **TypeScript & React**
+
 [React 公式ドキュメント](https://react.dev/)
+
 [TypeScript 公式ドキュメント](https://www.typescriptlang.org/)
+
 [Vite 公式ドキュメント](https://vitejs.dev/)
 
 **デザイン & UI**
+
 [Material-UI 公式ドキュメント](https://mui.com/)
+
 [Tailwind CSS 公式ドキュメント](https://tailwindcss.com/)
 
 ### **クリーンアーキテクチャ & コード設計**
