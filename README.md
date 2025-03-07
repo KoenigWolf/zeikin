@@ -1,4 +1,4 @@
-[# ZEIKIN 💰](https://zeikin.vercel.app/)
+# [ZEIKIN 💰](https://zeikin.vercel.app/)
 
 ## アプリケーション概要
 
