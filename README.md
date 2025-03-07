@@ -221,19 +221,15 @@ npm run lint
 
 ### **クリーンアーキテクチャ & コード設計**
 
-**手を動かして理解するクリーンアーキテクチャ**
-   (https://zenn.dev/sui_water/articles/88af41dc6d64bc)
+[手を動かして理解するクリーンアーキテクチャ](https://zenn.dev/sui_water/articles/88af41dc6d64bc)
 
-**Clean Architecture on Frontend （翻訳） #React**
-   (https://qiita.com/70ki8suda/items/7b720217c9b1b4855e99)
+[Clean Architecture on Frontend #React](https://qiita.com/70ki8suda/items/7b720217c9b1b4855e99)
 
 ### **パフォーマンス最適化**
 
-**驚愕の改善率！たった3ステップのReactパフォーマンスチューニング**
-   (https://zenn.dev/nap_engineer/articles/9e26019a661e50)
+[驚愕の改善率！たった3ステップのReactパフォーマンスチューニング](https://zenn.dev/nap_engineer/articles/9e26019a661e50)
 
-**Reactでデザインシステムをコード分割してパフォーマンスを向上**
-   (https://ittrip.xyz/react/react-design-system-optimization)
+[Reactでデザインシステムをコード分割してパフォーマンスを向上](https://ittrip.xyz/react/react-design-system-optimization)
 
 ---
 
