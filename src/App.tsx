@@ -1,10 +1,25 @@
+import { memo } from 'react';
 import { Container, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { TaxCalculator } from '@features/tax-calculator';
 import { typography } from '@styles/theme/typography';
+import { colors } from '@styles/theme/colors';
 
 const theme = createTheme({
   palette: {
     mode: 'light',
+    primary: {
+      main: colors.primary.main,
+      light: colors.primary.light,
+      dark: colors.primary.dark,
+    },
+    background: {
+      default: '#F8FAFC',
+      paper: colors.background.card,
+    },
+    text: {
+      primary: colors.text.primary,
+      secondary: colors.text.secondary,
+    },
   },
   typography: {
     fontFamily: [
@@ -62,9 +77,35 @@ const theme = createTheme({
       lineHeight: typography.body2.lineHeight,
     },
   },
+  shape: {
+    borderRadius: 8,
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          scrollbarWidth: 'thin',
+          scrollbarColor: `${colors.border.medium} transparent`,
+          '&::-webkit-scrollbar': {
+            width: '8px',
+          },
+          '&::-webkit-scrollbar-track': {
+            background: 'transparent',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: colors.border.medium,
+            borderRadius: '4px',
+            '&:hover': {
+              background: colors.border.strong,
+            },
+          },
+        },
+      },
+    },
+  },
 });
 
-function App() {
+const App = memo(() => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -73,6 +114,7 @@ function App() {
       </Container>
     </ThemeProvider>
   );
-}
+});
+App.displayName = 'App';
 
 export default App;

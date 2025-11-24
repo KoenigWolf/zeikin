@@ -2,27 +2,32 @@ import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { colors } from '@styles/theme/colors';
 import { componentTypography } from '@styles/theme/typography';
-import { transitions, borderRadius, dimensions, effects } from '@styles/theme/effects';
+import { borderRadius } from '@styles/theme/effects';
 
 export const ResultSection = styled(Box)(({ theme }) => ({
-  marginBottom: theme.spacing(3.5),
-  padding: theme.spacing(3),
+  marginBottom: theme.spacing(3),
+  padding: theme.spacing(2.5),
   background: colors.background.overlay,
-  backdropFilter: effects.blur.light,
-  borderRadius: theme.shape.borderRadius * borderRadius.large,
+  backdropFilter: 'blur(8px)',
+  borderRadius: borderRadius.medium,
   border: `1px solid ${colors.border.light}`,
-  transition: transitions.standard,
   position: 'relative',
+  
   '&:hover': {
     background: colors.background.sectionHover,
-    boxShadow: `0 6px 16px ${colors.shadow.medium}`,
+    boxShadow: colors.shadow.paper,
     borderColor: colors.border.medium,
-    transform: effects.transform.hover,
   },
+  
   '&:last-child': {
     marginBottom: 0,
   },
+  
   [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(3),
+  },
+  
+  [theme.breakpoints.up('md')]: {
     padding: theme.spacing(3.5),
   },
 }));
@@ -31,36 +36,45 @@ export const ResultItem = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  padding: theme.spacing(2, 0),
-  transition: transitions.fast,
+  padding: theme.spacing(1.5, 0),
+  
   '&:not(:last-child)': {
     borderBottom: `1px solid ${colors.border.light}`,
-    paddingBottom: theme.spacing(2),
+    paddingBottom: theme.spacing(1.5),
     marginBottom: theme.spacing(1),
   },
+  
   '& .label': {
     fontSize: componentTypography.label.fontSize,
-    color: theme.palette.text.primary,
+    color: colors.text.secondary,
     fontWeight: componentTypography.label.fontWeight,
+    lineHeight: 1.5,
   },
+  
   '& .value': {
     fontSize: componentTypography.value.fontSize,
     color: colors.text.primary,
     fontWeight: componentTypography.value.fontWeight,
+    fontVariantNumeric: 'tabular-nums',
   },
+  
   '& .total-label': {
     fontSize: componentTypography.totalLabel.fontSize,
-    color: theme.palette.text.primary,
+    color: colors.text.primary,
     fontWeight: componentTypography.totalLabel.fontWeight,
   },
+  
   '& .total-value': {
     fontSize: componentTypography.totalValue.fontSize,
-    color: colors.text.secondary,
+    color: colors.text.primary,
     fontWeight: componentTypography.totalValue.fontWeight,
     letterSpacing: componentTypography.totalValue.letterSpacing,
+    fontVariantNumeric: 'tabular-nums',
+    
     [theme.breakpoints.up('sm')]: {
       fontSize: componentTypography.totalValue.sm,
     },
+    
     [theme.breakpoints.up('md')]: {
       fontSize: componentTypography.totalValue.md,
     },
@@ -69,30 +83,37 @@ export const ResultItem = styled(Box)(({ theme }) => ({
 
 export const SectionTitle = styled(Typography)(({ theme }) => ({
   color: colors.text.primary,
-  marginBottom: 16,
+  marginBottom: theme.spacing(2),
   fontSize: componentTypography.sectionTitle.xs,
   fontWeight: componentTypography.sectionTitle.fontWeight,
   display: 'flex',
   alignItems: 'center',
-  gap: dimensions.gap.icon,
+  gap: theme.spacing(1),
+  
   [theme.breakpoints.up('sm')]: {
     fontSize: componentTypography.sectionTitle.sm,
+    marginBottom: theme.spacing(2.5),
   },
+  
   [theme.breakpoints.up('md')]: {
     fontSize: componentTypography.sectionTitle.md,
   },
+  
   '&::before': {
     fontSize: componentTypography.icon.fontSize,
+    opacity: 0.8,
   },
 })) as typeof Typography;
 
 export const HighlightedResultSection = styled(ResultSection)(() => ({
   background: colors.gradient.highlightedSection.base,
-  border: `${dimensions.border.titleWidth} solid ${colors.border.medium}`,
-  boxShadow: `0 4px 16px ${colors.shadow.medium}`,
+  border: `1px solid ${colors.border.medium}`,
+  boxShadow: colors.shadow.paper,
+  
   '&:hover': {
-    boxShadow: `0 8px 24px ${colors.shadow.large}`,
+    boxShadow: colors.shadow.cardHover,
     background: colors.gradient.highlightedSection.hover,
+    borderColor: colors.border.strong,
   },
 }));
 
@@ -100,5 +121,8 @@ export const TakeHomeValue = styled('span')(() => ({
   color: colors.accent.success,
   fontWeight: 800,
   textShadow: colors.shadow.text.success,
+  background: `linear-gradient(135deg, ${colors.accent.success} 0%, ${colors.accent.successLight} 100%)`,
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text',
 }));
-

@@ -1,9 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo, memo } from 'react';
 import { 
   Box, 
   useTheme, 
   useMediaQuery,
-  Fade,
   Alert,
   Snackbar
 } from '@mui/material';
@@ -22,9 +21,12 @@ import {
 import { HeaderTypography, ResultTitle } from '@styles/components/Typography.styles';
 import { StyledCard, StyledCardContent } from '@styles/components/Card.styles';
 import { texts } from '@constants';
-import { animations } from '@styles/theme/effects';
 import { validateSalary, validateBonus, safeMathOperation } from '@domain/validation';
 import type { TaxCalculationInput } from '@domain/tax';
+
+const MemoizedTaxForm = memo(TaxForm);
+const MemoizedEmployeeTaxResult = memo(EmployeeTaxResult);
+const MemoizedEmployerTaxResult = memo(EmployerTaxResult);
 
 export const TaxCalculator = () => {
   const [inputs, setInputs] = useState({
@@ -115,11 +117,15 @@ export const TaxCalculator = () => {
     setError(null);
   }, []);
 
+  const headerVariant = useMemo(() => (isMobile ? "h6" : "h5"), [isMobile]);
+  const showError = useMemo(() => error !== null, [error]);
+  const showResult = useMemo(() => result !== null, [result]);
+
   return (
     <RootBox>
       <GradientBox>
         <StyledContainer>
-          <HeaderTypography variant={isMobile ? "h6" : "h5"} component="h1">
+          <HeaderTypography variant={headerVariant} component="h1">
             {texts.app.title}
           </HeaderTypography>
         </StyledContainer>
@@ -129,7 +135,7 @@ export const TaxCalculator = () => {
         <ContentBox>
           <StyledCard>
             <StyledCardContent>
-              <TaxForm 
+              <MemoizedTaxForm 
                 inputs={inputs} 
                 onChange={handleInputChange} 
                 onSubmit={handleCalculate} 
@@ -138,7 +144,7 @@ export const TaxCalculator = () => {
           </StyledCard>
 
           <Snackbar
-            open={error !== null}
+            open={showError}
             autoHideDuration={6000}
             onClose={handleCloseError}
             anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
@@ -148,34 +154,30 @@ export const TaxCalculator = () => {
             </Alert>
           </Snackbar>
 
-          <Fade in={result !== null} timeout={animations.fadeIn.timeout}>
+          {showResult && result && (
             <ResultGrid>
-              {result && (
-                <>
-                  <StyledCard>
-                    <StyledCardContent>
-                      <ResultTitle variant="h5" gutterBottom>
-                        {texts.result.titles.employee}
-                      </ResultTitle>
-                      <Box sx={{ flex: 1, mt: 1 }}>
-                        <EmployeeTaxResult employee={result.employee} />
-                      </Box>
-                    </StyledCardContent>
-                  </StyledCard>
-                  <StyledCard>
-                    <StyledCardContent>
-                      <ResultTitle variant="h5" gutterBottom>
-                        {texts.result.titles.employer}
-                      </ResultTitle>
-                      <Box sx={{ flex: 1, mt: 1 }}>
-                        <EmployerTaxResult employer={result.employer} />
-                      </Box>
-                    </StyledCardContent>
-                  </StyledCard>
-                </>
-              )}
+              <StyledCard>
+                <StyledCardContent>
+                  <ResultTitle variant="h5" gutterBottom>
+                    {texts.result.titles.employee}
+                  </ResultTitle>
+                  <Box sx={{ flex: 1, mt: 1 }}>
+                    <MemoizedEmployeeTaxResult employee={result.employee} />
+                  </Box>
+                </StyledCardContent>
+              </StyledCard>
+              <StyledCard>
+                <StyledCardContent>
+                  <ResultTitle variant="h5" gutterBottom>
+                    {texts.result.titles.employer}
+                  </ResultTitle>
+                  <Box sx={{ flex: 1, mt: 1 }}>
+                    <MemoizedEmployerTaxResult employer={result.employer} />
+                  </Box>
+                </StyledCardContent>
+              </StyledCard>
             </ResultGrid>
-          </Fade>
+          )}
         </ContentBox>
       </ContentContainer>
     </RootBox>

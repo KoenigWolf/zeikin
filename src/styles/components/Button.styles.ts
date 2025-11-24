@@ -2,26 +2,32 @@ import { styled } from '@mui/material/styles';
 import { Button } from '@mui/material';
 import { colors } from '@styles/theme/colors';
 import { componentTypography } from '@styles/theme/typography';
-import { transitions, borderRadius, dimensions, effects } from '@styles/theme/effects';
+import { borderRadius, dimensions } from '@styles/theme/effects';
 
-export const GradientButton = styled(Button)(({ theme }) => ({
-  padding: theme.spacing(1.75, 3),
+export const GradientButton = styled(Button)(() => ({
+  padding: '14px 32px',
   fontSize: componentTypography.button.fontSize,
   fontWeight: componentTypography.button.fontWeight,
   letterSpacing: componentTypography.button.letterSpacing,
-  borderRadius: theme.shape.borderRadius * borderRadius.medium,
+  borderRadius: borderRadius.medium,
   background: colors.primary.gradient,
-  transition: transitions.standard,
-  boxShadow: `0 4px 12px ${colors.shadow.medium}`,
   textTransform: 'none',
   minHeight: dimensions.button.minHeight,
+  color: colors.text.light,
+  
   '&:hover': {
     background: colors.primary.hover,
-    boxShadow: `0 6px 20px ${colors.shadow.hover}`,
-    transform: effects.transform.hover,
+    boxShadow: colors.shadow.cardHover,
   },
-  '&:active': {
-    transform: effects.transform.reset,
-    boxShadow: `0 2px 8px ${colors.shadow.medium}`,
+  
+  '&:focus-visible': {
+    outline: `2px solid ${colors.primary.main}`,
+    outlineOffset: '2px',
+  },
+  
+  '&:disabled': {
+    background: colors.border.light,
+    color: colors.text.tertiary,
+    boxShadow: 'none',
   },
 }));

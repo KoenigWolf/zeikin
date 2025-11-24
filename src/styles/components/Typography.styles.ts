@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 import type { TypographyProps } from '@mui/material';
 import { colors } from '@styles/theme/colors';
 import { componentTypography } from '@styles/theme/typography';
-import { borderRadius, dimensions } from '@styles/theme/effects';
+import { borderRadius } from '@styles/theme/effects';
 
 interface HeaderTypographyProps extends TypographyProps {
   component?: React.ElementType;
@@ -17,9 +17,12 @@ export const HeaderTypography = styled(Typography)<HeaderTypographyProps>(({ the
     color: colors.text.light,
     textShadow: colors.shadow.text.dark,
     textAlign: 'center',
+    lineHeight: 1.2,
+    
     [theme.breakpoints.up('sm')]: {
       fontSize: componentTypography.appTitle.sm,
     },
+    
     [theme.breakpoints.up('md')]: {
       fontSize: componentTypography.appTitle.md,
     },
@@ -31,14 +34,16 @@ export const FormTitle = styled(Typography)(({ theme }) => {
     textAlign: 'center',
     marginBottom: theme.spacing(4),
     position: 'relative',
+    color: colors.text.primary,
+    fontWeight: 700,
 
     '&::after': {
       content: '""',
       position: 'absolute',
-      bottom: '-8px',
+      bottom: theme.spacing(-1.5),
       left: '50%',
       transform: 'translateX(-50%)',
-      width: '100px',
+      width: '80px',
       height: '3px',
       background: colors.primary.gradient,
       borderRadius: borderRadius.tiny,
@@ -48,13 +53,18 @@ export const FormTitle = styled(Typography)(({ theme }) => {
 
 export const ResultTitle = styled(Typography)(({ theme }) => {
   return {
-    borderBottom: `${dimensions.border.titleWidth} solid ${colors.border.medium}`,
+    borderBottom: `2px solid ${colors.border.medium}`,
     paddingBottom: theme.spacing(2),
     fontSize: componentTypography.resultTitle.xs,
     fontWeight: componentTypography.resultTitle.fontWeight,
+    color: colors.text.primary,
+    marginBottom: theme.spacing(2),
+    
     [theme.breakpoints.up('sm')]: {
       fontSize: componentTypography.resultTitle.sm,
+      marginBottom: theme.spacing(2.5),
     },
+    
     [theme.breakpoints.up('md')]: {
       fontSize: componentTypography.resultTitle.md,
     },

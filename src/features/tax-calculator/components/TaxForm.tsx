@@ -1,3 +1,4 @@
+import { memo, useCallback } from 'react';
 import { 
   Grid, 
   FormControlLabel, 
@@ -11,7 +12,8 @@ import { GradientButton } from '@styles/components/Button.styles';
 import { texts } from '@constants';
 import { componentTypography } from '@styles/theme/typography';
 import { colors } from '@styles/theme/colors';
-import { transitions, borderRadius, effects } from '@styles/theme/effects';
+import { borderRadius, effects } from '@styles/theme/effects';
+import { SectionTitle as BaseSectionTitle } from '@styles/components/Result.styles';
 
 interface TaxFormInputs {
   baseSalary: string;
@@ -27,9 +29,7 @@ interface TaxFormProps {
   onSubmit: () => void;
 }
 
-import { SectionTitle as BaseSectionTitle } from '@styles/components/Result.styles';
-
-const SectionTitle = ({ icon, title }: { icon: string; title: string }) => {
+const SectionTitle = memo(({ icon, title }: { icon: string; title: string }) => {
   const sanitizedIcon = icon.replace(/[<>"']/g, '');
   return (
     <BaseSectionTitle
@@ -45,9 +45,10 @@ const SectionTitle = ({ icon, title }: { icon: string; title: string }) => {
       {title}
     </BaseSectionTitle>
   );
-};
+});
+SectionTitle.displayName = 'SectionTitle';
 
-const SwitchControl = ({
+const SwitchControl = memo(({
   label,
   checked,
   onChange,
@@ -67,9 +68,29 @@ const SwitchControl = ({
       },
     }}
   />
-);
+));
+SwitchControl.displayName = 'SwitchControl';
 
-export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
+export const TaxForm = memo(({ inputs, onChange, onSubmit }: TaxFormProps) => {
+  const handleBaseSalaryChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value === '' || /^\d*\.?\d*$/.test(value)) {
+      onChange('baseSalary', value);
+    }
+  }, [onChange]);
+
+  const handlePensionChange = useCallback((checked: boolean) => {
+    onChange('hasPension', checked);
+  }, [onChange]);
+
+  const handleCareInsuranceChange = useCallback((checked: boolean) => {
+    onChange('hasCareInsurance', checked);
+  }, [onChange]);
+
+  const handleChildCareChange = useCallback((checked: boolean) => {
+    onChange('hasChildCare', checked);
+  }, [onChange]);
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -82,12 +103,7 @@ export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
                 label={texts.form.fields.baseSalary.label}
                 type="number"
                 value={inputs.baseSalary}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  if (value === '' || /^\d*\.?\d*$/.test(value)) {
-                    onChange('baseSalary', value);
-                  }
-                }}
+                onChange={handleBaseSalaryChange}
                 inputProps={{
                   min: 0,
                   max: 1000000,
@@ -114,12 +130,10 @@ export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
             backdropFilter: effects.blur.light,
             borderRadius: borderRadius.extraLarge,
             border: `1px solid ${colors.border.paper}`,
-            transition: transitions.standard,
             '&:hover': {
               bgcolor: colors.background.paperHover,
               boxShadow: colors.shadow.paper,
               borderColor: colors.border.paperHover,
-              transform: effects.transform.hover,
             },
           }}
         >
@@ -129,21 +143,21 @@ export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
               <SwitchControl
                 label={texts.form.fields.pension.label}
                 checked={inputs.hasPension}
-                onChange={(checked) => onChange('hasPension', checked)}
+                onChange={handlePensionChange}
               />
             </Grid>
             <Grid item xs={12}>
               <SwitchControl
                 label={texts.form.fields.careInsurance.label}
                 checked={inputs.hasCareInsurance}
-                onChange={(checked) => onChange('hasCareInsurance', checked)}
+                onChange={handleCareInsuranceChange}
               />
             </Grid>
             <Grid item xs={12}>
               <SwitchControl
                 label={texts.form.fields.childCare.label}
                 checked={inputs.hasChildCare}
-                onChange={(checked) => onChange('hasChildCare', checked)}
+                onChange={handleChildCareChange}
               />
             </Grid>
           </Grid>
@@ -162,4 +176,5 @@ export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
       </Grid>
     </Grid>
   );
-};
+});
+TaxForm.displayName = 'TaxForm';
