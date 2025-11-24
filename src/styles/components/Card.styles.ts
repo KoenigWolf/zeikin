@@ -4,7 +4,7 @@ import { colors } from '@styles/theme/colors';
 import { borderRadius, dimensions, effects } from '@styles/theme/effects';
 
 export const StyledCard = styled(Card)(() => ({
-  borderRadius: borderRadius.large,
+  borderRadius: borderRadius.medium,
   border: `1px solid ${colors.border.light}`,
   background: colors.background.card,
   backdropFilter: effects.blur.light,
@@ -21,7 +21,7 @@ export const StyledCard = styled(Card)(() => ({
     right: 0,
     height: dimensions.card.accentLineHeight,
     background: colors.primary.gradient,
-    borderRadius: `${borderRadius.large} ${borderRadius.large} 0 0`,
+    borderRadius: `${borderRadius.medium} ${borderRadius.medium} 0 0`,
     opacity: effects.opacity.visible,
   },
   
@@ -37,25 +37,30 @@ export const StyledCard = styled(Card)(() => ({
 }));
 
 export const StyledCardContent = styled(CardContent)(({ theme }) => {
-  const basePadding = theme.spacing(3);
-  const responsivePadding = theme.spacing(4);
-
   return {
-    padding: basePadding,
+    padding: theme.spacing(2.5),
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    gap: theme.spacing(2.5),
+    gap: theme.spacing(2),
 
     '&:last-child': {
-      paddingBottom: basePadding,
+      paddingBottom: theme.spacing(2.5),
     },
 
     [theme.breakpoints.up('sm')]: {
-      padding: responsivePadding,
+      padding: theme.spacing(3),
+      gap: theme.spacing(2.5),
+      '&:last-child': {
+        paddingBottom: theme.spacing(3),
+      },
+    },
+
+    [theme.breakpoints.up('md')]: {
+      padding: theme.spacing(3.5),
       gap: theme.spacing(3),
       '&:last-child': {
-        paddingBottom: responsivePadding,
+        paddingBottom: theme.spacing(3.5),
       },
     },
   };

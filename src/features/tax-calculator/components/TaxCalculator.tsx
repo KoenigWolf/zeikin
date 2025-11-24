@@ -43,6 +43,7 @@ export const TaxCalculator = () => {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
 
   const handleInputChange = useCallback((key: string, value: string | number | boolean) => {
     if (typeof value === 'boolean') {
@@ -117,7 +118,12 @@ export const TaxCalculator = () => {
     setError(null);
   }, []);
 
-  const headerVariant = useMemo(() => (isMobile ? "h6" : "h5"), [isMobile]);
+  const headerVariant = useMemo(() => {
+    if (isMobile) return "h6";
+    if (isTablet) return "h5";
+    return "h5";
+  }, [isMobile, isTablet]);
+  
   const showError = useMemo(() => error !== null, [error]);
   const showResult = useMemo(() => result !== null, [result]);
 
@@ -161,7 +167,7 @@ export const TaxCalculator = () => {
                   <ResultTitle variant="h5" gutterBottom>
                     {texts.result.titles.employee}
                   </ResultTitle>
-                  <Box sx={{ flex: 1, mt: 1 }}>
+                  <Box sx={{ flex: 1, mt: { xs: 0.5, sm: 1 } }}>
                     <MemoizedEmployeeTaxResult employee={result.employee} />
                   </Box>
                 </StyledCardContent>
@@ -171,7 +177,7 @@ export const TaxCalculator = () => {
                   <ResultTitle variant="h5" gutterBottom>
                     {texts.result.titles.employer}
                   </ResultTitle>
-                  <Box sx={{ flex: 1, mt: 1 }}>
+                  <Box sx={{ flex: 1, mt: { xs: 0.5, sm: 1 } }}>
                     <MemoizedEmployerTaxResult employer={result.employer} />
                   </Box>
                 </StyledCardContent>

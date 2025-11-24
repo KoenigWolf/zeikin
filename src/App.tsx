@@ -1,10 +1,10 @@
 import { memo } from 'react';
-import { Container, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import { Container, CssBaseline, ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material';
 import { TaxCalculator } from '@features/tax-calculator';
 import { typography } from '@styles/theme/typography';
 import { colors } from '@styles/theme/colors';
 
-const theme = createTheme({
+const baseTheme = createTheme({
   palette: {
     mode: 'light',
     primary: {
@@ -80,6 +80,15 @@ const theme = createTheme({
   shape: {
     borderRadius: 8,
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
@@ -105,11 +114,19 @@ const theme = createTheme({
   },
 });
 
+const theme = responsiveFontSizes(baseTheme);
+
 const App = memo(() => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Container 
+        maxWidth="lg" 
+        sx={{ 
+          py: { xs: 2, sm: 3, md: 4 },
+          px: { xs: 2, sm: 3, md: 4 },
+        }}
+      >
         <TaxCalculator />
       </Container>
     </ThemeProvider>

@@ -35,7 +35,7 @@ const SectionTitle = memo(({ icon, title }: { icon: string; title: string }) => 
     <BaseSectionTitle
       variant="h6"
       sx={{
-        mb: 2.5,
+        mb: { xs: 2, sm: 2.5 },
         color: 'primary.main',
         '&::before': {
           content: `"${sanitizedIcon}"`,
@@ -92,9 +92,9 @@ export const TaxForm = memo(({ inputs, onChange, onSubmit }: TaxFormProps) => {
   }, [onChange]);
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={{ xs: 2, sm: 3 }}>
       <Grid item xs={12}>
-        <Box sx={{ mb: 3 }}>
+        <Box sx={{ mb: { xs: 2.5, sm: 3 } }}>
           <SectionTitle icon={texts.form.sections.monthlySalary.icon} title={texts.form.sections.monthlySalary.title} />
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -124,8 +124,8 @@ export const TaxForm = memo(({ inputs, onChange, onSubmit }: TaxFormProps) => {
         <Paper
           elevation={0}
           sx={{
-            p: 3.5,
-            mb: 3,
+            p: { xs: 2.5, sm: 3, md: 3.5 },
+            mb: { xs: 2.5, sm: 3 },
             bgcolor: colors.background.paper,
             backdropFilter: effects.blur.light,
             borderRadius: borderRadius.extraLarge,

@@ -52,7 +52,8 @@ export const borderRadius = {
 
 export const dimensions = {
   button: {
-    minHeight: '48px',
+    minHeight: '44px',  // タッチデバイス対応（最低44px）
+    sm: '48px',         // タブレット以上
   },
   card: {
     accentLineHeight: '3px',
@@ -62,15 +63,25 @@ export const dimensions = {
     titleWidth: '1px',
   },
   gap: {
-    icon: 10,
+    icon: 8,
+    sm: 10,
+  },
+  input: {
+    minHeight: '44px',  // タッチデバイス対応
   },
 } as const;
 
 export const container = {
   maxWidth: {
-    sm: '640px',
-    md: '768px',
-    lg: '1024px',
-    xl: '1280px',
+    xs: '100%',         // モバイル: 全幅
+    sm: '600px',        // タブレット
+    md: '768px',        // タブレット（横向き）
+    lg: '1024px',       // デスクトップ
+    xl: '1280px',       // 大型デスクトップ
+  },
+  padding: {
+    xs: '16px',         // モバイル
+    sm: '24px',         // タブレット
+    md: '32px',         // デスクトップ
   },
 } as const;
