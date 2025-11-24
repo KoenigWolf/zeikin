@@ -2,25 +2,65 @@ import { calculateIncomeTax } from '@hooks/taxCalculations';
 import { calculateDeductions } from '@hooks/deductions';
 import type { TaxCalculationInput, TaxCalculationResult, MonthlyAnnual } from '../types/tax';
 import { CALCULATION_CONSTANTS } from '../constants/calculations';
+import { isSafeNumber, safeMathOperation } from '../utils/validation';
 
 const TAX_RATES = {
   childCare: 0.0036,
 } as const;
 
-const toMonthlyAnnual = (monthly: number): MonthlyAnnual => ({
-  monthly,
-  annual: monthly * CALCULATION_CONSTANTS.conversion.monthsPerYear,
-});
+const toMonthlyAnnual = (monthly: number): MonthlyAnnual => {
+  if (!isSafeNumber(monthly)) {
+    throw new Error('Invalid monthly value');
+  }
+  return {
+    monthly,
+    annual: monthly * CALCULATION_CONSTANTS.conversion.monthsPerYear,
+  };
+};
 
 export const useTaxCalculation = () => {
   const calculate = (input: TaxCalculationInput): TaxCalculationResult => {
     const { baseSalary, bonus, hasPension, hasCareInsurance, hasChildCare } = input;
 
-    const monthlySalary = baseSalary * CALCULATION_CONSTANTS.conversion.manToYen;
-    const annualSalary = monthlySalary * CALCULATION_CONSTANTS.conversion.monthsPerYear + bonus * CALCULATION_CONSTANTS.conversion.manToYen;
+    if (!isSafeNumber(baseSalary) || !isSafeNumber(bonus)) {
+      throw new Error('Invalid input values');
+    }
 
-    const annualIncomeTax = calculateIncomeTax(annualSalary);
-    const monthlyIncomeTax = Math.floor(annualIncomeTax / CALCULATION_CONSTANTS.conversion.monthsPerYear);
+    const monthlySalary = safeMathOperation(
+      () => baseSalary * CALCULATION_CONSTANTS.conversion.manToYen,
+      0,
+      '月給の計算中にエラーが発生しました'
+    );
+
+    if (!isSafeNumber(monthlySalary)) {
+      throw new Error('Invalid monthly salary calculation');
+    }
+
+    const annualSalary = safeMathOperation(
+      () => monthlySalary * CALCULATION_CONSTANTS.conversion.monthsPerYear + bonus * CALCULATION_CONSTANTS.conversion.manToYen,
+      0,
+      '年収の計算中にエラーが発生しました'
+    );
+
+    if (!isSafeNumber(annualSalary)) {
+      throw new Error('Invalid annual salary calculation');
+    }
+
+    const annualIncomeTax = safeMathOperation(
+      () => calculateIncomeTax(annualSalary),
+      0,
+      '所得税の計算中にエラーが発生しました'
+    );
+
+    if (!isSafeNumber(annualIncomeTax)) {
+      throw new Error('Invalid income tax calculation');
+    }
+
+    const monthlyIncomeTax = safeMathOperation(
+      () => Math.floor(annualIncomeTax / CALCULATION_CONSTANTS.conversion.monthsPerYear),
+      0,
+      '月額所得税の計算中にエラーが発生しました'
+    );
 
     const employeeDeductions = calculateDeductions(monthlySalary, hasPension, hasCareInsurance);
 
@@ -32,11 +72,27 @@ export const useTaxCalculation = () => {
       (employeeDeductions.careInsurance ?? 0) +
       (employeeDeductions.pensionInsurance ?? 0);
 
-    const takeHomePay = monthlySalary - totalEmployeeTax;
+    const takeHomePay = safeMathOperation(
+      () => monthlySalary - totalEmployeeTax,
+      0,
+      '手取り額の計算中にエラーが発生しました'
+    );
+
+    if (!isSafeNumber(takeHomePay) || takeHomePay < 0) {
+      throw new Error('Invalid take-home pay calculation');
+    }
+
+    const baseEmployerDeductions = calculateDeductions(monthlySalary, hasPension, hasCareInsurance);
+    
+    const childCareAmount = safeMathOperation(
+      () => hasChildCare ? Math.floor(monthlySalary * TAX_RATES.childCare) : 0,
+      0,
+      '子育て拠出金の計算中にエラーが発生しました'
+    );
 
     const employerDeductions = {
-      ...calculateDeductions(monthlySalary, hasPension, hasCareInsurance),
-      childCare: hasChildCare ? Math.floor(monthlySalary * TAX_RATES.childCare) : 0,
+      ...baseEmployerDeductions,
+      childCare: childCareAmount,
     };
 
     const totalEmployerTax =

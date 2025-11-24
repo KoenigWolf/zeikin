@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "security:audit": "npm audit",
+    "security:fix": "npm audit fix"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

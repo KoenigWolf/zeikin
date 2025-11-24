@@ -29,20 +29,23 @@ interface TaxFormProps {
 
 import { SectionTitle as BaseSectionTitle } from '@styles/components/Result.styles';
 
-const SectionTitle = ({ icon, title }: { icon: string; title: string }) => (
-  <BaseSectionTitle
-    variant="h6"
-    sx={{
-      mb: 2.5,
-      color: 'primary.main',
-      '&::before': {
-        content: `"${icon}"`,
-      },
-    }}
-  >
-    {title}
-  </BaseSectionTitle>
-);
+const SectionTitle = ({ icon, title }: { icon: string; title: string }) => {
+  const sanitizedIcon = icon.replace(/[<>"']/g, '');
+  return (
+    <BaseSectionTitle
+      variant="h6"
+      sx={{
+        mb: 2.5,
+        color: 'primary.main',
+        '&::before': {
+          content: `"${sanitizedIcon}"`,
+        },
+      }}
+    >
+      {title}
+    </BaseSectionTitle>
+  );
+};
 
 const SwitchControl = ({
   label,
@@ -79,7 +82,17 @@ export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
                 label={texts.form.fields.baseSalary.label}
                 type="number"
                 value={inputs.baseSalary}
-                onChange={(e) => onChange('baseSalary', e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value === '' || /^\d*\.?\d*$/.test(value)) {
+                    onChange('baseSalary', value);
+                  }
+                }}
+                inputProps={{
+                  min: 0,
+                  max: 1000000,
+                  step: 1,
+                }}
                 required
                 variant="outlined"
                 InputProps={{
