@@ -18,8 +18,16 @@ export const GradientBox = styled(Box)(({ theme }) => ({
   background: colors.primary.gradient,
   position: 'relative',
   overflow: 'hidden',
-  padding: theme.spacing(2.5),
-  boxShadow: `0 2px 8px ${colors.shadow.light}`,
+  padding: theme.spacing(3),
+  boxShadow: `0 4px 16px ${colors.shadow.medium}`,
+
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(3.5),
+  },
+
+  [theme.breakpoints.up('md')]: {
+    padding: theme.spacing(4),
+  },
 
   '&::before': {
     content: '""',
@@ -29,10 +37,10 @@ export const GradientBox = styled(Box)(({ theme }) => ({
     right: 0,
     bottom: 0,
     background: `
-      radial-gradient(circle at 0% 0%, rgba(255,255,255,0.08) 0%, transparent 25%),
-      radial-gradient(circle at 100% 100%, rgba(255,255,255,0.12) 0%, transparent 35%)
+      radial-gradient(circle at 0% 0%, rgba(255,255,255,0.12) 0%, transparent 30%),
+      radial-gradient(circle at 100% 100%, rgba(255,255,255,0.15) 0%, transparent 40%)
     `,
-    opacity: 0.8,
+    opacity: 0.9,
   },
 }));
 
@@ -52,33 +60,48 @@ export const StyledContainer = styled(Container)(({ theme }) => ({
 }));
 
 export const ContentContainer = styled(StyledContainer)(({ theme }) => ({
-  paddingTop: theme.spacing(3),
-  paddingBottom: theme.spacing(3),
+  paddingTop: theme.spacing(4),
+  paddingBottom: theme.spacing(4),
+
+  [theme.breakpoints.up('sm')]: {
+    paddingTop: theme.spacing(5),
+    paddingBottom: theme.spacing(5),
+  },
 
   [theme.breakpoints.up('md')]: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
+    paddingTop: theme.spacing(6),
+    paddingBottom: theme.spacing(6),
   },
 }));
 
 export const ContentBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.spacing(3),
+  gap: theme.spacing(4),
+
+  [theme.breakpoints.up('sm')]: {
+    gap: theme.spacing(5),
+  },
 
   [theme.breakpoints.up('md')]: {
-    gap: theme.spacing(4),
+    gap: theme.spacing(6),
   },
 }));
 
 export const ResultGrid = styled(Box)(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: '1fr',
-  gap: theme.spacing(3),
+  gap: theme.spacing(4),
   width: '100%',
+  marginTop: theme.spacing(2),
+
+  [theme.breakpoints.up('sm')]: {
+    gap: theme.spacing(5),
+  },
 
   [theme.breakpoints.up('md')]: {
     gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-    gap: theme.spacing(4),
+    gap: theme.spacing(6),
+    marginTop: theme.spacing(3),
   },
 }));

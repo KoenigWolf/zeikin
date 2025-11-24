@@ -74,7 +74,7 @@ export const TaxCalculator = () => {
             </StyledCardContent>
           </StyledCard>
 
-          <Fade in={result !== null} timeout={800}>
+          <Fade in={result !== null} timeout={600}>
             <ResultGrid>
               {result && (
                 <>
@@ -83,7 +83,7 @@ export const TaxCalculator = () => {
                       <ResultTitle variant="h5" gutterBottom>
                         {texts.result.titles.employee}
                       </ResultTitle>
-                      <Box sx={{ flex: 1 }}>
+                      <Box sx={{ flex: 1, mt: 1 }}>
                         <EmployeeTaxResult employee={result.employee} />
                       </Box>
                     </StyledCardContent>
@@ -93,7 +93,7 @@ export const TaxCalculator = () => {
                       <ResultTitle variant="h5" gutterBottom>
                         {texts.result.titles.employer}
                       </ResultTitle>
-                      <Box sx={{ flex: 1 }}>
+                      <Box sx={{ flex: 1, mt: 1 }}>
                         <EmployerTaxResult employer={result.employer} />
                       </Box>
                     </StyledCardContent>

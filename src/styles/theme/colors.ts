@@ -25,8 +25,15 @@ export const colors = {
   },
 
   shadow: {
-    light: 'rgba(43, 76, 140, 0.08)', // 弱い影
-    medium: 'rgba(43, 76, 140, 0.1)', // 中程度の影
-    hover: 'rgba(43, 76, 140, 0.15)',
+    light: 'rgba(43, 76, 140, 0.08)',
+    medium: 'rgba(43, 76, 140, 0.12)',
+    large: 'rgba(43, 76, 140, 0.16)',
+    hover: 'rgba(43, 76, 140, 0.2)',
+    card: '0 4px 12px rgba(43, 76, 140, 0.1)',
+    cardHover: '0 8px 24px rgba(43, 76, 140, 0.15)',
+  },
+  accent: {
+    success: '#4CAF50',
+    highlight: 'rgba(30, 136, 229, 0.1)',
   },
 } as const;

@@ -93,16 +93,18 @@ export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
         <Paper
           elevation={0}
           sx={{
-            p: 3,
+            p: 3.5,
             mb: 3,
-            bgcolor: 'rgba(255, 255, 255, 0.8)',
+            bgcolor: 'rgba(255, 255, 255, 0.85)',
             backdropFilter: 'blur(10px)',
-            borderRadius: 2,
-            border: '1px solid rgba(43, 76, 140, 0.08)',
-            transition: 'background 0.2s ease, box-shadow 0.2s ease',
+            borderRadius: 3,
+            border: '1px solid rgba(43, 76, 140, 0.1)',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             '&:hover': {
               bgcolor: 'rgba(255, 255, 255, 0.95)',
-              boxShadow: '0 4px 8px rgba(43, 76, 140, 0.08)',
+              boxShadow: '0 6px 16px rgba(43, 76, 140, 0.12)',
+              borderColor: 'rgba(43, 76, 140, 0.15)',
+              transform: 'translateY(-2px)',
             },
           }}
         >
