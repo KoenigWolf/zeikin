@@ -7,9 +7,16 @@ export const colors = {
   },
 
   background: {
-    main: 'linear-gradient(135deg, #F8FAFF 0%, #EEF2FF 100%)', // メイン背景 (グラデーション)
-    card: '#FFFFFF', // カード背景
+    main: 'linear-gradient(135deg, #F8FAFF 0%, #EEF2FF 100%)',
+    card: '#FFFFFF',
     overlay: 'rgba(255, 255, 255, 0.8)',
+    paper: 'rgba(255, 255, 255, 0.85)',
+    paperHover: 'rgba(255, 255, 255, 0.95)',
+    sectionHover: 'rgba(255, 255, 255, 0.95)',
+    gradientOverlay: {
+      light: 'rgba(255, 255, 255, 0.12)',
+      medium: 'rgba(255, 255, 255, 0.15)',
+    },
   },
 
   text: {
@@ -19,8 +26,10 @@ export const colors = {
   },
 
   border: {
-    light: 'rgba(43, 76, 140, 0.08)', // 薄いボーダー (通常)
-    medium: 'rgba(43, 76, 140, 0.1)', // 中程度のボーダー (強調)
+    light: 'rgba(43, 76, 140, 0.08)',
+    medium: 'rgba(43, 76, 140, 0.1)',
+    paper: 'rgba(43, 76, 140, 0.1)',
+    paperHover: 'rgba(43, 76, 140, 0.15)',
     hover: 'rgba(43, 76, 140, 0.2)',
   },
 
@@ -31,9 +40,21 @@ export const colors = {
     hover: 'rgba(43, 76, 140, 0.2)',
     card: '0 4px 12px rgba(43, 76, 140, 0.1)',
     cardHover: '0 8px 24px rgba(43, 76, 140, 0.15)',
+    paper: '0 6px 16px rgba(43, 76, 140, 0.12)',
+    text: {
+      dark: '0 2px 4px rgba(0, 0, 0, 0.15)',
+      success: '0 1px 2px rgba(76, 175, 80, 0.2)',
+    },
+  },
+  gradient: {
+    highlightedSection: {
+      base: 'linear-gradient(135deg, rgba(43, 76, 140, 0.06) 0%, rgba(30, 136, 229, 0.08) 100%)',
+      hover: 'linear-gradient(135deg, rgba(43, 76, 140, 0.08) 0%, rgba(30, 136, 229, 0.1) 100%)',
+    },
   },
   accent: {
     success: '#4CAF50',
+    successShadow: 'rgba(76, 175, 80, 0.2)',
     highlight: 'rgba(30, 136, 229, 0.1)',
   },
 } as const;

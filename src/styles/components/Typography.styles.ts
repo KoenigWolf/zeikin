@@ -14,7 +14,7 @@ export const HeaderTypography = styled(Typography)<HeaderTypographyProps>(({ the
     fontWeight: componentTypography.appTitle.fontWeight,
     letterSpacing: componentTypography.appTitle.letterSpacing,
     color: colors.text.light,
-    textShadow: '0 2px 4px rgba(0,0,0,0.15)',
+    textShadow: colors.shadow.text.dark,
     textAlign: 'center',
     [theme.breakpoints.up('sm')]: {
       fontSize: componentTypography.appTitle.sm,

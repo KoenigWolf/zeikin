@@ -10,6 +10,7 @@ import { StyledTextField, CustomSwitch } from '@styles/components/Form.styles';
 import { GradientButton } from '@styles/components/Button.styles';
 import { texts } from '../constants/texts';
 import { componentTypography } from '@styles/theme/typography';
+import { colors } from '@styles/theme/colors';
 
 interface TaxFormInputs {
   baseSalary: string;
@@ -95,15 +96,15 @@ export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
           sx={{
             p: 3.5,
             mb: 3,
-            bgcolor: 'rgba(255, 255, 255, 0.85)',
+            bgcolor: colors.background.paper,
             backdropFilter: 'blur(10px)',
             borderRadius: 3,
-            border: '1px solid rgba(43, 76, 140, 0.1)',
+            border: `1px solid ${colors.border.paper}`,
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             '&:hover': {
-              bgcolor: 'rgba(255, 255, 255, 0.95)',
-              boxShadow: '0 6px 16px rgba(43, 76, 140, 0.12)',
-              borderColor: 'rgba(43, 76, 140, 0.15)',
+              bgcolor: colors.background.paperHover,
+              boxShadow: colors.shadow.paper,
+              borderColor: colors.border.paperHover,
               transform: 'translateY(-2px)',
             },
           }}

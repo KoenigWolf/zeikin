@@ -37,8 +37,8 @@ export const GradientBox = styled(Box)(({ theme }) => ({
     right: 0,
     bottom: 0,
     background: `
-      radial-gradient(circle at 0% 0%, rgba(255,255,255,0.12) 0%, transparent 30%),
-      radial-gradient(circle at 100% 100%, rgba(255,255,255,0.15) 0%, transparent 40%)
+      radial-gradient(circle at 0% 0%, ${colors.background.gradientOverlay.light} 0%, transparent 30%),
+      radial-gradient(circle at 100% 100%, ${colors.background.gradientOverlay.medium} 0%, transparent 40%)
     `,
     opacity: 0.9,
   },

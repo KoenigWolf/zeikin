@@ -13,7 +13,7 @@ export const ResultSection = styled(Box)(({ theme }) => ({
   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   position: 'relative',
   '&:hover': {
-    background: 'rgba(255, 255, 255, 0.95)',
+    background: colors.background.sectionHover,
     boxShadow: `0 6px 16px ${colors.shadow.medium}`,
     borderColor: colors.border.medium,
     transform: 'translateY(-2px)',
@@ -86,18 +86,18 @@ export const SectionTitle = styled(Typography)(({ theme }) => ({
 })) as typeof Typography;
 
 export const HighlightedResultSection = styled(ResultSection)(() => ({
-  background: 'linear-gradient(135deg, rgba(43, 76, 140, 0.06) 0%, rgba(30, 136, 229, 0.08) 100%)',
+  background: colors.gradient.highlightedSection.base,
   border: `2px solid ${colors.border.medium}`,
   boxShadow: `0 4px 16px ${colors.shadow.medium}`,
   '&:hover': {
     boxShadow: `0 8px 24px ${colors.shadow.large}`,
-    background: 'linear-gradient(135deg, rgba(43, 76, 140, 0.08) 0%, rgba(30, 136, 229, 0.1) 100%)',
+    background: colors.gradient.highlightedSection.hover,
   },
 }));
 
 export const TakeHomeValue = styled('span')(() => ({
   color: colors.accent.success,
   fontWeight: 800,
-  textShadow: '0 1px 2px rgba(76, 175, 80, 0.2)',
+  textShadow: colors.shadow.text.success,
 }));
 

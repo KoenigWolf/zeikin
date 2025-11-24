@@ -11,7 +11,7 @@ export const StyledTextField = styled(TextField)(({ theme }) => {
   };
 
   const hoverStyles = {
-    background: 'rgba(255, 255, 255, 0.95)',
+    background: colors.background.paperHover,
     boxShadow: `0 2px 8px ${colors.shadow.light}`,
   };
 
