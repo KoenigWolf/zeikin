@@ -6,7 +6,8 @@ import {
   Alert,
   Snackbar
 } from '@mui/material';
-import { useTaxCalculation, type TaxCalculationResult } from '../hooks/useTaxCalculation';
+import { useTaxCalculation } from '../hooks/useTaxCalculation';
+import type { TaxCalculationResult } from '@domain/tax';
 import { TaxForm } from './TaxForm';
 import { EmployeeTaxResult } from './EmployeeTaxResult';
 import { EmployerTaxResult } from './EmployerTaxResult';
@@ -100,18 +101,24 @@ export const TaxCalculator = () => {
       hasChildCare: inputs.hasChildCare,
     };
 
-    const calculationResult = safeMathOperation(
-      () => calculate(numericInputs),
-      null,
-      '税金計算中にエラーが発生しました'
-    );
+    try {
+      const calculationResult = safeMathOperation(
+        () => calculate(numericInputs),
+        null,
+        '税金計算中にエラーが発生しました'
+      );
 
-    if (calculationResult === null) {
-      setError('計算中にエラーが発生しました。入力値を確認してください。');
-      return;
+      if (calculationResult === null) {
+        setError('計算中にエラーが発生しました。入力値を確認してください。');
+        return;
+      }
+
+      setResult(calculationResult);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : '計算中に予期しないエラーが発生しました';
+      setError(errorMessage);
+      console.error('Tax calculation error:', err);
     }
-
-    setResult(calculationResult);
   }, [inputs, calculate]);
 
   const handleCloseError = useCallback(() => {

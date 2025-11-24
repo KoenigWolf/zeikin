@@ -1,6 +1,6 @@
 import { memo, useMemo } from 'react';
 import { Box } from '@mui/material';
-import type { TaxCalculationResult } from '../hooks/useTaxCalculation';
+import type { TaxCalculationResult } from '@domain/tax';
 import { colors } from '@styles/theme/colors';
 import {
   ResultSection,
@@ -59,12 +59,18 @@ export const EmployeeTaxResult = memo(({ employee }: EmployeeTaxResultProps) => 
           <span className="value">{employee.pensionInsurance.monthly.toLocaleString()}{texts.result.currency.yen}</span>
         </ResultItem>
       )}
+      {employee.careInsurance && (
+        <ResultItem>
+          <span className="label">{texts.result.labels.careInsurance}</span>
+          <span className="value">{employee.careInsurance.monthly.toLocaleString()}{texts.result.currency.yen}</span>
+        </ResultItem>
+      )}
       <ResultItem>
         <span className="label">{texts.result.labels.employmentInsurance}</span>
         <span className="value">{employee.employmentInsurance.monthly.toLocaleString()}{texts.result.currency.yen}</span>
       </ResultItem>
     </ResultSection>
-  ), [employee.healthInsurance.monthly, employee.pensionInsurance, employee.employmentInsurance.monthly]);
+  ), [employee.healthInsurance.monthly, employee.pensionInsurance, employee.careInsurance, employee.employmentInsurance.monthly]);
 
   const summarySection = useMemo(() => (
     <HighlightedResultSection>

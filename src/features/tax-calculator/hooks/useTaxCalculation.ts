@@ -9,12 +9,16 @@ const TAX_RATES = {
 } as const;
 
 const toMonthlyAnnual = (monthly: number): MonthlyAnnual => {
-  if (!isSafeNumber(monthly)) {
-    throw new Error('Invalid monthly value');
+  if (!isSafeNumber(monthly) || isNaN(monthly) || !isFinite(monthly)) {
+    throw new Error(`Invalid monthly value: ${monthly}`);
+  }
+  const annual = monthly * CALCULATION_CONSTANTS.conversion.monthsPerYear;
+  if (!isSafeNumber(annual) || isNaN(annual) || !isFinite(annual)) {
+    throw new Error(`Invalid annual value calculated from monthly: ${monthly}`);
   }
   return {
-    monthly,
-    annual: monthly * CALCULATION_CONSTANTS.conversion.monthsPerYear,
+    monthly: Math.max(0, monthly),
+    annual: Math.max(0, annual),
   };
 };
 
@@ -82,7 +86,8 @@ export const useTaxCalculation = () => {
       throw new Error('Invalid take-home pay calculation');
     }
 
-    const baseEmployerDeductions = calculateDeductions(monthlySalary, hasPension, hasCareInsurance);
+    // 事業主負担分の計算（isEmployer=true）
+    const baseEmployerDeductions = calculateDeductions(monthlySalary, hasPension, hasCareInsurance, true);
     
     const childCareAmount = safeMathOperation(
       () => hasChildCare ? Math.floor(monthlySalary * TAX_RATES.childCare) : 0,
@@ -95,8 +100,8 @@ export const useTaxCalculation = () => {
       childCare: childCareAmount,
     };
 
+    // 事業主負担分の合計（住民税は個人負担のため含めない）
     const totalEmployerTax =
-      employerDeductions.residentTax +
       employerDeductions.healthInsurance +
       employerDeductions.employmentInsurance +
       employerDeductions.laborInsurance +
@@ -121,7 +126,7 @@ export const useTaxCalculation = () => {
         takeHome: toMonthlyAnnual(takeHomePay),
       },
       employer: {
-        residentTax: toMonthlyAnnual(employerDeductions.residentTax),
+        // 住民税は個人負担のため、事業主負担には含めない
         healthInsurance: toMonthlyAnnual(employerDeductions.healthInsurance),
         employmentInsurance: toMonthlyAnnual(employerDeductions.employmentInsurance),
         pensionInsurance: hasPension && employerDeductions.pensionInsurance
@@ -139,5 +144,3 @@ export const useTaxCalculation = () => {
 
   return { calculate };
 };
-
-export type { TaxCalculationResult };
