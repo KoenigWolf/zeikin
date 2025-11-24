@@ -3,6 +3,7 @@ import { Typography } from '@mui/material';
 import type { TypographyProps } from '@mui/material';
 import { colors } from '@styles/theme/colors';
 import { componentTypography } from '@styles/theme/typography';
+import { borderRadius, dimensions } from '@styles/theme/effects';
 
 interface HeaderTypographyProps extends TypographyProps {
   component?: React.ElementType;
@@ -40,14 +41,14 @@ export const FormTitle = styled(Typography)(({ theme }) => {
       width: '100px',
       height: '3px',
       background: colors.primary.gradient,
-      borderRadius: '2px',
+      borderRadius: borderRadius.tiny,
     },
   };
 });
 
 export const ResultTitle = styled(Typography)(({ theme }) => {
   return {
-    borderBottom: `2px solid ${colors.border.medium}`,
+    borderBottom: `${dimensions.border.titleWidth} solid ${colors.border.medium}`,
     paddingBottom: theme.spacing(2),
     fontSize: componentTypography.resultTitle.xs,
     fontWeight: componentTypography.resultTitle.fontWeight,

@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles';
 import { Box, Container } from '@mui/material';
 import { colors } from '@styles/theme/colors';
+import { container, effects } from '@styles/theme/effects';
 
 export const RootBox = styled(Box)(() => ({
   background: colors.background.main,
@@ -40,7 +41,7 @@ export const GradientBox = styled(Box)(({ theme }) => ({
       radial-gradient(circle at 0% 0%, ${colors.background.gradientOverlay.light} 0%, transparent 30%),
       radial-gradient(circle at 100% 100%, ${colors.background.gradientOverlay.medium} 0%, transparent 40%)
     `,
-    opacity: 0.9,
+    opacity: effects.opacity.semi,
   },
 }));
 
@@ -49,10 +50,10 @@ export const StyledContainer = styled(Container)(({ theme }) => ({
   marginLeft: 'auto',
   marginRight: 'auto',
 
-  [theme.breakpoints.up('sm')]: { maxWidth: '600px' },
-  [theme.breakpoints.up('md')]: { maxWidth: '900px' },
-  [theme.breakpoints.up('lg')]: { maxWidth: '1200px' },
-  [theme.breakpoints.up('xl')]: { maxWidth: '1400px' },
+  [theme.breakpoints.up('sm')]: { maxWidth: container.maxWidth.sm },
+  [theme.breakpoints.up('md')]: { maxWidth: container.maxWidth.md },
+  [theme.breakpoints.up('lg')]: { maxWidth: container.maxWidth.lg },
+  [theme.breakpoints.up('xl')]: { maxWidth: container.maxWidth.xl },
 
   padding: theme.spacing(0, 2),
   [theme.breakpoints.up('sm')]: { padding: theme.spacing(0, 3) },

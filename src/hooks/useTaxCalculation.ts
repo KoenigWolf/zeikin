@@ -1,21 +1,26 @@
 import { calculateIncomeTax } from '@hooks/taxCalculations';
 import { calculateDeductions } from '@hooks/deductions';
 import type { TaxCalculationInput, TaxCalculationResult, MonthlyAnnual } from '../types/tax';
+import { CALCULATION_CONSTANTS } from '../constants/calculations';
+
+const TAX_RATES = {
+  childCare: 0.0036,
+} as const;
 
 const toMonthlyAnnual = (monthly: number): MonthlyAnnual => ({
   monthly,
-  annual: monthly * 12,
+  annual: monthly * CALCULATION_CONSTANTS.conversion.monthsPerYear,
 });
 
 export const useTaxCalculation = () => {
   const calculate = (input: TaxCalculationInput): TaxCalculationResult => {
     const { baseSalary, bonus, hasPension, hasCareInsurance, hasChildCare } = input;
 
-    const monthlySalary = baseSalary * 10000;
-    const annualSalary = monthlySalary * 12 + bonus * 10000;
+    const monthlySalary = baseSalary * CALCULATION_CONSTANTS.conversion.manToYen;
+    const annualSalary = monthlySalary * CALCULATION_CONSTANTS.conversion.monthsPerYear + bonus * CALCULATION_CONSTANTS.conversion.manToYen;
 
     const annualIncomeTax = calculateIncomeTax(annualSalary);
-    const monthlyIncomeTax = Math.floor(annualIncomeTax / 12);
+    const monthlyIncomeTax = Math.floor(annualIncomeTax / CALCULATION_CONSTANTS.conversion.monthsPerYear);
 
     const employeeDeductions = calculateDeductions(monthlySalary, hasPension, hasCareInsurance);
 
@@ -31,7 +36,7 @@ export const useTaxCalculation = () => {
 
     const employerDeductions = {
       ...calculateDeductions(monthlySalary, hasPension, hasCareInsurance),
-      childCare: hasChildCare ? Math.floor(monthlySalary * 0.0036) : 0,
+      childCare: hasChildCare ? Math.floor(monthlySalary * TAX_RATES.childCare) : 0,
     };
 
     const totalEmployerTax =

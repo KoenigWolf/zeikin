@@ -1,13 +1,14 @@
 import { styled } from '@mui/material/styles';
 import { Card, CardContent } from '@mui/material';
 import { colors } from '@styles/theme/colors';
+import { transitions, borderRadius, dimensions, effects } from '@styles/theme/effects';
 
 export const StyledCard = styled(Card)(({ theme }) => ({
-  borderRadius: theme.shape.borderRadius * 2.5,
+  borderRadius: theme.shape.borderRadius * borderRadius.large,
   border: `1px solid ${colors.border.light}`,
   background: colors.background.card,
-  backdropFilter: 'blur(10px)',
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  backdropFilter: effects.blur.light,
+  transition: transitions.standard,
   overflow: 'visible',
   width: '100%',
   boxShadow: colors.shadow.card,
@@ -18,18 +19,18 @@ export const StyledCard = styled(Card)(({ theme }) => ({
     top: 0,
     left: 0,
     right: 0,
-    height: '4px',
+    height: dimensions.card.accentLineHeight,
     background: colors.primary.gradient,
-    borderRadius: `${theme.shape.borderRadius * 2.5}px ${theme.shape.borderRadius * 2.5}px 0 0`,
-    opacity: 0,
-    transition: 'opacity 0.3s ease',
+    borderRadius: `${theme.shape.borderRadius * borderRadius.large}px ${theme.shape.borderRadius * borderRadius.large}px 0 0`,
+    opacity: effects.opacity.hidden,
+    transition: transitions.opacity,
   },
   '&:hover': {
     boxShadow: colors.shadow.cardHover,
     border: `1px solid ${colors.border.medium}`,
-    transform: 'translateY(-2px)',
+    transform: effects.transform.hover,
     '&::before': {
-      opacity: 1,
+      opacity: effects.opacity.visible,
     },
   },
 }));

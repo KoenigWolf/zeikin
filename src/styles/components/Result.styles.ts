@@ -2,21 +2,22 @@ import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { colors } from '@styles/theme/colors';
 import { componentTypography } from '@styles/theme/typography';
+import { transitions, borderRadius, dimensions, effects } from '@styles/theme/effects';
 
 export const ResultSection = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(3.5),
   padding: theme.spacing(3),
   background: colors.background.overlay,
-  backdropFilter: 'blur(10px)',
-  borderRadius: theme.shape.borderRadius * 2.5,
+  backdropFilter: effects.blur.light,
+  borderRadius: theme.shape.borderRadius * borderRadius.large,
   border: `1px solid ${colors.border.light}`,
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  transition: transitions.standard,
   position: 'relative',
   '&:hover': {
     background: colors.background.sectionHover,
     boxShadow: `0 6px 16px ${colors.shadow.medium}`,
     borderColor: colors.border.medium,
-    transform: 'translateY(-2px)',
+    transform: effects.transform.hover,
   },
   '&:last-child': {
     marginBottom: 0,
@@ -31,7 +32,7 @@ export const ResultItem = styled(Box)(({ theme }) => ({
   justifyContent: 'space-between',
   alignItems: 'center',
   padding: theme.spacing(2, 0),
-  transition: 'all 0.2s ease',
+  transition: transitions.fast,
   '&:not(:last-child)': {
     borderBottom: `1px solid ${colors.border.light}`,
     paddingBottom: theme.spacing(2),
@@ -73,7 +74,7 @@ export const SectionTitle = styled(Typography)(({ theme }) => ({
   fontWeight: componentTypography.sectionTitle.fontWeight,
   display: 'flex',
   alignItems: 'center',
-  gap: 8,
+  gap: dimensions.gap.icon,
   [theme.breakpoints.up('sm')]: {
     fontSize: componentTypography.sectionTitle.sm,
   },
@@ -87,7 +88,7 @@ export const SectionTitle = styled(Typography)(({ theme }) => ({
 
 export const HighlightedResultSection = styled(ResultSection)(() => ({
   background: colors.gradient.highlightedSection.base,
-  border: `2px solid ${colors.border.medium}`,
+  border: `${dimensions.border.titleWidth} solid ${colors.border.medium}`,
   boxShadow: `0 4px 16px ${colors.shadow.medium}`,
   '&:hover': {
     boxShadow: `0 8px 24px ${colors.shadow.large}`,

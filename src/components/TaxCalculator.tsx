@@ -20,6 +20,7 @@ import {
 import { HeaderTypography, ResultTitle } from '@styles/components/Typography.styles';
 import { StyledCard, StyledCardContent } from '@styles/components/Card.styles';
 import { texts } from '../constants/texts';
+import { animations } from '@styles/theme/effects';
 
 export const TaxCalculator = () => {
   const [inputs, setInputs] = useState({
@@ -74,7 +75,7 @@ export const TaxCalculator = () => {
             </StyledCardContent>
           </StyledCard>
 
-          <Fade in={result !== null} timeout={600}>
+          <Fade in={result !== null} timeout={animations.fadeIn.timeout}>
             <ResultGrid>
               {result && (
                 <>

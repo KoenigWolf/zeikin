@@ -1,13 +1,14 @@
 import { styled } from '@mui/material/styles';
 import { TextField, Switch } from '@mui/material';
 import { colors } from '@styles/theme/colors';
+import { transitions, borderRadius, dimensions, effects } from '@styles/theme/effects';
 
 export const StyledTextField = styled(TextField)(({ theme }) => {
   const baseStyles = {
-    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    transition: transitions.standard,
     background: colors.background.overlay,
-    backdropFilter: 'blur(10px)',
-    borderRadius: theme.shape.borderRadius * 1.5,
+    backdropFilter: effects.blur.light,
+    borderRadius: theme.shape.borderRadius * borderRadius.small,
   };
 
   const hoverStyles = {
@@ -29,7 +30,7 @@ export const StyledTextField = styled(TextField)(({ theme }) => {
         ...focusStyles,
         '& fieldset': {
           borderColor: colors.primary.main,
-          borderWidth: '2px',
+          borderWidth: dimensions.border.focusWidth,
         },
       },
     },

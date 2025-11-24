@@ -11,6 +11,7 @@ import { GradientButton } from '@styles/components/Button.styles';
 import { texts } from '../constants/texts';
 import { componentTypography } from '@styles/theme/typography';
 import { colors } from '@styles/theme/colors';
+import { transitions, borderRadius, effects } from '@styles/theme/effects';
 
 interface TaxFormInputs {
   baseSalary: string;
@@ -97,15 +98,15 @@ export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
             p: 3.5,
             mb: 3,
             bgcolor: colors.background.paper,
-            backdropFilter: 'blur(10px)',
-            borderRadius: 3,
+            backdropFilter: effects.blur.light,
+            borderRadius: borderRadius.extraLarge,
             border: `1px solid ${colors.border.paper}`,
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            transition: transitions.standard,
             '&:hover': {
               bgcolor: colors.background.paperHover,
               boxShadow: colors.shadow.paper,
               borderColor: colors.border.paperHover,
-              transform: 'translateY(-2px)',
+              transform: effects.transform.hover,
             },
           }}
         >
