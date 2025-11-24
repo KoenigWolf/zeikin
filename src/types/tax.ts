@@ -1,33 +1,16 @@
-// =============================
-// 📂 ファイル: src/types/tax.ts
-// 📝 役割: 税金計算に関する型定義
-// 入力データの型
-// 計算結果の型
-// 共通で使用する型
-// =============================
-
-// =============================
-// 入力データの型定義
-// =============================
 export interface TaxCalculationInput {
   baseSalary: number;   // 月額基本給（万円単位）
   bonus: number;        // ボーナス（万円単位）
   hasPension: boolean;  // 厚生年金加入有無
   hasCareInsurance: boolean; // 介護保険加入有無
-  hasChildCare: boolean; // 企業の子育て支援負担有無
+  hasChildCare: boolean;
 }
 
-// =============================
-// 月額・年間データの型定義
-// =============================
 export interface MonthlyAnnual {
   annual: number;  // 年間の金額
-  monthly: number; // 月間の金額
+  monthly: number;
 }
 
-// =============================
-// 計算結果の型定義
-// =============================
 export interface TaxCalculationResult {
   employee: {
     grossIncome: MonthlyAnnual;        // 総支給額（額面）
@@ -48,6 +31,6 @@ export interface TaxCalculationResult {
     employmentInsurance: MonthlyAnnual;// 会社負担分の雇用保険
     laborInsurance: MonthlyAnnual;     // 労災保険
     childCare?: MonthlyAnnual;         // 会社負担の子育て支援
-    totalEmployerTax: MonthlyAnnual;   // 会社負担の税金合計
+    totalEmployerTax: MonthlyAnnual;
   };
 } 

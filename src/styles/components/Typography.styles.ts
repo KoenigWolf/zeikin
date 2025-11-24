@@ -3,22 +3,9 @@ import { Typography } from '@mui/material';
 import type { TypographyProps } from '@mui/material';
 import { colors } from '../theme/colors';
 
-// =============================
-// 型定義: HeaderTypographyProps
-// Typography の標準プロパティを継承
-// `component` プロパティをオプションとして指定
-// =============================
-
 interface HeaderTypographyProps extends TypographyProps {
   component?: React.ElementType;
 }
-
-// =============================
-// カスタムタイポグラフィ: HeaderTypography
-// 見出しに適したスタイル
-// 軽微な影を付与し、視認性を向上
-// 可読性と拡張性を向上
-// =============================
 
 export const HeaderTypography = styled(Typography)<HeaderTypographyProps>(() => {
   return {
@@ -29,20 +16,12 @@ export const HeaderTypography = styled(Typography)<HeaderTypographyProps>(() => 
   };
 });
 
-// =============================
-// カスタムタイポグラフィ: FormTitle
-// フォームのタイトルに適したデザイン
-// 下線 (グラデーション) を追加し、視覚的なアクセントを強化
-// 可読性と拡張性を向上
-// =============================
-
 export const FormTitle = styled(Typography)(({ theme }) => {
   return {
     textAlign: 'center',
     marginBottom: theme.spacing(4),
     position: 'relative',
 
-    // 下線のデザイン
     '&::after': {
       content: '""',
       position: 'absolute',
@@ -57,22 +36,13 @@ export const FormTitle = styled(Typography)(({ theme }) => {
   };
 });
 
-// =============================
-// カスタムタイポグラフィ: ResultTitle
-// 結果表示用のタイトル
-// 下線 (ボーダー) を追加し、区切りを強調
-// 可読性と拡張性を向上
-// =============================
-
 export const ResultTitle = styled(Typography)(({ theme }) => {
-  // 基本スタイル
   const baseStyles = {
     borderBottom: `2px solid ${colors.border.medium}`,
     paddingBottom: theme.spacing(2),
     fontSize: '1.25rem',
   };
 
-  // レスポンシブ対応: `md` 以上の画面サイズでフォントサイズを変更
   const responsiveStyles = {
     [theme.breakpoints.up('md')]: {
       fontSize: '1.5rem',

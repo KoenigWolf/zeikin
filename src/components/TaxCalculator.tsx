@@ -1,11 +1,3 @@
-// =============================
-// ファイル: src/components/TaxCalculator.tsx
-// 役割  : ユーザー入力の状態管理と計算実行
-// `TaxForm.tsx` でユーザー入力を受け取る
-// `EmployeeTaxResult.tsx` と `EmployerTaxResult.tsx` で結果を表示
-// 計算処理は `useTaxCalculation.ts` を使用
-// =============================
-
 import { useState } from 'react';
 import { 
   Box, 
@@ -33,11 +25,6 @@ import { HeaderTypography, ResultTitle } from '../styles/components/Typography.s
 import { StyledCard, StyledCardContent } from '../styles/components/Card.styles';
 
 export const TaxCalculator = () => {
-  // =============================
-  // 入力データの状態管理
-  // `baseSalary`, `bonus` は数値型
-  // チェックボックスは boolean 型
-  // =============================
   const [inputs, setInputs] = useState({
     baseSalary: "30",
     bonus: "",
@@ -46,20 +33,12 @@ export const TaxCalculator = () => {
     hasChildCare: false,
   });
 
-  // 計算結果の状態（初期値は `null`）
   const [result, setResult] = useState<TaxCalculationResult | null>(null);
-
-  // `useTaxCalculation` から `calculate` 関数を取得
   const { calculate } = useTaxCalculation();
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  // =============================
-  // 入力変更処理
-  // 数値項目は `Number(value) || 0` で変換
-  // チェックボックスは `boolean` のまま渡す
-  // =============================
   const handleInputChange = (key: string, value: string | number | boolean) => {
     setInputs((prev) => ({
       ...prev,
@@ -67,10 +46,6 @@ export const TaxCalculator = () => {
     }));
   };
 
-  // =============================
-  // 計算実行
-  // `calculate` を実行し、結果を `setResult` に保存
-  // =============================
   const handleCalculate = () => {
     const numericInputs = {
       ...inputs,
@@ -92,7 +67,6 @@ export const TaxCalculator = () => {
 
       <ContentContainer>
         <ContentBox>
-          {/* 入力フォーム */}
           <StyledCard>
             <StyledCardContent>
               <TaxForm 
@@ -103,7 +77,6 @@ export const TaxCalculator = () => {
             </StyledCardContent>
           </StyledCard>
 
-          {/* 計算結果の表示 */}
           <Fade in={result !== null} timeout={800}>
             <ResultGrid>
               {result && (

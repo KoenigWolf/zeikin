@@ -1,11 +1,3 @@
-// =============================
-// ファイル: src/components/EmployeeTaxResult.tsx
-// 社員負担の税金一覧を表示
-// `useTaxCalculation.ts` の計算結果を受け取る
-// 社員の各種税金をテーブルで表示
-// 厚生年金 pensionInsurance や 介護保険 careInsurance などのオプション項目は条件付き表示
-// =============================
-
 import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import type { TaxCalculationResult } from '../hooks/useTaxCalculation';
@@ -65,7 +57,6 @@ const ResultItem = styled(Box)(({ theme }) => ({
 export const EmployeeTaxResult = ({ employee }: EmployeeTaxResultProps) => {
   return (
     <Box>
-      {/* 収入セクション */}
       <ResultSection>
         <Typography 
           variant="h6" 
@@ -91,7 +82,6 @@ export const EmployeeTaxResult = ({ employee }: EmployeeTaxResultProps) => {
         </ResultItem>
       </ResultSection>
 
-      {/* 税金セクション */}
       <ResultSection>
         <Typography 
           variant="h6" 
@@ -121,7 +111,6 @@ export const EmployeeTaxResult = ({ employee }: EmployeeTaxResultProps) => {
         </ResultItem>
       </ResultSection>
 
-      {/* 社会保険料セクション */}
       <ResultSection>
         <Typography 
           variant="h6" 
@@ -157,7 +146,6 @@ export const EmployeeTaxResult = ({ employee }: EmployeeTaxResultProps) => {
         </ResultItem>
       </ResultSection>
 
-      {/* 合計セクション */}
       <ResultSection sx={{ 
         background: 'linear-gradient(135deg, rgba(43, 76, 140, 0.04) 0%, rgba(30, 136, 229, 0.04) 100%)'
       }}>

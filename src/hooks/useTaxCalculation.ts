@@ -1,36 +1,19 @@
-// =============================
-// ファイル: src/hooks/useTaxCalculation.ts
-// 役割  : 税金計算の統括
-// 所得税: taxCalculations.ts を使用
-// 各種控除: deductions.ts を使用
-// 計算結果を組み立て、最終的な収入を算出
-// =============================
-
 import { calculateIncomeTax } from '@hooks/taxCalculations';
 import { calculateDeductions } from '@hooks/deductions';
 
-// =============================
-// 入力データの型定義
-// =============================
 interface TaxCalculationInput {
   baseSalary: number;   // 月額基本給（万円単位）
   bonus: number;        // ボーナス（万円単位）
   hasPension: boolean;  // 厚生年金加入有無
   hasCareInsurance: boolean; // 介護保険加入有無
-  hasChildCare: boolean; // 企業の子育て支援負担有無
+  hasChildCare: boolean;
 }
 
-// =============================
-// 月額・年間データの型定義
-// =============================
 interface MonthlyAnnual {
   annual: number;  // 年間の金額
-  monthly: number; // 月間の金額
+  monthly: number;
 }
 
-// =============================
-// 計算結果の型定義
-// =============================
 interface TaxCalculationResult {
   employee: {
     grossIncome: MonthlyAnnual;        // 総支給額（額面）
@@ -51,30 +34,22 @@ interface TaxCalculationResult {
     employmentInsurance: MonthlyAnnual;// 会社負担分の雇用保険
     laborInsurance: MonthlyAnnual;     // 労災保険
     childCare?: MonthlyAnnual;         // 会社負担の子育て支援
-    totalEmployerTax: MonthlyAnnual;   // 会社負担の税金合計
+    totalEmployerTax: MonthlyAnnual;
   };
 }
 
-// =============================
-// 税金計算の統括関数
-// 各種計算処理を統合し、結果を返す
-// =============================
 export const useTaxCalculation = () => {
   const calculate = (input: TaxCalculationInput): TaxCalculationResult => {
     const { baseSalary, bonus, hasPension, hasCareInsurance, hasChildCare } = input;
 
-    // 基本収入の計算
-    const monthlySalary = baseSalary * 10000;  // 月額給与（円）
-    const annualSalary = monthlySalary * 12 + bonus * 10000;  // 年収（円）
+    const monthlySalary = baseSalary * 10000;
+    const annualSalary = monthlySalary * 12 + bonus * 10000;
 
-    // 所得税の計算（年間 & 月間）
     const annualIncomeTax = calculateIncomeTax(annualSalary);
     const monthlyIncomeTax = Math.floor(annualIncomeTax / 12);
 
-    // 社員負担の控除計算
     const employeeDeductions = calculateDeductions(monthlySalary, hasPension, hasCareInsurance);
 
-    // 社員負担の税金合計
     const totalEmployeeTax =
       monthlyIncomeTax +
       employeeDeductions.residentTax +
@@ -83,16 +58,13 @@ export const useTaxCalculation = () => {
       (employeeDeductions.careInsurance ?? 0) +
       (employeeDeductions.pensionInsurance ?? 0);
 
-    // 手取り収入の計算
     const takeHomePay = monthlySalary - totalEmployeeTax;
 
-    // 会社負担の計算
     const employerDeductions = {
       ...calculateDeductions(monthlySalary, hasPension, hasCareInsurance),
       childCare: hasChildCare ? Math.floor(monthlySalary * 0.0036) : 0,
     };
 
-    // 会社負担税金合計
     const totalEmployerTax =
       employerDeductions.residentTax +
       employerDeductions.healthInsurance +
@@ -102,7 +74,6 @@ export const useTaxCalculation = () => {
       (employerDeductions.pensionInsurance ?? 0) +
       (hasChildCare ? employerDeductions.childCare : 0);
 
-    // 計算結果の組み立て
     return {
       employee: {
         grossIncome: { annual: annualSalary, monthly: monthlySalary },

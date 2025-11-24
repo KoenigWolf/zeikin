@@ -1,29 +1,12 @@
-// =============================
-// ファイル: src/components/EmployerTaxResult.tsx
-// 会社負担の税金一覧を表示
-// `useTaxCalculation.ts` の計算結果を受け取り、表示
-// 会社負担の各種税金を `テーブル形式` で整理
-// 厚生年金 (`pensionInsurance`) などのオプショナル項目は条件付き表示
-// =============================
-
 import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import type { TaxCalculationResult } from '../hooks/useTaxCalculation';
 import { colors } from '../styles/theme/colors';
 
-// =============================
-// 型定義: EmployerTaxResultProps
-// `employer`: 会社負担の税金データを格納
-// =============================
 interface EmployerTaxResultProps {
   employer: TaxCalculationResult['employer'];
 }
 
-// =============================
-// コンポーネント：ResultSection
-// 各税金カテゴリ（社会保険料・合計金額）のコンテナ
-// 背景・枠線・ホバー時のスタイル適用
-// =============================
 const ResultSection = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(3),
   padding: theme.spacing(2.5),
@@ -41,12 +24,6 @@ const ResultSection = styled(Box)(({ theme }) => ({
   },
 }));
 
-// =============================
-// コンポーネント：ResultItem
-// 各税金項目（住民税・健康保険など）を整列表示
-// ラベルと金額を左右に配置
-// 金額フォントを強調
-// =============================
 const ResultItem = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
@@ -77,11 +54,6 @@ const ResultItem = styled(Box)(({ theme }) => ({
   },
 }));
 
-// =============================
-// コンポーネント：SectionTitle
-// セクション見出しを統一化
-// アイコン付きのスタイルを適用
-// =============================
 const SectionTitle = ({ icon, title }: { icon: string; title: string }) => (
   <Typography
     variant="h6"
@@ -103,16 +75,9 @@ const SectionTitle = ({ icon, title }: { icon: string; title: string }) => (
   </Typography>
 );
 
-// =============================
-// メインコンポーネント：EmployerTaxResult
-// 会社負担の税金情報を一覧表示
-// `pensionInsurance`（厚生年金）はオプション項目
-// =============================
-
 export const EmployerTaxResult = ({ employer }: EmployerTaxResultProps) => {
   return (
     <Box>
-      {/* 🏢 社会保険料（事業主負担） */}
       <ResultSection>
         <SectionTitle icon="🏢" title="社会保険料（事業主負担）" />
         
@@ -144,7 +109,6 @@ export const EmployerTaxResult = ({ employer }: EmployerTaxResultProps) => {
         </ResultItem>
       </ResultSection>
 
-      {/* 💰 会社負担税金合計 */}
       <ResultSection
         sx={{
           background:
