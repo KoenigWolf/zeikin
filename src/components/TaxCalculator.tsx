@@ -19,6 +19,7 @@ import {
 } from '@styles/shared.styles';
 import { HeaderTypography, ResultTitle } from '@styles/components/Typography.styles';
 import { StyledCard, StyledCardContent } from '@styles/components/Card.styles';
+import { texts } from '../constants/texts';
 
 export const TaxCalculator = () => {
   const [inputs, setInputs] = useState({
@@ -56,7 +57,7 @@ export const TaxCalculator = () => {
       <GradientBox>
         <StyledContainer>
           <HeaderTypography variant={isMobile ? "h6" : "h5"} component="h1">
-            ZEIKIN
+            {texts.app.title}
           </HeaderTypography>
         </StyledContainer>
       </GradientBox>
@@ -80,7 +81,7 @@ export const TaxCalculator = () => {
                   <StyledCard>
                     <StyledCardContent>
                       <ResultTitle variant="h5" gutterBottom>
-                        従業員負担額
+                        {texts.result.titles.employee}
                       </ResultTitle>
                       <Box sx={{ flex: 1 }}>
                         <EmployeeTaxResult employee={result.employee} />
@@ -90,7 +91,7 @@ export const TaxCalculator = () => {
                   <StyledCard>
                     <StyledCardContent>
                       <ResultTitle variant="h5" gutterBottom>
-                        企業負担額
+                        {texts.result.titles.employer}
                       </ResultTitle>
                       <Box sx={{ flex: 1 }}>
                         <EmployerTaxResult employer={result.employer} />

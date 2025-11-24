@@ -8,6 +8,7 @@ import {
   HighlightedResultSection,
   TakeHomeValue,
 } from '@styles/components/Result.styles';
+import { texts } from '../constants/texts';
 
 interface EmployeeTaxResultProps {
   employee: TaxCalculationResult['employee'];
@@ -17,53 +18,53 @@ export const EmployeeTaxResult = ({ employee }: EmployeeTaxResultProps) => {
   return (
     <Box>
       <ResultSection>
-        <SectionTitle variant="h6" sx={{ '&::before': { content: '"💴"' } }}>
-          収入
+        <SectionTitle variant="h6" sx={{ '&::before': { content: `"${texts.result.sections.income.icon}"` } }}>
+          {texts.result.sections.income.title}
         </SectionTitle>
         <ResultItem>
-          <span className="label">額面収入</span>
-          <span className="value">{employee.grossIncome.monthly.toLocaleString()}円</span>
+          <span className="label">{texts.result.labels.grossIncome}</span>
+          <span className="value">{employee.grossIncome.monthly.toLocaleString()}{texts.result.currency.yen}</span>
         </ResultItem>
       </ResultSection>
 
       <ResultSection>
-        <SectionTitle variant="h6" sx={{ '&::before': { content: '"🏛️"' } }}>
-          所得税・住民税
+        <SectionTitle variant="h6" sx={{ '&::before': { content: `"${texts.result.sections.tax.icon}"` } }}>
+          {texts.result.sections.tax.title}
         </SectionTitle>
         <ResultItem>
-          <span className="label">所得税</span>
-          <span className="value">{employee.incomeTax.monthly.toLocaleString()}円</span>
+          <span className="label">{texts.result.labels.incomeTax}</span>
+          <span className="value">{employee.incomeTax.monthly.toLocaleString()}{texts.result.currency.yen}</span>
         </ResultItem>
         <ResultItem>
-          <span className="label">住民税</span>
-          <span className="value">{employee.residentTax.monthly.toLocaleString()}円</span>
+          <span className="label">{texts.result.labels.residentTax}</span>
+          <span className="value">{employee.residentTax.monthly.toLocaleString()}{texts.result.currency.yen}</span>
         </ResultItem>
       </ResultSection>
 
       <ResultSection>
-        <SectionTitle variant="h6" sx={{ '&::before': { content: '"🏥"' } }}>
-          社会保険料
+        <SectionTitle variant="h6" sx={{ '&::before': { content: `"${texts.result.sections.insurance.icon}"` } }}>
+          {texts.result.sections.insurance.title}
         </SectionTitle>
         <ResultItem>
-          <span className="label">健康保険</span>
-          <span className="value">{employee.healthInsurance.monthly.toLocaleString()}円</span>
+          <span className="label">{texts.result.labels.healthInsurance}</span>
+          <span className="value">{employee.healthInsurance.monthly.toLocaleString()}{texts.result.currency.yen}</span>
         </ResultItem>
         {employee.pensionInsurance && (
           <ResultItem>
-            <span className="label">厚生年金</span>
-            <span className="value">{employee.pensionInsurance.monthly.toLocaleString()}円</span>
+            <span className="label">{texts.result.labels.pensionInsurance}</span>
+            <span className="value">{employee.pensionInsurance.monthly.toLocaleString()}{texts.result.currency.yen}</span>
           </ResultItem>
         )}
         <ResultItem>
-          <span className="label">雇用保険</span>
-          <span className="value">{employee.employmentInsurance.monthly.toLocaleString()}円</span>
+          <span className="label">{texts.result.labels.employmentInsurance}</span>
+          <span className="value">{employee.employmentInsurance.monthly.toLocaleString()}{texts.result.currency.yen}</span>
         </ResultItem>
       </ResultSection>
 
       <HighlightedResultSection>
         <ResultItem sx={{ border: 'none' }}>
-          <span className="total-label">税金合計</span>
-          <span className="total-value">{employee.totalTax.monthly.toLocaleString()}円</span>
+          <span className="total-label">{texts.result.labels.totalTax}</span>
+          <span className="total-value">{employee.totalTax.monthly.toLocaleString()}{texts.result.currency.yen}</span>
         </ResultItem>
         <ResultItem
           sx={{
@@ -73,9 +74,9 @@ export const EmployeeTaxResult = ({ employee }: EmployeeTaxResultProps) => {
             borderBottom: 'none',
           }}
         >
-          <span className="total-label">手取り額</span>
+          <span className="total-label">{texts.result.labels.takeHome}</span>
           <TakeHomeValue className="total-value">
-            {employee.takeHome.monthly.toLocaleString()}円
+            {employee.takeHome.monthly.toLocaleString()}{texts.result.currency.yen}
           </TakeHomeValue>
         </ResultItem>
       </HighlightedResultSection>

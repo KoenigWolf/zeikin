@@ -8,6 +8,7 @@ import {
 import { Calculate as CalculateIcon } from '@mui/icons-material';
 import { StyledTextField, CustomSwitch } from '@styles/components/Form.styles';
 import { GradientButton } from '@styles/components/Button.styles';
+import { texts } from '../constants/texts';
 
 interface TaxFormInputs {
   baseSalary: string;
@@ -66,19 +67,19 @@ export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
     <Grid container spacing={3}>
       <Grid item xs={12}>
         <Box sx={{ mb: 3 }}>
-          <SectionTitle icon="💰" title="月額給与" />
+          <SectionTitle icon={texts.form.sections.monthlySalary.icon} title={texts.form.sections.monthlySalary.title} />
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <StyledTextField
                 fullWidth
-                label="月給"
+                label={texts.form.fields.baseSalary.label}
                 type="number"
                 value={inputs.baseSalary}
                 onChange={(e) => onChange('baseSalary', e.target.value)}
                 required
                 variant="outlined"
                 InputProps={{
-                  endAdornment: <InputAdornment position="end">万円</InputAdornment>,
+                  endAdornment: <InputAdornment position="end">{texts.form.fields.baseSalary.unit}</InputAdornment>,
                 }}
               />
             </Grid>
@@ -103,25 +104,25 @@ export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
             },
           }}
         >
-          <SectionTitle icon="🏥" title="保険・控除" />
+          <SectionTitle icon={texts.form.sections.insurance.icon} title={texts.form.sections.insurance.title} />
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <SwitchControl
-                label="厚生年金"
+                label={texts.form.fields.pension.label}
                 checked={inputs.hasPension}
                 onChange={(checked) => onChange('hasPension', checked)}
               />
             </Grid>
             <Grid item xs={12}>
               <SwitchControl
-                label="介護保険料"
+                label={texts.form.fields.careInsurance.label}
                 checked={inputs.hasCareInsurance}
                 onChange={(checked) => onChange('hasCareInsurance', checked)}
               />
             </Grid>
             <Grid item xs={12}>
               <SwitchControl
-                label="子育て拠出金"
+                label={texts.form.fields.childCare.label}
                 checked={inputs.hasChildCare}
                 onChange={(checked) => onChange('hasChildCare', checked)}
               />
@@ -137,7 +138,7 @@ export const TaxForm = ({ inputs, onChange, onSubmit }: TaxFormProps) => {
           onClick={onSubmit}
           startIcon={<CalculateIcon />}
         >
-          計算する
+          {texts.form.buttons.calculate}
         </GradientButton>
       </Grid>
     </Grid>

@@ -6,6 +6,7 @@ import {
   SectionTitle,
   HighlightedResultSection,
 } from '@styles/components/Result.styles';
+import { texts } from '../constants/texts';
 
 interface EmployerTaxResultProps {
   employer: TaxCalculationResult['employer'];
@@ -15,42 +16,42 @@ export const EmployerTaxResult = ({ employer }: EmployerTaxResultProps) => {
   return (
     <Box>
       <ResultSection>
-        <SectionTitle variant="h6" sx={{ '&::before': { content: '"🏢"' } }}>
-          社会保険料（事業主負担）
+        <SectionTitle variant="h6" sx={{ '&::before': { content: `"${texts.result.sections.employerInsurance.icon}"` } }}>
+          {texts.result.sections.employerInsurance.title}
         </SectionTitle>
 
         <ResultItem>
-          <span className="label">住民税</span>
-          <span className="value">{employer.residentTax.monthly.toLocaleString()} 円</span>
+          <span className="label">{texts.result.labels.residentTax}</span>
+          <span className="value">{employer.residentTax.monthly.toLocaleString()} {texts.result.currency.yen}</span>
         </ResultItem>
 
         <ResultItem>
-          <span className="label">健康保険</span>
-          <span className="value">{employer.healthInsurance.monthly.toLocaleString()} 円</span>
+          <span className="label">{texts.result.labels.healthInsurance}</span>
+          <span className="value">{employer.healthInsurance.monthly.toLocaleString()} {texts.result.currency.yen}</span>
         </ResultItem>
 
         {employer.pensionInsurance && (
           <ResultItem>
-            <span className="label">厚生年金</span>
-            <span className="value">{employer.pensionInsurance.monthly.toLocaleString()} 円</span>
+            <span className="label">{texts.result.labels.pensionInsurance}</span>
+            <span className="value">{employer.pensionInsurance.monthly.toLocaleString()} {texts.result.currency.yen}</span>
           </ResultItem>
         )}
 
         <ResultItem>
-          <span className="label">雇用保険</span>
-          <span className="value">{employer.employmentInsurance.monthly.toLocaleString()} 円</span>
+          <span className="label">{texts.result.labels.employmentInsurance}</span>
+          <span className="value">{employer.employmentInsurance.monthly.toLocaleString()} {texts.result.currency.yen}</span>
         </ResultItem>
 
         <ResultItem>
-          <span className="label">労災保険</span>
-          <span className="value">{employer.laborInsurance.monthly.toLocaleString()} 円</span>
+          <span className="label">{texts.result.labels.laborInsurance}</span>
+          <span className="value">{employer.laborInsurance.monthly.toLocaleString()} {texts.result.currency.yen}</span>
         </ResultItem>
       </ResultSection>
 
       <HighlightedResultSection>
         <ResultItem sx={{ border: 'none' }}>
-          <span className="total-label">会社負担税金合計</span>
-          <span className="total-value">{employer.totalEmployerTax.monthly.toLocaleString()} 円</span>
+          <span className="total-label">{texts.result.labels.totalEmployerTax}</span>
+          <span className="total-value">{employer.totalEmployerTax.monthly.toLocaleString()} {texts.result.currency.yen}</span>
         </ResultItem>
       </HighlightedResultSection>
     </Box>
