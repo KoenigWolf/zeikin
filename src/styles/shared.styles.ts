@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { Box, Container } from '@mui/material';
-import { colors } from './theme/colors';
+import { colors } from '@styles/theme/colors';
 
 export const RootBox = styled(Box)(() => ({
   background: colors.background.main,

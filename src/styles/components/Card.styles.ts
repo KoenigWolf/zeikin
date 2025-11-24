@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { Card, CardContent } from '@mui/material';
-import { colors } from '../theme/colors';
+import { colors } from '@styles/theme/colors';
 
 export const StyledCard = styled(Card)(({ theme }) => {
   const baseStyles = {

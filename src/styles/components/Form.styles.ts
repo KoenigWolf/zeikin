@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { TextField, Switch } from '@mui/material';
-import { colors } from '../theme/colors';
+import { colors } from '@styles/theme/colors';
 
 export const StyledTextField = styled(TextField)(() => {
   const baseStyles = {

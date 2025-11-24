@@ -5,12 +5,10 @@ import {
   useMediaQuery,
   Fade
 } from '@mui/material';
-import { useTaxCalculation, type TaxCalculationResult } from '../hooks/useTaxCalculation';
+import { useTaxCalculation, type TaxCalculationResult } from '@hooks/useTaxCalculation';
 import { TaxForm } from './TaxForm';
 import { EmployeeTaxResult } from './EmployeeTaxResult';
 import { EmployerTaxResult } from './EmployerTaxResult';
-
-// 共通スタイルのインポート
 import {
   RootBox,
   GradientBox,
@@ -18,11 +16,9 @@ import {
   ContentContainer,
   ContentBox,
   ResultGrid
-} from '../styles/shared.styles';
-
-// コンポーネント固有のスタイルのインポート
-import { HeaderTypography, ResultTitle } from '../styles/components/Typography.styles';
-import { StyledCard, StyledCardContent } from '../styles/components/Card.styles';
+} from '@styles/shared.styles';
+import { HeaderTypography, ResultTitle } from '@styles/components/Typography.styles';
+import { StyledCard, StyledCardContent } from '@styles/components/Card.styles';
 
 export const TaxCalculator = () => {
   const [inputs, setInputs] = useState({

@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { Button } from '@mui/material';
-import { colors } from '../theme/colors';
+import { colors } from '@styles/theme/colors';
 
 export const GradientButton = styled(Button)(({ theme }) => {
   const baseStyles = {

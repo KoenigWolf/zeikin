@@ -7,8 +7,8 @@ import {
   InputAdornment,
 } from '@mui/material';
 import { Calculate as CalculateIcon } from '@mui/icons-material';
-import { StyledTextField, CustomSwitch } from '../styles/components/Form.styles';
-import { GradientButton } from '../styles/components/Button.styles';
+import { StyledTextField, CustomSwitch } from '@styles/components/Form.styles';
+import { GradientButton } from '@styles/components/Button.styles';
 
 interface TaxFormInputs {
   baseSalary: string;

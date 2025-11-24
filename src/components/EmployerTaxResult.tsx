@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import type { TaxCalculationResult } from '../hooks/useTaxCalculation';
-import { colors } from '../styles/theme/colors';
+import type { TaxCalculationResult } from '@hooks/useTaxCalculation';
+import { colors } from '@styles/theme/colors';
 
 interface EmployerTaxResultProps {
   employer: TaxCalculationResult['employer'];

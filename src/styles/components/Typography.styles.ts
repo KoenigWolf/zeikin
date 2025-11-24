@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 import { Typography } from '@mui/material';
 import type { TypographyProps } from '@mui/material';
-import { colors } from '../theme/colors';
+import { colors } from '@styles/theme/colors';
 
 interface HeaderTypographyProps extends TypographyProps {
   component?: React.ElementType;
