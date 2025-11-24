@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { colors } from '@styles/theme/colors';
+import { componentTypography } from '@styles/theme/typography';
 
 export const ResultSection = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(3),
@@ -28,37 +29,50 @@ export const ResultItem = styled(Box)(({ theme }) => ({
     borderBottom: `1px solid ${colors.border.light}`,
   },
   '& .label': {
-    fontSize: '1rem',
+    fontSize: componentTypography.label.fontSize,
     color: theme.palette.text.primary,
-    fontWeight: 500,
+    fontWeight: componentTypography.label.fontWeight,
   },
   '& .value': {
-    fontSize: '1.1rem',
+    fontSize: componentTypography.value.fontSize,
     color: colors.text.primary,
-    fontWeight: 600,
+    fontWeight: componentTypography.value.fontWeight,
   },
   '& .total-label': {
-    fontSize: '1.2rem',
+    fontSize: componentTypography.totalLabel.fontSize,
     color: theme.palette.text.primary,
-    fontWeight: 700,
+    fontWeight: componentTypography.totalLabel.fontWeight,
   },
   '& .total-value': {
-    fontSize: '1.4rem',
+    fontSize: componentTypography.totalValue.fontSize,
     color: colors.text.secondary,
-    fontWeight: 800,
+    fontWeight: componentTypography.totalValue.fontWeight,
+    letterSpacing: componentTypography.totalValue.letterSpacing,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: componentTypography.totalValue.sm,
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: componentTypography.totalValue.md,
+    },
   },
 }));
 
-export const SectionTitle = styled(Typography)(() => ({
+export const SectionTitle = styled(Typography)(({ theme }) => ({
   color: colors.text.primary,
   marginBottom: 16,
-  fontSize: '1.1rem',
-  fontWeight: 600,
+  fontSize: componentTypography.sectionTitle.xs,
+  fontWeight: componentTypography.sectionTitle.fontWeight,
   display: 'flex',
   alignItems: 'center',
   gap: 8,
+  [theme.breakpoints.up('sm')]: {
+    fontSize: componentTypography.sectionTitle.sm,
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: componentTypography.sectionTitle.md,
+  },
   '&::before': {
-    fontSize: '1.2rem',
+    fontSize: componentTypography.icon.fontSize,
   },
 })) as typeof Typography;
 

@@ -2,17 +2,26 @@ import { styled } from '@mui/material/styles';
 import { Typography } from '@mui/material';
 import type { TypographyProps } from '@mui/material';
 import { colors } from '@styles/theme/colors';
+import { componentTypography } from '@styles/theme/typography';
 
 interface HeaderTypographyProps extends TypographyProps {
   component?: React.ElementType;
 }
 
-export const HeaderTypography = styled(Typography)<HeaderTypographyProps>(() => {
+export const HeaderTypography = styled(Typography)<HeaderTypographyProps>(({ theme }) => {
   return {
-    fontWeight: 600,
+    fontSize: componentTypography.appTitle.xs,
+    fontWeight: componentTypography.appTitle.fontWeight,
+    letterSpacing: componentTypography.appTitle.letterSpacing,
     color: colors.text.light,
-    textShadow: '0 1px 2px rgba(0,0,0,0.1)',
+    textShadow: '0 2px 4px rgba(0,0,0,0.15)',
     textAlign: 'center',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: componentTypography.appTitle.sm,
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: componentTypography.appTitle.md,
+    },
   };
 });
 
@@ -37,20 +46,16 @@ export const FormTitle = styled(Typography)(({ theme }) => {
 });
 
 export const ResultTitle = styled(Typography)(({ theme }) => {
-  const baseStyles = {
+  return {
     borderBottom: `2px solid ${colors.border.medium}`,
     paddingBottom: theme.spacing(2),
-    fontSize: '1.25rem',
-  };
-
-  const responsiveStyles = {
-    [theme.breakpoints.up('md')]: {
-      fontSize: '1.5rem',
+    fontSize: componentTypography.resultTitle.xs,
+    fontWeight: componentTypography.resultTitle.fontWeight,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: componentTypography.resultTitle.sm,
     },
-  };
-
-  return {
-    ...baseStyles,
-    ...responsiveStyles,
+    [theme.breakpoints.up('md')]: {
+      fontSize: componentTypography.resultTitle.md,
+    },
   };
 });

@@ -9,6 +9,7 @@ import { Calculate as CalculateIcon } from '@mui/icons-material';
 import { StyledTextField, CustomSwitch } from '@styles/components/Form.styles';
 import { GradientButton } from '@styles/components/Button.styles';
 import { texts } from '../constants/texts';
+import { componentTypography } from '@styles/theme/typography';
 
 interface TaxFormInputs {
   baseSalary: string;
@@ -55,7 +56,8 @@ const SwitchControl = ({
     label={label}
     sx={{
       '& .MuiFormControlLabel-label': {
-        fontSize: '1rem',
+        fontSize: componentTypography.formLabel.fontSize,
+        fontWeight: componentTypography.formLabel.fontWeight,
         color: 'text.primary',
       },
     }}
