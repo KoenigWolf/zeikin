@@ -1,7 +1,4 @@
-interface MonthlyAnnual {
-  annual: number;
-  monthly: number;
-}
+import type { MonthlyAnnual } from '../types/tax';
 
 export const formatCurrency = (amount: number): string => {
   return `${amount.toLocaleString()} 円`;

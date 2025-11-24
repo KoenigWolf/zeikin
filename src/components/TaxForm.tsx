@@ -2,7 +2,6 @@ import {
   Grid, 
   FormControlLabel, 
   Box,
-  Typography,
   Paper,
   InputAdornment,
 } from '@mui/material';
@@ -24,24 +23,21 @@ interface TaxFormProps {
   onSubmit: () => void;
 }
 
+import { SectionTitle as BaseSectionTitle } from '@styles/components/Result.styles';
+
 const SectionTitle = ({ icon, title }: { icon: string; title: string }) => (
-  <Typography
+  <BaseSectionTitle
     variant="h6"
     sx={{
       mb: 2.5,
-      fontWeight: 600,
       color: 'primary.main',
-      display: 'flex',
-      alignItems: 'center',
-      gap: 1,
       '&::before': {
         content: `"${icon}"`,
-        fontSize: '1.2rem',
       },
     }}
   >
     {title}
-  </Typography>
+  </BaseSectionTitle>
 );
 
 const SwitchControl = ({
