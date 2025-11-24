@@ -8,7 +8,7 @@ import {
 import { Calculate as CalculateIcon } from '@mui/icons-material';
 import { StyledTextField, CustomSwitch } from '@styles/components/Form.styles';
 import { GradientButton } from '@styles/components/Button.styles';
-import { texts } from '../constants/texts';
+import { texts } from '@constants';
 import { componentTypography } from '@styles/theme/typography';
 import { colors } from '@styles/theme/colors';
 import { transitions, borderRadius, effects } from '@styles/theme/effects';

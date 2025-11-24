@@ -1,12 +1,12 @@
 import { Box } from '@mui/material';
-import type { TaxCalculationResult } from '@hooks/useTaxCalculation';
+import type { TaxCalculationResult } from '../hooks/useTaxCalculation';
 import {
   ResultSection,
   ResultItem,
   SectionTitle,
   HighlightedResultSection,
 } from '@styles/components/Result.styles';
-import { texts } from '../constants/texts';
+import { texts } from '@constants';
 
 interface EmployerTaxResultProps {
   employer: TaxCalculationResult['employer'];

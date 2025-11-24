@@ -1,8 +1,8 @@
-import { calculateIncomeTax } from '@hooks/taxCalculations';
-import { calculateDeductions } from '@hooks/deductions';
-import type { TaxCalculationInput, TaxCalculationResult, MonthlyAnnual } from '../types/tax';
-import { CALCULATION_CONSTANTS } from '../constants/calculations';
-import { isSafeNumber, safeMathOperation } from '../utils/validation';
+import { calculateIncomeTax } from './taxCalculations';
+import { calculateDeductions } from './deductions';
+import type { TaxCalculationInput, TaxCalculationResult, MonthlyAnnual } from '@domain/tax';
+import { CALCULATION_CONSTANTS } from '@domain/tax';
+import { isSafeNumber, safeMathOperation } from '@domain/validation';
 
 const TAX_RATES = {
   childCare: 0.0036,

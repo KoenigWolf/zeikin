@@ -1,4 +1,4 @@
-import type { MonthlyAnnual } from '../types/tax';
+import type { MonthlyAnnual } from '@domain/tax';
 
 export const formatCurrency = (amount: number): string => {
   return `${amount.toLocaleString()} 円`;
@@ -12,4 +12,3 @@ export const calculateTotal = (
     .filter((item): item is MonthlyAnnual => item !== undefined)
     .reduce((total, item) => total + item[key], 0);
 };
-

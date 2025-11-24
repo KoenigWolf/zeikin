@@ -26,11 +26,13 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"],
+      "@features/*": ["src/features/*"],
+      "@domain/*": ["src/domain/*"],
       "@styles/*": ["src/styles/*"],
-      "@utils/*": ["src/utils/*"],
-      "@types/*": ["src/types/*"]
+      "@utils": ["src/utils"],
+      "@constants": ["src/constants"],
+      "@config": ["src/config"],
+      "@assets/*": ["src/assets/*"]
     }
   },
   "include": ["src"]

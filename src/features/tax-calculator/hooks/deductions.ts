@@ -1,4 +1,4 @@
-import { CALCULATION_CONSTANTS } from '../constants/calculations';
+import { CALCULATION_CONSTANTS } from '@domain/tax';
 
 const TAX_RATES = {
   healthInsurance: 0.0987,

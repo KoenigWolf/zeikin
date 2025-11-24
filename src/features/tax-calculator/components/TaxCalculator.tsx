@@ -7,7 +7,7 @@ import {
   Alert,
   Snackbar
 } from '@mui/material';
-import { useTaxCalculation, type TaxCalculationResult } from '@hooks/useTaxCalculation';
+import { useTaxCalculation, type TaxCalculationResult } from '../hooks/useTaxCalculation';
 import { TaxForm } from './TaxForm';
 import { EmployeeTaxResult } from './EmployeeTaxResult';
 import { EmployerTaxResult } from './EmployerTaxResult';
@@ -21,10 +21,10 @@ import {
 } from '@styles/shared.styles';
 import { HeaderTypography, ResultTitle } from '@styles/components/Typography.styles';
 import { StyledCard, StyledCardContent } from '@styles/components/Card.styles';
-import { texts } from '../constants/texts';
+import { texts } from '@constants';
 import { animations } from '@styles/theme/effects';
-import { validateSalary, validateBonus, safeMathOperation } from '@utils/validation';
-import type { TaxCalculationInput } from '../types/tax';
+import { validateSalary, validateBonus, safeMathOperation } from '@domain/validation';
+import type { TaxCalculationInput } from '@domain/tax';
 
 export const TaxCalculator = () => {
   const [inputs, setInputs] = useState({

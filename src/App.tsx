@@ -1,6 +1,6 @@
 import { Container, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
-import { TaxCalculator } from '@components/TaxCalculator';
-import { typography } from './styles/theme/typography';
+import { TaxCalculator } from '@features/tax-calculator';
+import { typography } from '@styles/theme/typography';
 
 const theme = createTheme({
   palette: {

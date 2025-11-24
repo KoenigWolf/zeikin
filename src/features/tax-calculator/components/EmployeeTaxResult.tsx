@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import type { TaxCalculationResult } from '@hooks/useTaxCalculation';
+import type { TaxCalculationResult } from '../hooks/useTaxCalculation';
 import { colors } from '@styles/theme/colors';
 import {
   ResultSection,
@@ -8,7 +8,7 @@ import {
   HighlightedResultSection,
   TakeHomeValue,
 } from '@styles/components/Result.styles';
-import { texts } from '../constants/texts';
+import { texts } from '@constants';
 
 interface EmployeeTaxResultProps {
   employee: TaxCalculationResult['employee'];
