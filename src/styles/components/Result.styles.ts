@@ -2,16 +2,16 @@ import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { colors } from '@styles/theme/colors';
 import { componentTypography } from '@styles/theme/typography';
-import { borderRadius } from '@styles/theme/effects';
+import { borderRadius, transitions } from '@styles/theme/effects';
 
 export const ResultSection = styled(Box)(({ theme }) => ({
-  marginBottom: theme.spacing(2.5),
-  padding: theme.spacing(2),
-  background: colors.background.overlay,
-  backdropFilter: 'blur(8px)',
+  marginBottom: theme.spacing(1.5), // 12px
+  padding: theme.spacing(1.5), // 12px
+  background: colors.background.card,
   borderRadius: borderRadius.medium,
   border: `1px solid ${colors.border.light}`,
   position: 'relative',
+  transition: transitions.smooth,
   
   '&:hover': {
     background: colors.background.sectionHover,
@@ -24,13 +24,13 @@ export const ResultSection = styled(Box)(({ theme }) => ({
   },
   
   [theme.breakpoints.up('sm')]: {
-    padding: theme.spacing(2.5),
-    marginBottom: theme.spacing(3),
+    padding: theme.spacing(2), // 16px
+    marginBottom: theme.spacing(2), // 16px
   },
   
   [theme.breakpoints.up('md')]: {
-    padding: theme.spacing(3),
-    marginBottom: theme.spacing(3.5),
+    padding: theme.spacing(2.5), // 20px
+    marginBottom: theme.spacing(2), // 16px
   },
 }));
 
@@ -38,13 +38,14 @@ export const ResultItem = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  padding: theme.spacing(1.25, 0),
+  padding: theme.spacing(1, 0), // 8px - Instagram風のタイトなパディング
   minHeight: '44px',  // タッチデバイス対応
+  transition: transitions.smooth,
   
   '&:not(:last-child)': {
     borderBottom: `1px solid ${colors.border.light}`,
-    paddingBottom: theme.spacing(1.25),
-    marginBottom: theme.spacing(1),
+    paddingBottom: theme.spacing(1), // 8px
+    marginBottom: theme.spacing(0.75), // 6px
   },
   
   '& .label': {
@@ -98,22 +99,22 @@ export const ResultItem = styled(Box)(({ theme }) => ({
 
 export const SectionTitle = styled(Typography)(({ theme }) => ({
   color: colors.text.primary,
-  marginBottom: theme.spacing(1.5),
+  marginBottom: theme.spacing(1), // 8px
   fontSize: componentTypography.sectionTitle.xs,
   fontWeight: componentTypography.sectionTitle.fontWeight,
   display: 'flex',
   alignItems: 'center',
-  gap: theme.spacing(0.75),
+  gap: theme.spacing(0.5), // 4px
   
   [theme.breakpoints.up('sm')]: {
     fontSize: componentTypography.sectionTitle.sm,
-    marginBottom: theme.spacing(2),
-    gap: theme.spacing(1),
+    marginBottom: theme.spacing(1.25), // 10px
+    gap: theme.spacing(0.75), // 6px
   },
   
   [theme.breakpoints.up('md')]: {
     fontSize: componentTypography.sectionTitle.md,
-    marginBottom: theme.spacing(2.5),
+    marginBottom: theme.spacing(1.5), // 12px
   },
   
   '&::before': {
@@ -139,12 +140,13 @@ export const HighlightedResultSection = styled(ResultSection)(() => ({
     boxShadow: colors.shadow.cardHover,
     background: colors.gradient.highlightedSection.hover,
     borderColor: colors.border.strong,
+    transform: 'translateY(-2px)',
   },
 }));
 
 export const TakeHomeValue = styled('span')(() => ({
   color: colors.accent.success,
-  fontWeight: 800,
+  fontWeight: 600, // Instagramは600を使用
   textShadow: colors.shadow.text.success,
   background: `linear-gradient(135deg, ${colors.accent.success} 0%, ${colors.accent.successLight} 100%)`,
   WebkitBackgroundClip: 'text',

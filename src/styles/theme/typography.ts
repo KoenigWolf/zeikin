@@ -1,141 +1,141 @@
 export const typography = {
   h1: {
-    fontSize: '2rem',      // モバイル
-    sm: '2.5rem',          // タブレット
-    md: '2.75rem',         // デスクトップ
-    fontWeight: 800,
-    lineHeight: 1.1,
-    letterSpacing: '-0.03em',
+    fontSize: '1.5rem',    // 24px - Instagramの見出しサイズ
+    sm: '1.75rem',         // 28px
+    md: '2rem',            // 32px
+    fontWeight: 600,       // Instagramは600を使用
+    lineHeight: 1.2,
+    letterSpacing: '0',
   },
   h2: {
-    fontSize: '1.75rem',   // モバイル
-    sm: '2rem',            // タブレット
-    md: '2.25rem',         // デスクトップ
-    fontWeight: 700,
-    lineHeight: 1.2,
-    letterSpacing: '-0.02em',
+    fontSize: '1.25rem',   // 20px
+    sm: '1.5rem',          // 24px
+    md: '1.75rem',         // 28px
+    fontWeight: 600,
+    lineHeight: 1.25,
+    letterSpacing: '0',
   },
   h3: {
-    fontSize: '1.5rem',    // モバイル
-    sm: '1.75rem',         // タブレット
-    md: '1.875rem',        // デスクトップ
-    fontWeight: 700,
+    fontSize: '1.125rem',  // 18px
+    sm: '1.25rem',         // 20px
+    md: '1.5rem',          // 24px
+    fontWeight: 600,
     lineHeight: 1.3,
-    letterSpacing: '-0.01em',
+    letterSpacing: '0',
   },
   h4: {
-    fontSize: '1.25rem',   // モバイル
-    sm: '1.375rem',        // タブレット
-    md: '1.5rem',          // デスクトップ
+    fontSize: '1rem',      // 16px
+    sm: '1.125rem',        // 18px
+    md: '1.25rem',         // 20px
     fontWeight: 600,
     lineHeight: 1.4,
   },
   h5: {
-    fontSize: '1.125rem',  // モバイル
-    sm: '1.25rem',         // タブレット
-    md: '1.25rem',         // デスクトップ
+    fontSize: '0.9375rem', // 15px
+    sm: '1rem',            // 16px
+    md: '1.125rem',        // 18px
     fontWeight: 600,
     lineHeight: 1.5,
   },
   h6: {
-    fontSize: '1rem',      // モバイル
-    sm: '1.125rem',        // タブレット
-    md: '1.125rem',       // デスクトップ
+    fontSize: '0.875rem',  // 14px
+    sm: '0.9375rem',       // 15px
+    md: '1rem',            // 16px
     fontWeight: 600,
     lineHeight: 1.5,
   },
   body1: {
-    fontSize: '0.9375rem', // モバイル
-    sm: '1rem',            // タブレット
-    md: '1rem',            // デスクトップ
+    fontSize: '1rem',      // 16px - Instagramの本文サイズ
+    sm: '1rem',            // 16px
+    md: '1rem',            // 16px
     fontWeight: 400,
-    lineHeight: 1.65,
+    lineHeight: 1.5,
   },
   body2: {
-    fontSize: '0.8125rem', // モバイル
-    sm: '0.875rem',        // タブレット
-    md: '0.875rem',        // デスクトップ
+    fontSize: '0.875rem',  // 14px - Instagramのキャプションサイズ
+    sm: '0.875rem',        // 14px
+    md: '0.875rem',        // 14px
     fontWeight: 400,
-    lineHeight: 1.65,
+    lineHeight: 1.5,
   },
 } as const;
 
 export const responsiveTypography = {
   header: {
-    xs: '1.5rem',
-    sm: '1.75rem',
-    md: '2rem',
-    lg: '2.25rem',
+    xs: '1.5rem',   // 24px
+    sm: '1.75rem',  // 28px
+    md: '2rem',     // 32px
+    lg: '2.25rem',  // 36px
   },
   title: {
-    xs: '1.25rem',
-    sm: '1.375rem',
-    md: '1.5rem',
+    xs: '1.125rem', // 18px
+    sm: '1.25rem',  // 20px
+    md: '1.5rem',   // 24px
   },
   subtitle: {
-    xs: '1rem',
-    sm: '1.125rem',
-    md: '1.25rem',
+    xs: '1rem',     // 16px
+    sm: '1rem',     // 16px
+    md: '1.125rem', // 18px
   },
 } as const;
 
 export const componentTypography = {
   appTitle: {
-    xs: '1.75rem',    // モバイル
-    sm: '2rem',       // タブレット
-    md: '2.25rem',   // デスクトップ
-    lg: '2.5rem',    // 大型デスクトップ
-    fontWeight: 800,
-    letterSpacing: '-0.02em',
+    xs: '1.5rem',     // 24px - Instagramの見出しサイズ
+    sm: '1.75rem',    // 28px
+    md: '2rem',       // 32px
+    lg: '2.25rem',    // 36px
+    fontWeight: 600,  // Instagramは600を使用
+    letterSpacing: '0',
   },
   resultTitle: {
-    xs: '1.25rem',    // モバイル
-    sm: '1.375rem',   // タブレット
-    md: '1.5rem',     // デスクトップ
-    fontWeight: 700,
+    xs: '1.125rem',   // 18px
+    sm: '1.25rem',    // 20px
+    md: '1.5rem',     // 24px
+    fontWeight: 600,
   },
   sectionTitle: {
-    xs: '1rem',       // モバイル
-    sm: '1.125rem',   // タブレット
-    md: '1.25rem',    // デスクトップ
+    xs: '1rem',       // 16px
+    sm: '1.125rem',   // 18px
+    md: '1.25rem',    // 20px
     fontWeight: 600,
   },
   button: {
-    fontSize: '0.9375rem', // モバイル
-    sm: '1rem',            // タブレット以上
+    fontSize: '0.875rem', // 14px - Instagramのボタンサイズ
+    sm: '0.875rem',        // 14px
     fontWeight: 600,
-    letterSpacing: '0.01em',
+    letterSpacing: '0',
   },
   label: {
-    fontSize: '0.875rem',  // モバイル
-    sm: '0.9375rem',       // タブレット以上
-    fontWeight: 500,
+    fontSize: '0.875rem',  // 14px
+    sm: '0.875rem',        // 14px
+    fontWeight: 400,       // Instagramは通常400
   },
   value: {
-    fontSize: '1rem',      // モバイル
-    sm: '1.125rem',        // タブレット以上
-    fontWeight: 600,
+    fontSize: '1rem',      // 16px
+    sm: '1rem',            // 16px
+    fontWeight: 400,
   },
   totalLabel: {
-    fontSize: '1.125rem', // モバイル
-    sm: '1.25rem',         // タブレット以上
-    fontWeight: 700,
+    fontSize: '1rem',      // 16px
+    sm: '1.125rem',        // 18px
+    fontWeight: 600,
   },
   totalValue: {
-    fontSize: '1.375rem', // モバイル
-    sm: '1.5rem',         // タブレット
-    md: '1.625rem',       // デスクトップ
-    fontWeight: 800,
-    letterSpacing: '-0.01em',
+    fontSize: '1.25rem',   // 20px
+    sm: '1.5rem',          // 24px
+    md: '1.75rem',         // 28px
+    fontWeight: 600,
+    letterSpacing: '0',
   },
   formLabel: {
-    fontSize: '0.875rem',  // モバイル
-    sm: '0.9375rem',       // タブレット以上
-    fontWeight: 500,
+    fontSize: '0.875rem',  // 14px
+    sm: '0.875rem',        // 14px
+    fontWeight: 400,
   },
   icon: {
-    fontSize: '1.125rem',  // モバイル
-    sm: '1.25rem',         // タブレット
-    md: '1.375rem',        // デスクトップ
+    fontSize: '1rem',      // 16px
+    sm: '1.125rem',        // 18px
+    md: '1.25rem',         // 20px
   },
 } as const;

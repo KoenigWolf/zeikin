@@ -13,7 +13,7 @@ const baseTheme = createTheme({
       dark: colors.primary.dark,
     },
     background: {
-      default: '#F8FAFC',
+      default: colors.background.main,
       paper: colors.background.card,
     },
     text: {
@@ -25,6 +25,7 @@ const baseTheme = createTheme({
     fontFamily: [
       '-apple-system',
       'BlinkMacSystemFont',
+      'system-ui',
       '"Segoe UI"',
       'Roboto',
       '"Helvetica Neue"',
@@ -34,6 +35,7 @@ const baseTheme = createTheme({
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
     ].join(','),
+    fontSize: 16, // Instagramのベースフォントサイズ
     h1: {
       fontSize: typography.h1.fontSize,
       fontWeight: typography.h1.fontWeight,
@@ -123,8 +125,8 @@ const App = memo(() => {
       <Container 
         maxWidth="lg" 
         sx={{ 
-          py: { xs: 2, sm: 3, md: 4 },
-          px: { xs: 2, sm: 3, md: 4 },
+          py: { xs: 1.5, sm: 2, md: 2.5 }, // Instagram風のタイトなパディング
+          px: { xs: 1.5, sm: 2, md: 2.5 },
         }}
       >
         <TaxCalculator />

@@ -1,17 +1,17 @@
 import { styled } from '@mui/material/styles';
 import { TextField, Switch } from '@mui/material';
 import { colors } from '@styles/theme/colors';
-import { borderRadius, dimensions } from '@styles/theme/effects';
+import { borderRadius, dimensions, transitions } from '@styles/theme/effects';
 
 export const StyledTextField = styled(TextField)(({ theme }) => {
   const baseStyles = {
-    background: colors.background.overlay,
-    backdropFilter: 'blur(8px)',
+    background: colors.background.card,
     borderRadius: borderRadius.small,
+    transition: transitions.smooth,
   };
 
   const hoverStyles = {
-    background: colors.background.paperHover,
+    background: colors.background.card,
     boxShadow: colors.shadow.card,
   };
 
@@ -42,15 +42,18 @@ export const StyledTextField = styled(TextField)(({ theme }) => {
       
       '& fieldset': {
         borderColor: colors.border.light,
+        transition: transitions.smooth,
       },
     },
     
     '& .MuiInputLabel-root': {
       color: colors.text.secondary,
-      fontSize: '0.875rem',
+      fontSize: '0.875rem', // 14px - Instagramのラベルサイズ
+      transition: transitions.smooth,
+      fontWeight: 400,
       
       [theme.breakpoints.up('sm')]: {
-        fontSize: '0.9375rem',
+        fontSize: '0.875rem', // 14px
       },
       
       '&.Mui-focused': {
@@ -59,12 +62,14 @@ export const StyledTextField = styled(TextField)(({ theme }) => {
     },
     
     '& .MuiInputBase-input': {
-      fontSize: '1rem',
-      padding: theme.spacing(1.25, 1.5),
+      fontSize: '1rem', // 16px - Instagramの入力サイズ
+      padding: theme.spacing(1, 1.25), // 8px 10px - Instagram風のタイトなパディング
+      color: colors.text.primary,
+      fontWeight: 400,
       
       [theme.breakpoints.up('sm')]: {
-        fontSize: '1.0625rem',
-        padding: theme.spacing(1.5, 1.75),
+        fontSize: '1rem', // 16px
+        padding: theme.spacing(1.25, 1.5), // 10px 12px
       },
     },
   };
@@ -73,9 +78,11 @@ export const StyledTextField = styled(TextField)(({ theme }) => {
 export const CustomSwitch = styled(Switch)(({ theme }) => {
   return {
     padding: theme.spacing(1),
+    transition: transitions.smooth,
     
     '& .MuiSwitch-switchBase': {
       padding: theme.spacing(1),
+      transition: transitions.smooth,
       
       '&:hover': {
         backgroundColor: `${colors.primary.main}0A`,
@@ -98,11 +105,13 @@ export const CustomSwitch = styled(Switch)(({ theme }) => {
     '& .MuiSwitch-track': {
       backgroundColor: colors.border.medium,
       opacity: 1,
+      transition: transitions.smooth,
     },
     
     '& .MuiSwitch-thumb': {
       width: 20,
       height: 20,
+      transition: transitions.smooth,
       
       [theme.breakpoints.up('sm')]: {
         width: 22,
