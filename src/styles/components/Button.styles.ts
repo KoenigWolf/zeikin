@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 import { Button } from '@mui/material';
 import { colors } from '@styles/theme/colors';
 import { componentTypography } from '@styles/theme/typography';
-import { borderRadius, dimensions, transitions } from '@styles/theme/effects';
+import { borderRadius, dimensions } from '@styles/theme/effects';
 
 export const GradientButton = styled(Button)(({ theme }) => ({
   padding: theme.spacing(1, 2.5), // 8px 20px - Instagram風のタイトなパディング
@@ -14,7 +14,6 @@ export const GradientButton = styled(Button)(({ theme }) => ({
   textTransform: 'none',
   minHeight: dimensions.button.minHeight,
   color: colors.text.light,
-  transition: transitions.smooth,
   boxShadow: 'none',
   
   [theme.breakpoints.up('sm')]: {
@@ -26,11 +25,6 @@ export const GradientButton = styled(Button)(({ theme }) => ({
   '&:hover': {
     background: colors.primary.hover,
     boxShadow: colors.shadow.cardHover,
-    transform: 'scale(1.02)',
-  },
-  
-  '&:active': {
-    transform: 'scale(0.98)',
   },
   
   '&:focus-visible': {
@@ -42,6 +36,5 @@ export const GradientButton = styled(Button)(({ theme }) => ({
     background: colors.border.light,
     color: colors.text.tertiary,
     boxShadow: 'none',
-    transform: 'none',
   },
 }));

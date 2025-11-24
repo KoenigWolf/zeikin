@@ -100,8 +100,9 @@ export const useTaxCalculation = () => {
       childCare: childCareAmount,
     };
 
-    // 事業主負担分の合計（住民税は個人負担のため含めない）
+    // 事業主負担分の合計（住民税は労使折半）
     const totalEmployerTax =
+      employerDeductions.residentTax +
       employerDeductions.healthInsurance +
       employerDeductions.employmentInsurance +
       employerDeductions.laborInsurance +
@@ -126,7 +127,7 @@ export const useTaxCalculation = () => {
         takeHome: toMonthlyAnnual(takeHomePay),
       },
       employer: {
-        // 住民税は個人負担のため、事業主負担には含めない
+        residentTax: toMonthlyAnnual(employerDeductions.residentTax),
         healthInsurance: toMonthlyAnnual(employerDeductions.healthInsurance),
         employmentInsurance: toMonthlyAnnual(employerDeductions.employmentInsurance),
         pensionInsurance: hasPension && employerDeductions.pensionInsurance

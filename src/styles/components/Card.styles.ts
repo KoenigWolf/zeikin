@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 import { Card, CardContent } from '@mui/material';
 import { colors } from '@styles/theme/colors';
-import { borderRadius, effects, transitions } from '@styles/theme/effects';
+import { borderRadius } from '@styles/theme/effects';
 
 export const StyledCard = styled(Card)(() => ({
   borderRadius: borderRadius.medium,
@@ -11,12 +11,10 @@ export const StyledCard = styled(Card)(() => ({
   width: '100%',
   boxShadow: colors.shadow.card,
   position: 'relative',
-  transition: transitions.smooth,
   
   '&:hover': {
     boxShadow: colors.shadow.cardHover,
     border: `1px solid ${colors.border.medium}`,
-    transform: effects.transform.hover,
   },
   
   '&:focus-within': {

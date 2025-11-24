@@ -24,7 +24,7 @@ export interface TaxCalculationResult {
     takeHome: MonthlyAnnual;           // 手取り額
   };
   employer: {
-    // 住民税は個人負担のため、事業主負担には含めない
+    residentTax: MonthlyAnnual;        // 会社負担分の住民税（労使折半）
     healthInsurance: MonthlyAnnual;    // 会社負担分の健康保険
     pensionInsurance?: MonthlyAnnual;  // 会社負担分の厚生年金
     careInsurance?: MonthlyAnnual;     // 会社負担分の介護保険

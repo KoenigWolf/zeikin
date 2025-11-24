@@ -64,15 +64,16 @@ export const calculateDeductions = (
   hasCareInsurance: boolean,
   isEmployer = false
 ): Deductions => {
-  // 住民税の計算
+  // 住民税の計算（労使折半）
   // 住民税は前年の所得に対して課税されるが、簡易計算として当年の年収から計算
   // 出典: 総務省「住民税のしくみ」https://www.soumu.go.jp/
   // 計算式: (年収 - 基礎控除43万円) × 10% + 均等割5,000円 = 年間住民税
-  // 年間住民税を12ヶ月で割って月額を計算
+  // 年間住民税を12ヶ月で割って月額を計算し、労使折半（50%ずつ負担）
   const annualSalary = salary * CALCULATION_CONSTANTS.conversion.monthsPerYear;
   const taxableResidentIncome = Math.max(0, annualSalary - TAX_RATES.incomeDeduction);
   const annualResidentTax = Math.max(0, taxableResidentIncome * TAX_RATES.residentTaxRate + TAX_RATES.residentTaxBase);
-  const residentTax = Math.max(0, Math.floor(annualResidentTax / CALCULATION_CONSTANTS.conversion.monthsPerYear));
+  const monthlyResidentTax = Math.max(0, Math.floor(annualResidentTax / CALCULATION_CONSTANTS.conversion.monthsPerYear));
+  const residentTax = Math.max(0, Math.floor(monthlyResidentTax / 2)); // 労使折半
 
   // 健康保険料（労使折半、労働者負担は総額の50%）
   // 出典: 全国健康保険協会「健康保険の保険料率」https://www.kyoukaikenpo.or.jp/

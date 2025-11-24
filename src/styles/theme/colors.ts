@@ -8,12 +8,12 @@ export const colors = {
   },
 
   background: {
-    main: '#FAFAFA', // Instagramの背景色
+    main: '#FFFFFF', // Instagramの背景色（白）
     card: '#FFFFFF',
     overlay: '#FFFFFF',
     paper: '#FFFFFF',
-    paperHover: '#FFFFFF',
-    sectionHover: '#F5F5F5',
+    paperHover: '#FAFAFA', // ホバー時は薄いグレー
+    sectionHover: '#FAFAFA', // セクションホバー時
     gradientOverlay: {
       light: 'rgba(255, 255, 255, 0.05)',
       medium: 'rgba(255, 255, 255, 0.1)',

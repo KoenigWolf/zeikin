@@ -17,6 +17,11 @@ export const EmployerTaxResult = memo(({ employer }: EmployerTaxResultProps) => 
   const insuranceItems = useMemo(() => (
     <>
       <ResultItem>
+        <span className="label">{texts.result.labels.residentTax}</span>
+        <span className="value">{employer.residentTax.monthly.toLocaleString()} {texts.result.currency.yen}</span>
+      </ResultItem>
+
+      <ResultItem>
         <span className="label">{texts.result.labels.healthInsurance}</span>
         <span className="value">{employer.healthInsurance.monthly.toLocaleString()} {texts.result.currency.yen}</span>
       </ResultItem>
@@ -53,6 +58,7 @@ export const EmployerTaxResult = memo(({ employer }: EmployerTaxResultProps) => 
       )}
     </>
   ), [
+    employer.residentTax.monthly,
     employer.healthInsurance.monthly,
     employer.pensionInsurance,
     employer.careInsurance,

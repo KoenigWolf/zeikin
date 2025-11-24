@@ -14,8 +14,7 @@ export const HeaderTypography = styled(Typography)<HeaderTypographyProps>(({ the
     fontSize: componentTypography.appTitle.xs,
     fontWeight: componentTypography.appTitle.fontWeight,
     letterSpacing: componentTypography.appTitle.letterSpacing,
-    color: colors.text.light,
-    textShadow: colors.shadow.text.dark,
+    color: colors.text.primary, // Instagram風のダークテキスト
     textAlign: 'center',
     lineHeight: 1.2,
     padding: theme.spacing(0.75, 0), // 6px - Instagram風のタイトなパディング

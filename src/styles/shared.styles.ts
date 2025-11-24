@@ -17,11 +17,11 @@ export const RootBox = styled(Box)(() => ({
 }));
 
 export const GradientBox = styled(Box)(({ theme }) => ({
-  background: colors.primary.gradient,
+  background: colors.background.card, // Instagram風の白背景
   position: 'relative',
   overflow: 'hidden',
   padding: theme.spacing(1.5), // 12px - Instagram風のタイトなスペーシング
-  boxShadow: colors.shadow.card,
+  borderBottom: `1px solid ${colors.border.light}`, // Instagram風のボーダー
 
   [theme.breakpoints.up('sm')]: {
     padding: theme.spacing(2), // 16px

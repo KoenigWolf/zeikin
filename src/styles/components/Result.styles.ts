@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { colors } from '@styles/theme/colors';
 import { componentTypography } from '@styles/theme/typography';
-import { borderRadius, transitions } from '@styles/theme/effects';
+import { borderRadius } from '@styles/theme/effects';
 
 export const ResultSection = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(1.5), // 12px
@@ -11,7 +11,6 @@ export const ResultSection = styled(Box)(({ theme }) => ({
   borderRadius: borderRadius.medium,
   border: `1px solid ${colors.border.light}`,
   position: 'relative',
-  transition: transitions.smooth,
   
   '&:hover': {
     background: colors.background.sectionHover,
@@ -40,7 +39,6 @@ export const ResultItem = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   padding: theme.spacing(1, 0), // 8px - Instagram風のタイトなパディング
   minHeight: '44px',  // タッチデバイス対応
-  transition: transitions.smooth,
   
   '&:not(:last-child)': {
     borderBottom: `1px solid ${colors.border.light}`,
@@ -140,7 +138,6 @@ export const HighlightedResultSection = styled(ResultSection)(() => ({
     boxShadow: colors.shadow.cardHover,
     background: colors.gradient.highlightedSection.hover,
     borderColor: colors.border.strong,
-    transform: 'translateY(-2px)',
   },
 }));
 

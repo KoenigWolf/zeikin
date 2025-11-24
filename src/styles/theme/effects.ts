@@ -1,23 +1,23 @@
 export const transitions = {
-  standard: 'all 0.2s ease-in-out',
-  fast: 'all 0.15s ease-in-out',
-  slow: 'all 0.3s ease-in-out',
-  opacity: 'opacity 0.2s ease-in-out',
-  transform: 'transform 0.2s ease-in-out',
-  smooth: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+  standard: 'none',
+  fast: 'none',
+  slow: 'none',
+  opacity: 'none',
+  transform: 'none',
+  smooth: 'none',
 } as const;
 
 export const animations = {
   fadeIn: {
-    timeout: 200,
+    timeout: 0,
   },
   slideUp: {
-    timeout: 300,
+    timeout: 0,
   },
   hover: {
-    translateY: '-2px',
+    translateY: '0px',
     translateYReset: '0px',
-    scale: '1.02',
+    scale: '1',
     scaleReset: '1',
   },
 } as const;
@@ -35,9 +35,9 @@ export const effects = {
     light: 0.7,
   },
   transform: {
-    hover: 'translateY(-2px) scale(1.01)',
-    reset: 'translateY(0) scale(1)',
-    scale: 'scale(1.02)',
+    hover: 'none',
+    reset: 'none',
+    scale: 'none',
   },
 } as const;
 
